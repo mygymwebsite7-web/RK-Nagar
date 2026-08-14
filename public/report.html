@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Report Complaint – TVK Complaint Box</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="navbar-placeholder"></div>
+
+<div style="background:linear-gradient(135deg,#6B0000,#B80000,#B84000,#C8A000);padding:40px 20px;text-align:center;border-bottom:3px solid #FFD700;">
+  <h1 style="color:#FFD700;font-size:clamp(22px,5vw,34px);font-weight:800" data-i18n="form_title">Report a Complaint</h1>
+  <p style="color:rgba(255,230,150,0.85);margin-top:8px;font-size:14px" class="tamil">உங்கள் பிரச்சனையை இங்கே பதிவு செய்யுங்கள்</p>
+</div>
+
+<div class="container" style="padding:40px 20px; max-width:700px;">
+  <div class="card" style="padding:32px;">
+    <form id="complaintForm" enctype="multipart/form-data">
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div class="form-group">
+          <label data-i18n="form_name">Resident Name *</label>
+          <input class="form-control" id="name" name="name" required placeholder="Enter your name">
+        </div>
+        <div class="form-group">
+          <label data-i18n="form_mobile">Mobile Number *</label>
+          <input class="form-control" id="mobile" name="mobile" required placeholder="10-digit mobile" maxlength="10" pattern="[0-9]{10}">
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div class="form-group">
+          <label data-i18n="form_ward">Ward Number *</label>
+          <input class="form-control" id="wardNumber" name="wardNumber" required placeholder="e.g. 12">
+        </div>
+        <div class="form-group">
+          <label data-i18n="form_area">Area / Street Name *</label>
+          <input class="form-control" id="area" name="area" required placeholder="Street name">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label data-i18n="form_category">Complaint Category *</label>
+        <select class="form-control" id="category" name="category" required>
+          <option value="">-- Select Category --</option>
+          <option value="Water Problems">💧 Water Problems</option>
+          <option value="Road & Pothole Problems">🛣️ Road & Pothole Problems</option>
+          <option value="Street Light Problems">💡 Street Light Problems</option>
+          <option value="Garbage & Sanitation">🗑️ Garbage & Sanitation</option>
+          <option value="Drainage Problems">🚰 Drainage Problems</option>
+          <option value="Public Health Issues">🏥 Public Health Issues</option>
+          <option value="Public Transport Issues">🚌 Public Transport Issues</option>
+          <option value="Electricity Problems">⚡ Electricity Problems</option>
+          <option value="Public School Issues">🏫 Public School Issues</option>
+          <option value="Other Local Problems">📍 Other Local Problems</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label data-i18n="form_desc">Problem Description *</label>
+        <textarea class="form-control" id="description" name="description" required placeholder="Describe the problem in detail..."></textarea>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div class="form-group">
+          <label data-i18n="form_photo">Upload Photo (optional)</label>
+          <input class="form-control" type="file" id="photo" name="photo" accept="image/*" style="padding:8px;">
+        </div>
+        <div class="form-group">
+          <label data-i18n="form_landmark">Location / Landmark</label>
+          <input class="form-control" id="landmark" name="landmark" placeholder="Near bus stop, temple...">
+        </div>
+      </div>
+
+      <div id="formError" style="color:var(--yellow);font-size:13px;margin-bottom:12px;display:none;padding:10px;background:rgba(107,0,0,0.4);border-radius:8px;border-left:4px solid var(--yellow);"></div>
+
+      <button type="submit" class="btn-primary" style="width:100%;justify-content:center;font-size:16px;" id="submitBtn">
+        <span data-i18n="form_submit">Submit Complaint</span>
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay" id="successModal">
+  <div class="modal">
+    <div class="modal-icon">✅</div>
+    <h3>Complaint Registered!</h3>
+    <p class="tamil" style="color:var(--muted);font-size:13px;">உங்கள் புகார் வெற்றிகரமாக பதிவு செய்யப்பட்டது</p>
+    <div class="complaint-id" id="generatedId">TVK-...</div>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:20px;">Save this ID to track your complaint status</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a id="trackLink" href="track.html" class="btn-secondary">🔍 Track Complaint</a>
+      <button onclick="document.getElementById('successModal').classList.remove('open');document.getElementById('complaintForm').reset();"
+        style="background:rgba(107,0,0,0.4);border:2px solid rgba(255,215,0,0.4);color:var(--text);padding:10px 20px;border-radius:50px;font-size:14px;cursor:pointer;">
+        Report Another
+      </button>
+    </div>
+  </div>
+</div>
+
+<a href="report.html" class="fab" data-i18n="fab_label">📢 Report</a>
+<div id="footer-placeholder"></div>
+
+<script src="js/translations.js"></script>
+<script src="js/main.js"></script>
+<script src="js/form.js"></script>
+</body>
+</html>

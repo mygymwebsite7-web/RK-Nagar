@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300" width="500" height="300">
+
+  <!-- Red top stripe -->
+  <rect x="0" y="0" width="500" height="100" fill="#8B0000"/>
+
+  <!-- Yellow middle stripe -->
+  <rect x="0" y="100" width="500" height="100" fill="#FFD700"/>
+
+  <!-- Red bottom stripe -->
+  <rect x="0" y="200" width="500" height="100" fill="#8B0000"/>
+
+  <!-- ═══ CENTER EMBLEM ═══ -->
+  <!-- Outer dark red circle -->
+  <circle cx="250" cy="150" r="62" fill="#8B0000" stroke="#FFD700" stroke-width="3"/>
+
+  <!-- Green star ring (22 stars around circle) -->
+  <g fill="#228B22">
+    <polygon points="250,93 252,99 258,99 253,103 255,109 250,105 245,109 247,103 242,99 248,99" transform="rotate(0,250,150) translate(0,-57)"/>
+    <polygon points="250,93 252,99 258,99 253,103 255,109 250,105 245,109 247,103 242,99 248,99" transform="rotate(16.36,250,150) translate(0,-57)"/>
+    <polygon points="250,93 252,99 258,99 253,103 255,109 250,105 245,109 247,103 242,99 248,99" transform="rotate(32.72,250,150) translate(0,-57)"/>
+    <polygon points="250,93 252,99 258,99 253,103 255,109 250,105 245,109 247,103 242,99 248,99" transform="rotate(49.09,250,150) translate(0,-57)"/>
+    <polygon points="250,93 252,99 258,99 253,103 255,109 250,105 245,109 247,103 242,99 248,99" transform="rotate(65.45,250,150) translate(0,-57)"/>
+    <polygon points="250,93 252,99 258,99 253,103 255,109 250,105 245,109 247,103 242,99 248,99" transform="rotate(81.81,250,150) translate(0,-57)"/>
+    <polygon points="250,93 252,99 258,99 253,103 255,109 250,105 245,109 247,103 242,99 248,99" transform="rotate(98.18,250,150) translate(0,-57)"/>
+    <polygon points="250,93 252,99 258,99 253,103 255,109 250,105 245,109 247,103 242,99 248,99" transform="rotate(114.54,250,150) translate(0,-57)"/>
+    <polygon points="250,93 252,99 258,99 253,103 255,109 250,105 245,109 247,103 242,99 248,99" transform="rotate(130.90,250,150) translate(0,-57)"/>
+    <polygon points="250,93 252,99 258,99 253,103 255,109 250,105 245,109 247,103 242,99 248,99" transform="rotate(147.27,250,150) translate(0,-57)"/>
+    <polygon points="250,93 252,99 258,99 253,103 255,109 250,105 245,109 247,103 242,99 248,99" transform="rotate(163.63,250,150) translate(0,-57)"/>
+    <polygon points="250,93 252,99 258,99 253,103 255,109 250,105 245,109 247,103 242,99 248,99" transform="rotate(180,250,150) translate(0,-57)"/>
+    <polygon points="250,93 252,99 258,99 253,103 255,109 250,105 245,109 247,103 242,99 248,99" transform="rotate(196.36,250,150) translate(0,-57)"/>
+    <polygon points="250,93 252,99 258,99 253,103 255,109 250,105 245,109 247,103 242,99 248,99" transform="rotate(212.72,250,150) translate(0,-57)"/>
+    <polygon points="250,93 252,99 258,99 253,103 255,109 250,105 245,109 247,103 242,99 248,99" transform="rotate(229.09,250,150) translate(0,-57)"/>
+    <polygon points="250,93 252,99 258,99 253,103 255,109 250,105 245,109 247,103 242,99 248,99" transform="rotate(245.45,250,150) translate(0,-57)"/>
+    <polygon points="250,93 252,99 258,99 253,103 255,109 250,105 245,109 247,103 242,99 248,99" transform="rotate(261.81,250,150) translate(0,-57)"/>
+    <polygon points="250,93 252,99 258,99 253,103 255,109 250,105 245,109 247,103 242,99 248,99" transform="rotate(278.18,250,150) translate(0,-57)"/>
+    <polygon points="250,93 252,99 258,99 253,103 255,109 250,105 245,109 247,103 242,99 248,99" transform="rotate(294.54,250,150) translate(0,-57)"/>
+    <polygon points="250,93 252,99 258,99 253,103 255,109 250,105 245,109 247,103 242,99 248,99" transform="rotate(310.90,250,150) translate(0,-57)"/>
+    <polygon points="250,93 252,99 258,99 253,103 255,109 250,105 245,109 247,103 242,99 248,99" transform="rotate(327.27,250,150) translate(0,-57)"/>
+    <polygon points="250,93 252,99 258,99 253,103 255,109 250,105 245,109 247,103 242,99 248,99" transform="rotate(343.63,250,150) translate(0,-57)"/>
+  </g>
+
+  <!-- Inner circle -->
+  <circle cx="250" cy="150" r="46" fill="#8B0000"/>
+
+  <!-- Lotus flower -->
+  <!-- Green base leaves -->
+  <ellipse cx="250" cy="168" rx="18" ry="7" fill="#228B22"/>
+  <ellipse cx="238" cy="165" rx="12" ry="5" fill="#228B22" transform="rotate(-20,238,165)"/>
+  <ellipse cx="262" cy="165" rx="12" ry="5" fill="#228B22" transform="rotate(20,262,165)"/>
+
+  <!-- Pink lotus petals - outer -->
+  <ellipse cx="250" cy="148" rx="5" ry="18" fill="#E91E8C" opacity="0.9"/>
+  <ellipse cx="250" cy="148" rx="5" ry="18" fill="#E91E8C" opacity="0.9" transform="rotate(20,250,165)"/>
+  <ellipse cx="250" cy="148" rx="5" ry="18" fill="#E91E8C" opacity="0.9" transform="rotate(-20,250,165)"/>
+  <ellipse cx="250" cy="148" rx="5" ry="18" fill="#E91E8C" opacity="0.9" transform="rotate(40,250,165)"/>
+  <ellipse cx="250" cy="148" rx="5" ry="18" fill="#E91E8C" opacity="0.9" transform="rotate(-40,250,165)"/>
+  <ellipse cx="250" cy="148" rx="5" ry="18" fill="#E91E8C" opacity="0.9" transform="rotate(60,250,165)"/>
+  <ellipse cx="250" cy="148" rx="5" ry="18" fill="#E91E8C" opacity="0.9" transform="rotate(-60,250,165)"/>
+  <ellipse cx="250" cy="148" rx="5" ry="18" fill="#E91E8C" opacity="0.9" transform="rotate(80,250,165)"/>
+  <ellipse cx="250" cy="148" rx="5" ry="18" fill="#E91E8C" opacity="0.9" transform="rotate(-80,250,165)"/>
+
+  <!-- Pink lotus petals - inner brighter -->
+  <ellipse cx="250" cy="152" rx="3.5" ry="13" fill="#FF4DB8" opacity="1"/>
+  <ellipse cx="250" cy="152" rx="3.5" ry="13" fill="#FF4DB8" opacity="1" transform="rotate(30,250,165)"/>
+  <ellipse cx="250" cy="152" rx="3.5" ry="13" fill="#FF4DB8" opacity="1" transform="rotate(-30,250,165)"/>
+  <ellipse cx="250" cy="152" rx="3.5" ry="13" fill="#FF4DB8" opacity="1" transform="rotate(60,250,165)"/>
+  <ellipse cx="250" cy="152" rx="3.5" ry="13" fill="#FF4DB8" opacity="1" transform="rotate(-60,250,165)"/>
+  <ellipse cx="250" cy="152" rx="3.5" ry="13" fill="#FF4DB8" opacity="1" transform="rotate(90,250,165)"/>
+
+  <!-- Lotus center -->
+  <circle cx="250" cy="158" r="6" fill="#FFD700"/>
+  <circle cx="250" cy="158" r="3" fill="#FF6600"/>
+
+  <!-- ═══ LEFT ELEPHANT ═══ -->
+  <g transform="translate(85,100)">
+    <!-- Body -->
+    <ellipse cx="0" cy="45" rx="48" ry="38" fill="#A0A0A0"/>
+    <!-- Head -->
+    <ellipse cx="-28" cy="20" rx="30" ry="26" fill="#A8A8A8"/>
+    <!-- Ear -->
+    <ellipse cx="-46" cy="22" rx="16" ry="20" fill="#909090"/>
+    <ellipse cx="-46" cy="22" rx="10" ry="14" fill="#B8B8B8" opacity="0.4"/>
+    <!-- Trunk (curling down and forward) -->
+    <path d="M-52,32 Q-70,50 -65,72 Q-60,88 -50,90" stroke="#A0A0A0" stroke-width="13" fill="none" stroke-linecap="round"/>
+    <path d="M-52,32 Q-70,50 -65,72 Q-60,88 -50,90" stroke="#909090" stroke-width="9" fill="none" stroke-linecap="round"/>
+    <!-- Tusk -->
+    <path d="M-52,38 Q-72,44 -75,55" stroke="#F5F5DC" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <!-- Eye -->
+    <circle cx="-36" cy="16" r="5" fill="#1a1a1a"/>
+    <circle cx="-35" cy="15" r="2" fill="white"/>
+    <!-- Front legs -->
+    <rect x="-20" y="75" width="18" height="35" rx="8" fill="#989898"/>
+    <rect x="3" y="75" width="18" height="35" rx="8" fill="#989898"/>
+    <!-- Back legs -->
+    <rect x="22" y="75" width="18" height="33" rx="8" fill="#909090"/>
+    <rect x="42" y="72" width="18" height="30" rx="8" fill="#909090"/>
+    <!-- Tail -->
+    <path d="M46,42 Q60,50 58,65" stroke="#888" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- Raised front leg -->
+    <rect x="-22" y="55" width="18" height="28" rx="8" fill="#989898" transform="rotate(-25,-13,60)"/>
+  </g>
+
+  <!-- ═══ RIGHT ELEPHANT (mirrored) ═══ -->
+  <g transform="translate(415,100) scale(-1,1)">
+    <!-- Body -->
+    <ellipse cx="0" cy="45" rx="48" ry="38" fill="#A0A0A0"/>
+    <!-- Head -->
+    <ellipse cx="-28" cy="20" rx="30" ry="26" fill="#A8A8A8"/>
+    <!-- Ear -->
+    <ellipse cx="-46" cy="22" rx="16" ry="20" fill="#909090"/>
+    <ellipse cx="-46" cy="22" rx="10" ry="14" fill="#B8B8B8" opacity="0.4"/>
+    <!-- Trunk -->
+    <path d="M-52,32 Q-70,50 -65,72 Q-60,88 -50,90" stroke="#A0A0A0" stroke-width="13" fill="none" stroke-linecap="round"/>
+    <path d="M-52,32 Q-70,50 -65,72 Q-60,88 -50,90" stroke="#909090" stroke-width="9" fill="none" stroke-linecap="round"/>
+    <!-- Tusk -->
+    <path d="M-52,38 Q-72,44 -75,55" stroke="#F5F5DC" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <!-- Eye -->
+    <circle cx="-36" cy="16" r="5" fill="#1a1a1a"/>
+    <circle cx="-35" cy="15" r="2" fill="white"/>
+    <!-- Front legs -->
+    <rect x="-20" y="75" width="18" height="35" rx="8" fill="#989898"/>
+    <rect x="3" y="75" width="18" height="35" rx="8" fill="#989898"/>
+    <!-- Back legs -->
+    <rect x="22" y="75" width="18" height="33" rx="8" fill="#909090"/>
+    <rect x="42" y="72" width="18" height="30" rx="8" fill="#909090"/>
+    <!-- Tail -->
+    <path d="M46,42 Q60,50 58,65" stroke="#888" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <!-- Raised front leg -->
+    <rect x="-22" y="55" width="18" height="28" rx="8" fill="#989898" transform="rotate(-25,-13,60)"/>
+  </g>
+
+</svg>

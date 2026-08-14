@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track Complaint – TVK Complaint Box</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="navbar-placeholder"></div>
+
+<div style="background:linear-gradient(135deg,#6B0000,#B80000,#B84000,#C8A000);padding:40px 20px;text-align:center;border-bottom:3px solid #FFD700;">
+  <h1 style="color:#FFD700;font-size:clamp(22px,5vw,34px);font-weight:800" data-i18n="track_title">Track Your Complaint</h1>
+  <p style="color:rgba(255,230,150,0.85);margin-top:8px;font-size:14px" class="tamil">உங்கள் புகாரின் நிலையை கண்காணிக்கவும்</p>
+</div>
+
+<div class="container" style="padding:40px 20px;max-width:700px;">
+  <div class="card" style="padding:32px;">
+    <div style="display:flex;gap:12px;">
+      <input class="form-control" id="trackInput"
+        data-i18n-placeholder="track_input"
+        placeholder="Enter Complaint ID (e.g. TVK-20240101-1234)"
+        style="flex:1;">
+      <button class="btn-primary" onclick="trackComplaint()" style="white-space:nowrap;padding:12px 24px;" data-i18n="track_btn">Track</button>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div id="trackResult" style="margin-top:24px;display:none;">
+    <div class="card" style="padding:32px;">
+      <h3 style="color:var(--yellow);margin-bottom:20px;font-size:18px;">Complaint Status</h3>
+
+      <!-- PROGRESS TRACKER -->
+      <div class="progress-tracker" id="progressTracker"></div>
+
+      <!-- DETAILS -->
+      <div id="complaintDetails" style="margin-top:24px;border-top:1px solid rgba(184,64,0,0.4);padding-top:20px;">
+      </div>
+    </div>
+  </div>
+
+  <div id="trackError" style="display:none;margin-top:24px;" class="card">
+    <div style="text-align:center;padding:20px;">
+      <div style="font-size:48px;margin-bottom:12px">🔍</div>
+      <h3 style="color:var(--muted)">Complaint Not Found</h3>
+      <p style="font-size:13px;color:var(--muted);margin-top:8px" class="tamil">புகார் ஐடி சரியாக உள்ளிடவும்</p>
+    </div>
+  </div>
+</div>
+
+<a href="report.html" class="fab" data-i18n="fab_label">📢 Report</a>
+<div id="footer-placeholder"></div>
+
+<script src="js/translations.js"></script>
+<script src="js/main.js"></script>
+<script src="js/track.js"></script>
+</body>
+</html>

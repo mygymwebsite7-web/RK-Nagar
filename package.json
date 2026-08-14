@@ -1,0 +1,22 @@
+{
+  "name": "tvk-complaint-box",
+  "version": "1.0.0",
+  "description": "TVK Complaint Box – R.K. Nagar Thoguthi civic grievance platform",
+  "type": "module",
+  "scripts": {
+    "dev": "vercel dev",
+    "start": "vercel dev"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^1.41.3",
+    "dotenv": "^16.3.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.0.3",
+    "multer": "^1.4.5-lts.1",
+    "multiparty": "^4.2.3"
+  },
+  "engines": {
+    "node": ">=18.x"
+  }
+}
