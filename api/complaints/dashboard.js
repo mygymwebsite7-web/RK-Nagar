@@ -27,10 +27,11 @@ export default async function handler(req, res) {
       else if (c.status === 'In Progress') inProgress++;
       else if (c.status === 'Resolved') resolved++;
 
-      if (!wardMap[c.wardNumber]) {
-        wardMap[c.wardNumber] = { _id: c.wardNumber, count: 0, topCategory: c.category };
+      const w = c.wardNumber || c.wardnumber || 'Unknown';
+      if (!wardMap[w]) {
+        wardMap[w] = { _id: w, count: 0, topCategory: c.category };
       }
-      wardMap[c.wardNumber].count++;
+      wardMap[w].count++;
     }
 
     const wardAgg = Object.values(wardMap).sort((a, b) => b.count - a.count);
