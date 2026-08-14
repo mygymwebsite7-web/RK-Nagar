@@ -1,6 +1,5 @@
 import 'dotenv/config';
-import { connectDB } from '../../lib/db.js';
-import Complaint from '../../models/Complaint.js';
+import { supabase } from '../../lib/supabase.js';
 import { verifyToken } from '../../lib/auth.js';
 
 export default async function handler(req, res) {
@@ -27,9 +26,17 @@ export default async function handler(req, res) {
   if (!allowed.includes(status)) return res.status(400).json({ error: 'Invalid status' });
 
   try {
-    await connectDB();
-    const complaint = await Complaint.findByIdAndUpdate(id, { status }, { new: true });
-    if (!complaint) return res.status(404).json({ error: 'Complaint not found' });
+    const { data: complaint, error } = await supabase
+      .from('complaints')
+      .update({ status })
+      .eq('id', id)
+      .select()
+      .single();
+
+    if (error || !complaint) {
+      return res.status(404).json({ error: 'Complaint not found' });
+    }
+    
     return res.status(200).json(complaint);
   } catch (err) {
     return res.status(500).json({ error: 'Server error: ' + err.message });

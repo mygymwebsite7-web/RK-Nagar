@@ -1,6 +1,5 @@
 import 'dotenv/config';
-import { connectDB } from '../../lib/db.js';
-import Complaint from '../../models/Complaint.js';
+import { supabase } from '../../lib/supabase.js';
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -13,9 +12,16 @@ export default async function handler(req, res) {
   const { complaintId } = req.query;
 
   try {
-    await connectDB();
-    const complaint = await Complaint.findOne({ complaintId });
-    if (!complaint) return res.status(404).json({ error: 'Complaint not found' });
+    const { data: complaint, error } = await supabase
+      .from('complaints')
+      .select('*')
+      .eq('complaintId', complaintId)
+      .single();
+
+    if (error || !complaint) {
+      return res.status(404).json({ error: 'Complaint not found' });
+    }
+    
     return res.status(200).json(complaint);
   } catch (err) {
     return res.status(500).json({ error: 'Server error: ' + err.message });

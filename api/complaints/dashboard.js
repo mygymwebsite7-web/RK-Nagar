@@ -1,6 +1,5 @@
 import 'dotenv/config';
-import { connectDB } from '../../lib/db.js';
-import Complaint from '../../models/Complaint.js';
+import { supabase } from '../../lib/supabase.js';
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -11,19 +10,30 @@ export default async function handler(req, res) {
   if (req.method !== 'GET') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
-    await connectDB();
+    const { data: complaints, error } = await supabase
+      .from('complaints')
+      .select('status, wardNumber, category');
 
-    const total      = await Complaint.countDocuments();
-    const pending    = await Complaint.countDocuments({ status: 'Submitted' });
-    const underReview= await Complaint.countDocuments({ status: 'Under Review' });
-    const assigned   = await Complaint.countDocuments({ status: 'Assigned' });
-    const inProgress = await Complaint.countDocuments({ status: 'In Progress' });
-    const resolved   = await Complaint.countDocuments({ status: 'Resolved' });
+    if (error) throw error;
 
-    const wardAgg = await Complaint.aggregate([
-      { $group: { _id: '$wardNumber', count: { $sum: 1 }, topCategory: { $first: '$category' } } },
-      { $sort: { count: -1 } },
-    ]);
+    let total = 0, pending = 0, underReview = 0, assigned = 0, inProgress = 0, resolved = 0;
+    const wardMap = {};
+
+    for (const c of complaints) {
+      total++;
+      if (c.status === 'Submitted') pending++;
+      else if (c.status === 'Under Review') underReview++;
+      else if (c.status === 'Assigned') assigned++;
+      else if (c.status === 'In Progress') inProgress++;
+      else if (c.status === 'Resolved') resolved++;
+
+      if (!wardMap[c.wardNumber]) {
+        wardMap[c.wardNumber] = { _id: c.wardNumber, count: 0, topCategory: c.category };
+      }
+      wardMap[c.wardNumber].count++;
+    }
+
+    const wardAgg = Object.values(wardMap).sort((a, b) => b.count - a.count);
 
     return res.status(200).json({ total, pending, underReview, assigned, inProgress, resolved, wards: wardAgg });
   } catch (err) {

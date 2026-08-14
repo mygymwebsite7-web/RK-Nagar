@@ -1,6 +1,5 @@
 import 'dotenv/config';
-import { connectDB } from '../../lib/db.js';
-import Complaint from '../../models/Complaint.js';
+import { supabase } from '../../lib/supabase.js';
 import { verifyToken } from '../../lib/auth.js';
 
 export default async function handler(req, res) {
@@ -15,8 +14,13 @@ export default async function handler(req, res) {
   if (!user) return res.status(401).json({ error: 'Unauthorized' });
 
   try {
-    await connectDB();
-    const complaints = await Complaint.find().sort({ createdAt: -1 });
+    const { data: complaints, error } = await supabase
+      .from('complaints')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+    
     return res.status(200).json(complaints);
   } catch (err) {
     return res.status(500).json({ error: 'Server error: ' + err.message });

@@ -1,8 +1,7 @@
 import 'dotenv/config';
 import multiparty from 'multiparty';
 import cloudinary from 'cloudinary';
-import { connectDB } from '../../lib/db.js';
-import Complaint from '../../models/Complaint.js';
+import { supabase } from '../../lib/supabase.js';
 
 cloudinary.v2.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -40,7 +39,6 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
-    await connectDB();
     const { fields, files } = await parseForm(req);
 
     const get = (f) => (Array.isArray(fields[f]) ? fields[f][0] : fields[f] || '');
@@ -50,7 +48,13 @@ export default async function handler(req, res) {
       photoUrl = await uploadToCloudinary(files.photo[0].path);
     }
 
-    const complaint = new Complaint({
+    const date = new Date();
+    const ymd = `${date.getFullYear()}${String(date.getMonth()+1).padStart(2,'0')}${String(date.getDate()).padStart(2,'0')}`;
+    const rand = String(Math.floor(1000 + Math.random() * 9000));
+    const complaintId = `TVK-${ymd}-${rand}`;
+
+    const { error } = await supabase.from('complaints').insert([{
+      complaintId,
       name:       get('name'),
       mobile:     get('mobile'),
       wardNumber: get('wardNumber'),
@@ -59,10 +63,11 @@ export default async function handler(req, res) {
       description:get('description'),
       landmark:   get('landmark'),
       photo:      photoUrl,
-    });
+    }]);
 
-    await complaint.save();
-    return res.status(201).json({ complaintId: complaint.complaintId, message: 'Complaint registered successfully' });
+    if (error) throw error;
+
+    return res.status(201).json({ complaintId, message: 'Complaint registered successfully' });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ error: 'Server error: ' + err.message });

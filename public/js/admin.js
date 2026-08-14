@@ -104,7 +104,7 @@ function renderTable() {
 
   document.getElementById('tableBody').innerHTML = filtered.length
     ? filtered.map(c => {
-        const date = new Date(c.createdAt).toLocaleDateString('en-IN');
+        const date = new Date(c.created_at).toLocaleDateString('en-IN');
         return `<tr>
           <td><strong style="color:var(--red)">${c.complaintId}</strong></td>
           <td>${c.name}</td>
@@ -114,7 +114,7 @@ function renderTable() {
           <td>${c.area}${c.landmark ? '<br><small style="color:var(--muted)">'+c.landmark+'</small>' : ''}</td>
           <td>${date}</td>
           <td>
-            <select class="status-select" onchange="updateStatus('${c._id}', this.value)">
+            <select class="status-select" onchange="updateStatus('${c.id}', this.value)">
               ${['Submitted','Under Review','Assigned','In Progress','Resolved'].map(s =>
                 `<option ${s===c.status?'selected':''}>${s}</option>`
               ).join('')}
@@ -144,7 +144,7 @@ async function updateStatus(id, status) {
       return;
     }
     // update locally and re-render
-    const c = allComplaints.find(x => x._id === id);
+    const c = allComplaints.find(x => x.id === id);
     if (c) { c.status = status; renderStats(); renderTable(); }
   } catch (err) {
     console.error('Update status error:', err);

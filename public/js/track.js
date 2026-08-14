@@ -54,7 +54,7 @@ function renderProgress(currentStatus) {
 }
 
 function renderDetails(d) {
-  const date = new Date(d.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+  const date = new Date(d.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
   document.getElementById('complaintDetails').innerHTML = `
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;">
       <div><span style="font-size:11px;color:var(--muted);display:block;">COMPLAINT ID</span>
