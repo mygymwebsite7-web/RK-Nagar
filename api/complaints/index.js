@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import multiparty from 'multiparty';
-import { v2 as cloudinary } from 'cloudinary';
+import fs from 'fs';
+import path from 'path';
 import { supabase } from '../../lib/supabase.js';
 
 export const config = { api: { bodyParser: false } };
@@ -40,33 +41,37 @@ export default async function handler(req, res) {
     const landmark    = get('landmark');
 
     if (!name || !mobile || !ward_number || !area || !category || !description) {
-      return res.status(400).json({
-        error: 'Missing required fields',
-        received: { name: !!name, mobile: !!mobile, ward_number: !!ward_number, area: !!area, category: !!category, description: !!description },
-      });
+      return res.status(400).json({ error: 'Missing required fields' });
     }
 
-    // Upload photo to Cloudinary if provided and credentials exist
+    // Upload photo to Supabase Storage if provided
     let photoUrl = '';
-    const hasCloudinary = process.env.CLOUDINARY_CLOUD_NAME &&
-                          process.env.CLOUDINARY_API_KEY &&
-                          process.env.CLOUDINARY_API_SECRET;
-
-    if (hasCloudinary && files.photo && files.photo[0] && files.photo[0].size > 0) {
-      cloudinary.config({
-        cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-        api_key:    process.env.CLOUDINARY_API_KEY,
-        api_secret: process.env.CLOUDINARY_API_SECRET,
-      });
+    const photoFile = files.photo && files.photo[0];
+    if (photoFile && photoFile.size > 0) {
       try {
-        const result = await cloudinary.uploader.upload(files.photo[0].path, {
-          folder: 'tvk-complaints',
-          transformation: [{ width: 1200, height: 1200, crop: 'limit' }, { quality: 'auto' }],
-        });
-        photoUrl = result.secure_url;
+        const fileBuffer  = fs.readFileSync(photoFile.path);
+        const ext         = path.extname(photoFile.originalFilename || '.jpg').toLowerCase() || '.jpg';
+        const fileName    = `${Date.now()}-${Math.random().toString(36).slice(2)}${ext}`;
+
+        const { error: uploadError } = await supabase.storage
+          .from('complaint-photos')
+          .upload(fileName, fileBuffer, {
+            contentType: photoFile.headers['content-type'] || 'image/jpeg',
+            upsert: false,
+          });
+
+        if (uploadError) {
+          console.error('Storage upload error:', uploadError.message);
+          // Continue without photo — don't block the complaint
+        } else {
+          const { data: urlData } = supabase.storage
+            .from('complaint-photos')
+            .getPublicUrl(fileName);
+          photoUrl = urlData.publicUrl;
+        }
       } catch (uploadErr) {
-        // Photo upload failed — continue without photo, don't block the complaint
-        console.error('Cloudinary upload failed:', uploadErr.message);
+        console.error('Photo upload failed:', uploadErr.message);
+        // Continue without photo
       }
     }
 
