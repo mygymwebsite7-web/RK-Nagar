@@ -42,7 +42,7 @@ async function handleSubmit(e) {
 
     const data = await res.json();
 
-    if (!res.ok) throw new Error(data.error || 'Submission failed');
+    if (!res.ok) throw new Error('Server error ' + res.status + ': ' + (data.error || JSON.stringify(data)));
 
     // Show success modal
     document.getElementById('generatedId').textContent = data.complaintId;
