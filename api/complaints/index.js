@@ -22,33 +22,54 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
+  // Guard: supabase client missing means env vars not set
+  if (!supabase) {
+    return res.status(500).json({ error: 'Server misconfiguration: Supabase credentials missing' });
+  }
+
   try {
     const { fields } = await parseForm(req);
-
     const get = (f) => (Array.isArray(fields[f]) ? fields[f][0] : fields[f] || '');
 
+    const name        = get('name');
+    const mobile      = get('mobile');
+    const ward_number = get('wardNumber');
+    const area        = get('area');
+    const category    = get('category');
+    const description = get('description');
+    const landmark    = get('landmark');
+
+    // Validate required fields
+    if (!name || !mobile || !ward_number || !area || !category || !description) {
+      return res.status(400).json({
+        error: 'Missing required fields',
+        received: { name: !!name, mobile: !!mobile, ward_number: !!ward_number, area: !!area, category: !!category, description: !!description },
+      });
+    }
+
     const date = new Date();
-    const ymd = `${date.getFullYear()}${String(date.getMonth()+1).padStart(2,'0')}${String(date.getDate()).padStart(2,'0')}`;
+    const ymd  = `${date.getFullYear()}${String(date.getMonth()+1).padStart(2,'0')}${String(date.getDate()).padStart(2,'0')}`;
     const rand = String(Math.floor(1000 + Math.random() * 9000));
     const complaintId = `TVK-${ymd}-${rand}`;
 
     const { error } = await supabase.from('complaints').insert([{
       complaint_id: complaintId,
-      name:         get('name'),
-      mobile:       get('mobile'),
-      ward_number:  get('wardNumber'),
-      area:         get('area'),
-      category:     get('category'),
-      description:  get('description'),
-      landmark:     get('landmark'),
-      photo:        '',
+      name,
+      mobile,
+      ward_number,
+      area,
+      category,
+      description,
+      landmark,
+      photo: '',
     }]);
 
-    if (error) throw error;
+    if (error) {
+      return res.status(500).json({ error: 'DB insert failed: ' + error.message, code: error.code });
+    }
 
     return res.status(201).json({ complaintId, message: 'Complaint registered successfully' });
   } catch (err) {
-    console.error(err);
     return res.status(500).json({ error: 'Server error: ' + err.message });
   }
 }
