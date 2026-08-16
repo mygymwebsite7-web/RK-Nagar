@@ -1,20 +1,19 @@
 {
   "version": 2,
   "outputDirectory": "public",
-  "routes": [
-    { "src": "/api/debug",                "methods": ["GET", "OPTIONS"],          "dest": "/api/debug.js" },
-    { "src": "/api/complaints/dashboard", "methods": ["GET", "OPTIONS"],          "dest": "/api/complaints/dashboard.js" },
-    { "src": "/api/complaints/([^/]+)",   "methods": ["GET", "OPTIONS"],          "dest": "/api/complaints/[complaintId].js?complaintId=$1" },
-    { "src": "/api/complaints",            "methods": ["POST", "OPTIONS"],         "dest": "/api/complaints/index.js" },
-    { "src": "/api/admin/login",           "methods": ["POST", "OPTIONS"],         "dest": "/api/admin/login.js" },
-    { "src": "/api/admin/complaints",      "methods": ["GET", "OPTIONS"],          "dest": "/api/admin/complaints.js" },
-    { "src": "/api/admin/([^/]+)",         "methods": ["PATCH", "OPTIONS"],        "dest": "/api/admin/[id].js?id=$1" },
-    { "src": "/report",    "dest": "/report.html" },
-    { "src": "/track",     "dest": "/track.html" },
-    { "src": "/dashboard", "dest": "/dashboard.html" },
-    { "src": "/about",     "dest": "/about.html" },
-    { "src": "/contact",   "dest": "/contact.html" },
-    { "src": "/admin",     "dest": "/admin.html" },
-    { "src": "/(.*)",      "dest": "/$1" }
+  "rewrites": [
+    { "source": "/api/debug",                "destination": "/api/debug.js" },
+    { "source": "/api/complaints/dashboard", "destination": "/api/complaints/dashboard.js" },
+    { "source": "/api/complaints/:id",       "destination": "/api/complaints/[complaintId].js" },
+    { "source": "/api/complaints",           "destination": "/api/complaints/index.js" },
+    { "source": "/api/admin/login",          "destination": "/api/admin/login.js" },
+    { "source": "/api/admin/complaints",     "destination": "/api/admin/complaints.js" },
+    { "source": "/api/admin/:id",            "destination": "/api/admin/[id].js" },
+    { "source": "/report",                   "destination": "/report.html" },
+    { "source": "/track",                    "destination": "/track.html" },
+    { "source": "/dashboard",                "destination": "/dashboard.html" },
+    { "source": "/about",                    "destination": "/about.html" },
+    { "source": "/contact",                  "destination": "/contact.html" },
+    { "source": "/admin",                    "destination": "/admin.html" }
   ]
 }
