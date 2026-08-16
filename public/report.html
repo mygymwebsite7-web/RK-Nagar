@@ -62,15 +62,9 @@
         <textarea class="form-control" id="description" name="description" required placeholder="Describe the problem in detail..."></textarea>
       </div>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-        <div class="form-group">
-          <label data-i18n="form_photo">Upload Photo (optional)</label>
-          <input class="form-control" type="file" id="photo" name="photo" accept="image/*" style="padding:8px;">
-        </div>
-        <div class="form-group">
-          <label data-i18n="form_landmark">Location / Landmark</label>
-          <input class="form-control" id="landmark" name="landmark" placeholder="Near bus stop, temple...">
-        </div>
+      <div class="form-group">
+        <label data-i18n="form_landmark">Location / Landmark</label>
+        <input class="form-control" id="landmark" name="landmark" placeholder="Near bus stop, temple...">
       </div>
 
       <div id="formError" style="color:var(--yellow);font-size:13px;margin-bottom:12px;display:none;padding:10px;background:rgba(107,0,0,0.4);border-radius:8px;border-left:4px solid var(--yellow);"></div>

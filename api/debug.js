@@ -10,9 +10,6 @@ export default async function handler(req, res) {
   if (!process.env.JWT_SECRET)                missing.push('JWT_SECRET');
   if (!process.env.ADMIN_USERNAME)            missing.push('ADMIN_USERNAME');
   if (!process.env.ADMIN_PASSWORD_HASH)       missing.push('ADMIN_PASSWORD_HASH');
-  if (!process.env.CLOUDINARY_CLOUD_NAME)     missing.push('CLOUDINARY_CLOUD_NAME');
-  if (!process.env.CLOUDINARY_API_KEY)        missing.push('CLOUDINARY_API_KEY');
-  if (!process.env.CLOUDINARY_API_SECRET)     missing.push('CLOUDINARY_API_SECRET');
 
   if (missing.length) {
     return res.status(200).json({
@@ -22,11 +19,9 @@ export default async function handler(req, res) {
     });
   }
 
-  // Test Supabase
   const { createClient } = await import('@supabase/supabase-js');
   const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
 
-  // Test DB read
   const { data: sample, error: readErr } = await supabase
     .from('complaints').select('*').limit(1);
 
@@ -36,7 +31,6 @@ export default async function handler(req, res) {
     });
   }
 
-  // Test DB insert (no photo)
   const testId = 'DEBUG-' + Date.now();
   const { error: insertErr } = await supabase.from('complaints').insert([{
     complaint_id: testId,
@@ -50,15 +44,9 @@ export default async function handler(req, res) {
 
   return res.status(200).json({
     ok: !insertErr,
-    env_vars: 'all present',
-    cloudinary: {
-      cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-      api_key_set: !!process.env.CLOUDINARY_API_KEY,
-      api_secret_set: !!process.env.CLOUDINARY_API_SECRET,
-    },
     db_columns: sample && sample[0] ? Object.keys(sample[0]) : '(empty table — columns ok)',
     insert_test: insertErr
       ? { ok: false, error: insertErr.message }
-      : { ok: true, message: 'Insert works' },
+      : { ok: true, message: 'All systems working' },
   });
 }

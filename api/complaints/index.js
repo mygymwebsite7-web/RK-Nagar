@@ -1,13 +1,6 @@
 import 'dotenv/config';
 import multiparty from 'multiparty';
-import cloudinary from 'cloudinary';
 import { supabase } from '../../lib/supabase.js';
-
-cloudinary.v2.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key:    process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
 
 export const config = { api: { bodyParser: false } };
 
@@ -21,15 +14,6 @@ function parseForm(req) {
   });
 }
 
-function uploadToCloudinary(filePath) {
-  return new Promise((resolve, reject) => {
-    cloudinary.v2.uploader.upload(filePath, { folder: 'tvk-complaints' }, (err, result) => {
-      if (err) reject(err);
-      else resolve(result.secure_url);
-    });
-  });
-}
-
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -39,14 +23,9 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
-    const { fields, files } = await parseForm(req);
+    const { fields } = await parseForm(req);
 
     const get = (f) => (Array.isArray(fields[f]) ? fields[f][0] : fields[f] || '');
-
-    let photoUrl = '';
-    if (files.photo && files.photo[0]) {
-      photoUrl = await uploadToCloudinary(files.photo[0].path);
-    }
 
     const date = new Date();
     const ymd = `${date.getFullYear()}${String(date.getMonth()+1).padStart(2,'0')}${String(date.getDate()).padStart(2,'0')}`;
@@ -62,7 +41,7 @@ export default async function handler(req, res) {
       category:     get('category'),
       description:  get('description'),
       landmark:     get('landmark'),
-      photo:        photoUrl,
+      photo:        '',
     }]);
 
     if (error) throw error;
