@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <title>Admin Panel – TVK Complaint Box</title>
   <link rel="stylesheet" href="css/style.css">
   <style>
@@ -50,7 +51,7 @@
       <input class="form-control" type="password" id="adminPass" placeholder="Enter password" onkeydown="if(event.key==='Enter')doLogin()">
     </div>
     <div id="loginError" style="color:var(--yellow);font-size:13px;margin-bottom:12px;display:none;padding:8px;background:rgba(107,0,0,0.4);border-radius:6px;"></div>
-    <button class="btn-primary" onclick="doLogin()" style="width:100%;justify-content:center;">Login</button>
+    <button class="btn-primary" id="loginBtn" onclick="doLogin()" style="width:100%;justify-content:center;">Login</button>
   </div>
 </div>
 

@@ -6,7 +6,10 @@ async function doLogin() {
   const username = document.getElementById('adminUser').value.trim();
   const password = document.getElementById('adminPass').value;
   const errEl    = document.getElementById('loginError');
+  const btn      = document.getElementById('loginBtn');
   errEl.style.display = 'none';
+  btn.disabled = true;
+  btn.textContent = 'Logging in...';
 
   try {
     const res  = await fetch('/api/admin/login', {
@@ -22,6 +25,9 @@ async function doLogin() {
   } catch (err) {
     errEl.textContent = err.message;
     errEl.style.display = 'block';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Login';
   }
 }
 
@@ -29,6 +35,7 @@ function doLogout() {
   localStorage.removeItem('tvk-admin-token');
   document.getElementById('loginPanel').style.display = 'flex';
   document.getElementById('adminPanel').style.display = 'none';
+  allComplaints = [];
 }
 
 function showPanel() {
@@ -39,13 +46,23 @@ function showPanel() {
 
 async function loadComplaints() {
   const token = localStorage.getItem('tvk-admin-token');
-  if (!token) return;
+  if (!token) { doLogout(); return; }
+
+  document.getElementById('tableBody').innerHTML =
+    '<tr><td colspan="9" style="text-align:center;padding:30px;color:var(--muted);">Loading...</td></tr>';
 
   try {
-    const res  = await fetch('/api/admin/complaints', {
+    const res = await fetch('/api/admin/complaints', {
       headers: { 'Authorization': 'Bearer ' + token },
+      cache: 'no-store',
     });
-    if (res.status === 401) { doLogout(); return; }
+
+    if (res.status === 401) {
+      // Token expired — clear it and show login
+      localStorage.removeItem('tvk-admin-token');
+      doLogout();
+      return;
+    }
 
     const raw = await res.text();
     let data;
@@ -55,8 +72,7 @@ async function loadComplaints() {
       const msg = (data && data.error) ? data.error : raw;
       document.getElementById('tableBody').innerHTML =
         `<tr><td colspan="9" style="text-align:center;padding:30px;color:#c0392b;font-family:monospace;font-size:12px;">
-          ❌ HTTP ${res.status}: ${msg}<br><br>
-          <a href="/api/debug" target="_blank" style="color:#FFD700;">Click here to run diagnostics →</a>
+          ❌ HTTP ${res.status}: ${msg}
         </td></tr>`;
       return;
     }
@@ -67,8 +83,7 @@ async function loadComplaints() {
   } catch (err) {
     document.getElementById('tableBody').innerHTML =
       `<tr><td colspan="9" style="text-align:center;padding:30px;color:#c0392b;font-family:monospace;font-size:12px;">
-        ❌ Network error – ${err.message}<br><br>
-        <a href="/api/debug" target="_blank" style="color:#FFD700;">Click here to run diagnostics →</a>
+        ❌ Network error – ${err.message}
       </td></tr>`;
   }
 }
@@ -103,14 +118,6 @@ function renderTable() {
            (!ward     || w.includes(ward));
   });
 
-  const badgeMap = {
-    'Submitted':   'submitted',
-    'Under Review':'review',
-    'Assigned':    'assigned',
-    'In Progress': 'progress',
-    'Resolved':    'resolved',
-  };
-
   document.getElementById('tableBody').innerHTML = filtered.length
     ? filtered.map(c => {
         const date = new Date(c.created_at).toLocaleDateString('en-IN');
@@ -123,13 +130,13 @@ function renderTable() {
           <td>${c.area}${c.landmark ? '<br><small style="color:var(--muted)">'+c.landmark+'</small>' : ''}</td>
           <td>${date}</td>
           <td>
-            <select class="status-select" onchange="updateStatus('${c.id}', this.value)">
+            <select class="status-select" onchange="updateStatus(${c.id}, this.value)">
               ${['Submitted','Under Review','Assigned','In Progress','Resolved'].map(s =>
                 `<option ${s===c.status?'selected':''}>${s}</option>`
               ).join('')}
             </select>
           </td>
-          <td>${c.photo ? `<a href="${c.photo}" target="_blank" style="color:var(--red);font-size:12px;">View 📷</a>` : '–'}</td>
+          <td>–</td>
         </tr>`;
       }).join('')
     : '<tr><td colspan="9" style="text-align:center;padding:30px;color:var(--muted);">No complaints found.</td></tr>';
@@ -148,32 +155,34 @@ async function updateStatus(id, status) {
     });
     if (!res.ok) {
       const err = await res.json().catch(() => ({}));
-      console.error('Update status failed:', err.error || res.status);
       alert('Failed to update status: ' + (err.error || 'Server error'));
       return;
     }
-    // update locally and re-render
     const c = allComplaints.find(x => x.id === id);
     if (c) { c.status = status; renderStats(); renderTable(); }
   } catch (err) {
-    console.error('Update status error:', err);
     alert('Network error: ' + err.message);
   }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   const token = localStorage.getItem('tvk-admin-token');
-  if (token) showPanel();
+  if (token) {
+    showPanel();
+  } else {
+    document.getElementById('loginPanel').style.display = 'flex';
+    document.getElementById('adminPanel').style.display = 'none';
+  }
 });
 
-// Auto-refresh complaints every 30 seconds when panel is visible
+// Auto-refresh every 15 seconds
 setInterval(() => {
   if (document.getElementById('adminPanel').style.display !== 'none') {
     loadComplaints();
   }
-}, 30000);
+}, 15000);
 
-// Refresh when the tab regains focus so newly filed complaints appear immediately
+// Refresh when tab becomes visible
 document.addEventListener('visibilitychange', () => {
   if (!document.hidden && document.getElementById('adminPanel').style.display !== 'none') {
     loadComplaints();
