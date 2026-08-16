@@ -17,40 +17,60 @@ export default async function handler(req, res) {
   if (!process.env.ADMIN_PASSWORD_HASH)       missing.push('ADMIN_PASSWORD_HASH');
 
   if (missing.length) {
-    return res.status(500).json({
-      ok: false,
-      error: 'Missing environment variables',
-      missing,
-    });
+    return res.status(500).json({ ok: false, error: 'Missing environment variables', missing });
   }
 
-  // Try a simple DB query
   try {
-    const { data, error, count } = await supabase
-      .from('complaints')
-      .select('*', { count: 'exact', head: true });
+    // Query information_schema to get actual column names in the table
+    const { data: cols, error: colErr } = await supabase
+      .rpc('get_columns')
+      .select('*');
 
-    if (error) {
-      return res.status(500).json({
-        ok: false,
-        error: 'DB query failed',
-        details: error.message,
-        hint: error.hint || null,
-        code: error.code || null,
-      });
-    }
-
-    // Also fetch column names to confirm schema
-    const { data: sample } = await supabase
+    // Fallback: just fetch one row and report the keys
+    const { data: sample, error: sampleErr } = await supabase
       .from('complaints')
       .select('*')
       .limit(1);
 
+    if (sampleErr) {
+      return res.status(500).json({
+        ok: false,
+        error: 'DB query failed',
+        details: sampleErr.message,
+        hint: sampleErr.hint || null,
+        code: sampleErr.code || null,
+      });
+    }
+
+    // Try inserting a test row to see what error we get
+    const testId = 'DEBUG-TEST-' + Date.now();
+    const { error: insertErr } = await supabase
+      .from('complaints')
+      .insert([{
+        complaint_id: testId,
+        name: 'Debug Test',
+        mobile: '0000000000',
+        ward_number: '0',
+        area: 'Debug',
+        category: 'Other Local Problems',
+        description: 'Debug test row - safe to delete',
+        landmark: '',
+        photo: '',
+      }]);
+
+    // Immediately delete it
+    if (!insertErr) {
+      await supabase.from('complaints').delete().eq('complaint_id', testId);
+    }
+
     return res.status(200).json({
       ok: true,
       supabase_url: process.env.SUPABASE_URL,
-      row_count: count,
-      columns: sample && sample[0] ? Object.keys(sample[0]) : '(no rows yet)',
+      existing_columns: sample && sample[0] ? Object.keys(sample[0]) : '(table is empty — cannot detect columns)',
+      row_count: sample ? sample.length : 0,
+      insert_test: insertErr
+        ? { ok: false, error: insertErr.message, hint: insertErr.hint, code: insertErr.code }
+        : { ok: true, message: 'Insert + delete succeeded with snake_case columns' },
     });
   } catch (err) {
     return res.status(500).json({ ok: false, error: err.message });
