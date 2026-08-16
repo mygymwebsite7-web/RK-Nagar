@@ -136,7 +136,7 @@ function renderTable() {
               ).join('')}
             </select>
           </td>
-          <td>–</td>
+          <td>${c.photo ? `<a href="${c.photo}" target="_blank" style="color:var(--red);font-size:12px;">📷 View</a>` : '–'}</td>
         </tr>`;
       }).join('')
     : '<tr><td colspan="9" style="text-align:center;padding:30px;color:var(--muted);">No complaints found.</td></tr>';

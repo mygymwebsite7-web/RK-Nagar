@@ -1205,26 +1205,26 @@
         <div class="form-row">
           <div class="form-group">
             <label id="lbl-name">குடியிருப்பாளர் பெயர் *</label>
-            <input class="form-control" id="fName" placeholder="உங்கள் பெயர் / Your name" required>
+            <input class="form-control" id="fName" name="name" placeholder="உங்கள் பெயர் / Your name" required>
           </div>
           <div class="form-group">
             <label id="lbl-mobile">கைபேசி எண் *</label>
-            <input class="form-control" id="fMobile" placeholder="10-digit mobile" maxlength="10" pattern="[0-9]{10}" required>
+            <input class="form-control" id="fMobile" name="mobile" placeholder="10-digit mobile" maxlength="10" pattern="[0-9]{10}" required>
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
             <label id="lbl-ward">வார்டு எண் *</label>
-            <input class="form-control" id="fWard" placeholder="e.g. 12" required>
+            <input class="form-control" id="fWard" name="wardNumber" placeholder="e.g. 12" required>
           </div>
           <div class="form-group">
             <label id="lbl-area">பகுதி / தெரு *</label>
-            <input class="form-control" id="fArea" placeholder="Street / Area name" required>
+            <input class="form-control" id="fArea" name="area" placeholder="Street / Area name" required>
           </div>
         </div>
         <div class="form-group">
           <label id="lbl-cat">புகார் வகை *</label>
-          <select class="form-control" id="fCategory" required>
+          <select class="form-control" id="fCategory" name="category" required>
             <option value="">-- வகை தேர்ந்தெடு / Select Category --</option>
             <option value="Water Problems">💧 தண்ணீர் / Water Problems</option>
             <option value="Road Problems">🛣️ சாலை / Road Problems</option>
@@ -1239,7 +1239,7 @@
         </div>
         <div class="form-group">
           <label id="lbl-desc">பிரச்சனை விவரம் *</label>
-          <textarea class="form-control" id="fDesc" placeholder="பிரச்சனையை விரிவாக விவரிக்கவும் / Describe the problem in detail..." required></textarea>
+          <textarea class="form-control" id="fDesc" name="description" placeholder="பிரச்சனையை விரிவாக விவரிக்கவும் / Describe the problem in detail..." required></textarea>
         </div>
         <div class="form-row">
           <div class="form-group">
@@ -1247,12 +1247,12 @@
             <label class="photo-upload-label" for="photoInput">
               📷 &nbsp; <span id="photoLabel">Click to upload photo / புகைப்படம் பதிவேற்று</span>
             </label>
-            <input type="file" id="photoInput" accept="image/*" onchange="previewPhoto(this)">
+            <input type="file" id="photoInput" name="photo" accept="image/*" onchange="previewPhoto(this)">
             <img id="photoPreview" alt="Preview">
           </div>
           <div class="form-group">
             <label id="lbl-landmark">இடம் / அடையாளம்</label>
-            <input class="form-control" id="fLandmark" placeholder="Near bus stop, temple...">
+            <input class="form-control" id="fLandmark" name="landmark" placeholder="Near bus stop, temple...">
             <button type="button" class="location-btn" style="margin-top:8px;" onclick="getLocation()">
               📍 <span id="txt-get-loc">Get My Location</span>
             </button>
@@ -1720,14 +1720,8 @@ document.addEventListener('DOMContentLoaded', function() {
     submitBtn.innerHTML = '<span>Submitting... / சமர்பிக்கிறது...</span>';
 
     try {
-      var formData = new FormData();
-      formData.append('name', name);
-      formData.append('mobile', mobile);
-      formData.append('wardNumber', ward);
-      formData.append('area', area);
-      formData.append('category', cat);
-      formData.append('description', desc);
-      formData.append('landmark', lm);
+      // Use FormData from the form directly — captures photo file automatically
+      var formData = new FormData(document.getElementById('complaintForm'));
 
       var res = await fetch('/api/complaints', { method: 'POST', body: formData });
       var data = await res.json();
@@ -1993,7 +1987,7 @@ function renderAdmin() {
           STATUSES.map(function(s) { return '<option' + (s===c.status?' selected':'') + '>' + s + '</option>'; }).join('') +
         '</select>' +
       '</td>' +
-      '<td>—</td>' +
+      '<td>' + (c.photo ? '<a href="' + c.photo + '" target="_blank" style="color:var(--red);font-size:12px;font-weight:700;">📷 View</a>' : '—') + '</td>' +
       '</tr>';
   }).join('');
 }
