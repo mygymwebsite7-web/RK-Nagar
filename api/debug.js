@@ -1,14 +1,10 @@
 import 'dotenv/config';
-import { supabase } from '../../lib/supabase.js';
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-
   if (req.method === 'OPTIONS') return res.status(200).end();
 
-  // Check env vars first
+  // 1. Check every required env var
   const missing = [];
   if (!process.env.SUPABASE_URL)              missing.push('SUPABASE_URL');
   if (!process.env.SUPABASE_SERVICE_ROLE_KEY) missing.push('SUPABASE_SERVICE_ROLE_KEY');
@@ -17,62 +13,55 @@ export default async function handler(req, res) {
   if (!process.env.ADMIN_PASSWORD_HASH)       missing.push('ADMIN_PASSWORD_HASH');
 
   if (missing.length) {
-    return res.status(500).json({ ok: false, error: 'Missing environment variables', missing });
-  }
-
-  try {
-    // Query information_schema to get actual column names in the table
-    const { data: cols, error: colErr } = await supabase
-      .rpc('get_columns')
-      .select('*');
-
-    // Fallback: just fetch one row and report the keys
-    const { data: sample, error: sampleErr } = await supabase
-      .from('complaints')
-      .select('*')
-      .limit(1);
-
-    if (sampleErr) {
-      return res.status(500).json({
-        ok: false,
-        error: 'DB query failed',
-        details: sampleErr.message,
-        hint: sampleErr.hint || null,
-        code: sampleErr.code || null,
-      });
-    }
-
-    // Try inserting a test row to see what error we get
-    const testId = 'DEBUG-TEST-' + Date.now();
-    const { error: insertErr } = await supabase
-      .from('complaints')
-      .insert([{
-        complaint_id: testId,
-        name: 'Debug Test',
-        mobile: '0000000000',
-        ward_number: '0',
-        area: 'Debug',
-        category: 'Other Local Problems',
-        description: 'Debug test row - safe to delete',
-        landmark: '',
-        photo: '',
-      }]);
-
-    // Immediately delete it
-    if (!insertErr) {
-      await supabase.from('complaints').delete().eq('complaint_id', testId);
-    }
-
     return res.status(200).json({
-      ok: true,
-      supabase_url: process.env.SUPABASE_URL,
-      existing_columns: sample && sample[0] ? Object.keys(sample[0]) : '(table is empty — cannot detect columns)',
-      row_count: sample ? sample.length : 0,
-      insert_test: insertErr
-        ? { ok: false, error: insertErr.message, hint: insertErr.hint, code: insertErr.code }
-        : { ok: true, message: 'Insert + delete succeeded with snake_case columns' },
+      ok: false,
+      problem: 'Missing Vercel environment variables — add these in Vercel → Project → Settings → Environment Variables',
+      missing,
     });
-  } catch (err) {
-    return res.status(500).json({ ok: false, error: err.message });
   }
+
+  // 2. Try connecting to Supabase
+  let supabase;
+  try {
+    const { createClient } = await import('@supabase/supabase-js');
+    supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
+  } catch (err) {
+    return res.status(200).json({ ok: false, problem: 'Failed to load Supabase client', error: err.message });
+  }
+
+  // 3. Try reading the table
+  const { data: sample, error: readErr } = await supabase
+    .from('complaints')
+    .select('*')
+    .limit(1);
+
+  if (readErr) {
+    return res.status(200).json({
+      ok: false,
+      problem: 'DB read failed — table may not exist yet. Run the CREATE TABLE sql in Supabase.',
+      error: readErr.message,
+      code: readErr.code,
+    });
+  }
+
+  // 4. Try inserting a test row
+  const testId = 'DEBUG-' + Date.now();
+  const { error: insertErr } = await supabase.from('complaints').insert([{
+    complaint_id: testId,
+    name: 'Debug', mobile: '0000000000', ward_number: '0',
+    area: 'Debug', category: 'Other Local Problems',
+    description: 'debug', landmark: '', photo: '',
+  }]);
+
+  if (!insertErr) {
+    await supabase.from('complaints').delete().eq('complaint_id', testId);
+  }
+
+  return res.status(200).json({
+    ok: true,
+    columns: sample && sample[0] ? Object.keys(sample[0]) : '(empty table)',
+    insert_test: insertErr
+      ? { ok: false, error: insertErr.message }
+      : { ok: true, message: 'Insert works correctly' },
+  });
 }
