@@ -1694,7 +1694,7 @@ function goReport(cat) {
 document.addEventListener('DOMContentLoaded', function() {
   var form = document.getElementById('complaintForm');
   if (!form) return;
-  form.addEventListener('submit', function(e) {
+  form.addEventListener('submit', async function(e) {
     e.preventDefault();
     var name    = document.getElementById('fName').value.trim();
     var mobile  = document.getElementById('fMobile').value.trim();
@@ -1715,31 +1715,41 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     errEl.style.display = 'none';
 
-    var id = genId();
-    var complaints = getComplaints();
-    complaints.push({
-      id: id, name: name, mobile: mobile, ward: ward, area: area,
-      category: cat, description: desc, landmark: lm,
-      photo: photoDataUrl,
-      location: locationData,
-      status: 'Submitted',
-      date: new Date().toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' }),
-      createdAt: Date.now()
-    });
-    saveComplaints(complaints);
-    renderStats();
-
-    document.getElementById('generatedId').textContent = id;
-    document.getElementById('successModal').classList.add('open');
-    form.reset();
-    photoDataUrl = null;
-    locationData = null;
-    document.getElementById('photoPreview').style.display = 'none';
-    document.getElementById('photoLabel').textContent = 'Click to upload photo / புகைப்படம் பதிவேற்று';
-    document.getElementById('locationStatus').textContent = '';
     var submitBtn = document.getElementById('submitBtn');
-    submitBtn.innerHTML = '✅ <span>Submitted! / சமர்பிக்கப்பட்டது!</span>';
-    setTimeout(function() { submitBtn.innerHTML = '✅ <span id="txt-submit">புகாரை சமர்பிக்கவும் / Submit Complaint</span>'; }, 2000);
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span>Submitting... / சமர்பிக்கிறது...</span>';
+
+    try {
+      var formData = new FormData();
+      formData.append('name', name);
+      formData.append('mobile', mobile);
+      formData.append('wardNumber', ward);
+      formData.append('area', area);
+      formData.append('category', cat);
+      formData.append('description', desc);
+      formData.append('landmark', lm);
+
+      var res = await fetch('/api/complaints', { method: 'POST', body: formData });
+      var data = await res.json();
+
+      if (!res.ok) throw new Error(data.error || 'Submission failed');
+
+      document.getElementById('generatedId').textContent = data.complaintId;
+      document.getElementById('successModal').classList.add('open');
+      form.reset();
+      photoDataUrl = null;
+      locationData = null;
+      document.getElementById('photoPreview').style.display = 'none';
+      document.getElementById('photoLabel').textContent = 'Click to upload photo / புகைப்படம் பதிவேற்று';
+      document.getElementById('locationStatus').textContent = '';
+      renderStats();
+    } catch(err) {
+      errEl.textContent = '❌ ' + (err.message || 'Something went wrong. Try again.');
+      errEl.style.display = 'block';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '✅ <span id="txt-submit">புகாரை சமர்பிக்கவும் / Submit Complaint</span>';
+    }
   });
 });
 
