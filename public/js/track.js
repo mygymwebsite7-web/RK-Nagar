@@ -58,13 +58,13 @@ function renderDetails(d) {
   document.getElementById('complaintDetails').innerHTML = `
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;">
       <div><span style="font-size:11px;color:var(--muted);display:block;">COMPLAINT ID</span>
-           <strong style="color:var(--red)">${d.complaintId}</strong></div>
+           <strong style="color:var(--red)">${d.complaint_id}</strong></div>
       <div><span style="font-size:11px;color:var(--muted);display:block;">CATEGORY</span>
            <strong>${d.category}</strong></div>
       <div><span style="font-size:11px;color:var(--muted);display:block;">AREA</span>
            <strong>${d.area}</strong></div>
       <div><span style="font-size:11px;color:var(--muted);display:block;">WARD</span>
-           <strong>${d.wardNumber}</strong></div>
+           <strong>${d.ward_number}</strong></div>
       <div><span style="font-size:11px;color:var(--muted);display:block;">DATE SUBMITTED</span>
            <strong>${date}</strong></div>
       ${d.landmark ? `<div><span style="font-size:11px;color:var(--muted);display:block;">LANDMARK</span>

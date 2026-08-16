@@ -89,7 +89,7 @@ function renderTable() {
   const ward     = document.getElementById('filterWard').value.trim().toLowerCase();
 
   const filtered = allComplaints.filter(c => {
-    const w = (c.wardNumber || c.wardnumber || '').toString().toLowerCase();
+    const w = (c.ward_number || '').toString().toLowerCase();
     return (!status   || c.status   === status)   &&
            (!category || c.category === category) &&
            (!ward     || w.includes(ward));
@@ -107,10 +107,10 @@ function renderTable() {
     ? filtered.map(c => {
         const date = new Date(c.created_at).toLocaleDateString('en-IN');
         return `<tr>
-          <td><strong style="color:var(--red)">${c.complaintId || c.complaintid || ''}</strong></td>
+          <td><strong style="color:var(--red)">${c.complaint_id || ''}</strong></td>
           <td>${c.name}</td>
           <td>${c.mobile}</td>
-          <td>${c.wardNumber || c.wardnumber || ''}</td>
+          <td>${c.ward_number || ''}</td>
           <td>${c.category}</td>
           <td>${c.area}${c.landmark ? '<br><small style="color:var(--muted)">'+c.landmark+'</small>' : ''}</td>
           <td>${date}</td>

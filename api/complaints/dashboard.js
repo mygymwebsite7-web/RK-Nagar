@@ -12,7 +12,7 @@ export default async function handler(req, res) {
   try {
     const { data: complaints, error } = await supabase
       .from('complaints')
-      .select('status, wardNumber, category');
+      .select('status, ward_number, category');
 
     if (error) throw error;
 
@@ -27,7 +27,7 @@ export default async function handler(req, res) {
       else if (c.status === 'In Progress') inProgress++;
       else if (c.status === 'Resolved') resolved++;
 
-      const w = c.wardNumber || c.wardnumber || 'Unknown';
+      const w = c.ward_number || 'Unknown';
       if (!wardMap[w]) {
         wardMap[w] = { _id: w, count: 0, topCategory: c.category };
       }

@@ -54,15 +54,15 @@ export default async function handler(req, res) {
     const complaintId = `TVK-${ymd}-${rand}`;
 
     const { error } = await supabase.from('complaints').insert([{
-      complaintId,
-      name:       get('name'),
-      mobile:     get('mobile'),
-      wardNumber: get('wardNumber'),
-      area:       get('area'),
-      category:   get('category'),
-      description:get('description'),
-      landmark:   get('landmark'),
-      photo:      photoUrl,
+      complaint_id: complaintId,
+      name:         get('name'),
+      mobile:       get('mobile'),
+      ward_number:  get('wardNumber'),
+      area:         get('area'),
+      category:     get('category'),
+      description:  get('description'),
+      landmark:     get('landmark'),
+      photo:        photoUrl,
     }]);
 
     if (error) throw error;
