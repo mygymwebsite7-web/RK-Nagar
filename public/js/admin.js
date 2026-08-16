@@ -46,22 +46,30 @@ async function loadComplaints() {
       headers: { 'Authorization': 'Bearer ' + token },
     });
     if (res.status === 401) { doLogout(); return; }
+
+    const raw = await res.text();
+    let data;
+    try { data = JSON.parse(raw); } catch { data = null; }
+
     if (!res.ok) {
-      const err = await res.json().catch(() => ({}));
-      console.error('Load complaints failed:', err.error || res.status);
+      const msg = (data && data.error) ? data.error : raw;
       document.getElementById('tableBody').innerHTML =
-        `<tr><td colspan="9" style="text-align:center;padding:30px;color:#c0392b;">
-          Failed to load complaints: ${err.error || 'Server error'}. Check environment variables on Vercel.
+        `<tr><td colspan="9" style="text-align:center;padding:30px;color:#c0392b;font-family:monospace;font-size:12px;">
+          ❌ HTTP ${res.status}: ${msg}<br><br>
+          <a href="/api/debug" target="_blank" style="color:#FFD700;">Click here to run diagnostics →</a>
         </td></tr>`;
       return;
     }
-    allComplaints = await res.json();
+
+    allComplaints = Array.isArray(data) ? data : [];
     renderStats();
     renderTable();
   } catch (err) {
-    console.error('Load complaints error:', err);
     document.getElementById('tableBody').innerHTML =
-      `<tr><td colspan="9" style="text-align:center;padding:30px;color:#c0392b;">Network error – ${err.message}</td></tr>`;
+      `<tr><td colspan="9" style="text-align:center;padding:30px;color:#c0392b;font-family:monospace;font-size:12px;">
+        ❌ Network error – ${err.message}<br><br>
+        <a href="/api/debug" target="_blank" style="color:#FFD700;">Click here to run diagnostics →</a>
+      </td></tr>`;
   }
 }
 
