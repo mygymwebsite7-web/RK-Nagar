@@ -157,3 +157,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const token = localStorage.getItem('tvk-admin-token');
   if (token) showPanel();
 });
+
+// Auto-refresh complaints every 30 seconds when panel is visible
+setInterval(() => {
+  if (document.getElementById('adminPanel').style.display !== 'none') {
+    loadComplaints();
+  }
+}, 30000);
+
+// Refresh when the tab regains focus so newly filed complaints appear immediately
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden && document.getElementById('adminPanel').style.display !== 'none') {
+    loadComplaints();
+  }
+});
