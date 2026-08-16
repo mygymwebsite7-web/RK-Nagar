@@ -1892,42 +1892,79 @@ function statCard(icon, num, label, color) {
 /* ═══════════════════════════════════════════════
    ADMIN
 ═══════════════════════════════════════════════ */
-function doLogin() {
-  var u = document.getElementById('adminUser').value.trim();
-  var p = document.getElementById('adminPass').value;
+var allAdminComplaints = [];
+
+async function doLogin() {
+  var u   = document.getElementById('adminUser').value.trim();
+  var p   = document.getElementById('adminPass').value;
   var err = document.getElementById('loginError');
-  if (u === 'TVK' && p === 'TVK123') {
+  var btn = document.querySelector('#loginPanel .form-submit-btn');
+  err.style.display = 'none';
+  if (btn) { btn.disabled = true; btn.textContent = 'Logging in...'; }
+
+  try {
+    var res  = await fetch('/api/admin/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: u, password: p })
+    });
+    var data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Login failed');
+    localStorage.setItem('tvk-admin-token', data.token);
     document.getElementById('loginPanel').style.display = 'none';
     document.getElementById('adminPanel').style.display = 'block';
-    renderAdmin();
-  } else {
-    err.textContent = '❌ Invalid username or password. / தவறான பயனர் பெயர் அல்லது கடவுச்சொல்.';
+    loadAdminComplaints();
+  } catch(e) {
+    err.textContent = '❌ ' + e.message;
     err.style.display = 'block';
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = '🔐 Login'; }
   }
 }
+
 function doLogout() {
+  localStorage.removeItem('tvk-admin-token');
   document.getElementById('loginPanel').style.display = 'flex';
   document.getElementById('adminPanel').style.display = 'none';
   document.getElementById('adminUser').value = '';
   document.getElementById('adminPass').value = '';
   document.getElementById('loginError').style.display = 'none';
+  allAdminComplaints = [];
+}
+
+async function loadAdminComplaints() {
+  var token = localStorage.getItem('tvk-admin-token');
+  if (!token) { doLogout(); return; }
+  var body = document.getElementById('adminBody');
+  if (body) body.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:20px;color:var(--muted);">Loading...</td></tr>';
+  try {
+    var res = await fetch('/api/admin/complaints', {
+      headers: { 'Authorization': 'Bearer ' + token }, cache: 'no-store'
+    });
+    if (res.status === 401) { doLogout(); return; }
+    var data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Failed to load');
+    allAdminComplaints = Array.isArray(data) ? data : [];
+    renderAdmin();
+  } catch(e) {
+    if (body) body.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:20px;color:#c0392b;">❌ ' + e.message + '</td></tr>';
+  }
 }
 
 function renderAdmin() {
-  var complaints = getComplaints();
   var fs = document.getElementById('filterStatus').value;
   var fc = document.getElementById('filterCategory').value;
   var fw = document.getElementById('filterWard').value.trim().toLowerCase();
-  var filtered = complaints.filter(function(c) {
+  var filtered = allAdminComplaints.filter(function(c) {
     return (!fs || c.status === fs) &&
            (!fc || c.category === fc) &&
-           (!fw || c.ward.toLowerCase().includes(fw));
+           (!fw || (c.ward_number||'').toLowerCase().includes(fw));
   });
 
-  var total    = complaints.length;
-  var pending  = complaints.filter(function(c) { return c.status === 'Submitted'; }).length;
-  var progress = complaints.filter(function(c) { return c.status === 'In Progress'; }).length;
-  var resolved = complaints.filter(function(c) { return c.status === 'Resolved'; }).length;
+  var total    = allAdminComplaints.length;
+  var pending  = allAdminComplaints.filter(function(c) { return c.status === 'Submitted'; }).length;
+  var progress = allAdminComplaints.filter(function(c) { return c.status === 'In Progress'; }).length;
+  var resolved = allAdminComplaints.filter(function(c) { return c.status === 'Resolved'; }).length;
 
   var sg = document.getElementById('adminStats');
   if (sg) sg.innerHTML =
@@ -1941,29 +1978,38 @@ function renderAdmin() {
     body.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:30px;color:var(--muted);">No complaints found.</td></tr>';
     return;
   }
-  body.innerHTML = filtered.slice().reverse().map(function(c) {
+  body.innerHTML = filtered.map(function(c) {
+    var date = c.created_at ? new Date(c.created_at).toLocaleDateString('en-IN') : '';
     return '<tr>' +
-      '<td style="font-weight:700;color:var(--red);font-family:monospace;font-size:11px;">' + c.id + '</td>' +
+      '<td style="font-weight:700;color:var(--red);font-family:monospace;font-size:11px;">' + (c.complaint_id||'') + '</td>' +
       '<td>' + c.name + '</td>' +
       '<td>' + c.mobile + '</td>' +
-      '<td>' + c.ward + '</td>' +
+      '<td>' + (c.ward_number||'') + '</td>' +
       '<td>' + c.category + '</td>' +
       '<td>' + c.area + '</td>' +
-      '<td>' + c.date + '</td>' +
+      '<td>' + date + '</td>' +
       '<td>' +
-        '<select class="status-select" onchange="updateStatus(\'' + c.id + '\',this.value)">' +
+        '<select class="status-select" onchange="updateStatus(' + c.id + ',this.value)">' +
           STATUSES.map(function(s) { return '<option' + (s===c.status?' selected':'') + '>' + s + '</option>'; }).join('') +
         '</select>' +
       '</td>' +
-      '<td>' + (c.photo ? '<a href="' + c.photo + '" target="_blank" style="color:var(--red);font-size:12px;font-weight:700;">📷 View</a>' : '—') + '</td>' +
+      '<td>—</td>' +
       '</tr>';
   }).join('');
 }
 
-function updateStatus(id, newStatus) {
-  var complaints = getComplaints();
-  var c = complaints.find(function(x) { return x.id === id; });
-  if (c) { c.status = newStatus; saveComplaints(complaints); renderStats(); }
+async function updateStatus(id, newStatus) {
+  var token = localStorage.getItem('tvk-admin-token');
+  try {
+    var res = await fetch('/api/admin/' + id, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+      body: JSON.stringify({ status: newStatus })
+    });
+    if (!res.ok) { alert('Failed to update status'); return; }
+    var c = allAdminComplaints.find(function(x) { return x.id === id; });
+    if (c) { c.status = newStatus; renderAdmin(); }
+  } catch(e) { alert('Network error: ' + e.message); }
 }
 
 function getBadgeClass(status) {
