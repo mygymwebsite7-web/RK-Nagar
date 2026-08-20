@@ -704,6 +704,12 @@
         drop-shadow(0 0 12px rgba(255,215,0,0.4));
       animation: ministerFadeIn 1s ease 0.3s both;
     }
+    /* JPEG with black bg: blend black away into hero */
+    .minister-photo[src$=".jpeg"],
+    .minister-photo[src$=".jpg"] {
+      mix-blend-mode: screen;
+      border-radius: 12px;
+    }
     @keyframes ministerFadeIn {
       from { opacity: 0; transform: translateY(24px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -1011,14 +1017,26 @@
       <!-- Horizontal divider -->
       <div class="minister-row-divider"></div>
 
-      <!-- Leader row (single centred card) -->
-      <div class="ministers-row ministers-row-single">
+      <!-- Leader row (two cards side by side) -->
+      <div class="ministers-row">
 
         <div class="minister-block">
           <div class="minister-block-inner">
             <img src="assets/leader-cutout.png" alt="தளபதி T.ராஜேஷ்" class="minister-photo">
             <div class="minister-name">தளபதி T.ராஜேஷ்</div>
             <div class="minister-desig">சென்னை வடக்கு மாவட்ட<br>இணை செயலாளர்</div>
+          </div>
+        </div>
+
+        <!-- Vertical divider -->
+        <div class="minister-col-divider"></div>
+
+        <!-- New MLA photo -->
+        <div class="minister-block">
+          <div class="minister-block-inner">
+            <img src="assets/mla3-cutout.jpeg" alt="TVK Leader" class="minister-photo">
+            <div class="minister-name">TVK தலைவர்</div>
+            <div class="minister-desig">ஆர்.கே.நகர் தொகுதி<br>TVK பிரதிநிதி</div>
           </div>
         </div>
 
