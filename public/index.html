@@ -31,7 +31,7 @@
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Poppins', 'Noto Sans Tamil', sans-serif;
-      background: linear-gradient(135deg, #6B0000 0%, #8B0000 25%, #B84000 55%, #C8A000 80%, #FFD700 100%);
+      background: linear-gradient(160deg, #8B0000 0%, #CC0000 18%, #E02020 30%, #FFD700 50%, #E02020 70%, #CC0000 82%, #8B0000 100%);
       background-attachment: fixed;
       color: var(--text);
       line-height: 1.6;
@@ -64,7 +64,7 @@
     /* ── NAVBAR ── */
     .navbar {
       position: sticky; top: 0; z-index: 1000;
-      background: linear-gradient(90deg, var(--red-dark) 0%, var(--red) 50%, var(--red-dark) 100%);
+      background: linear-gradient(90deg, #8B0000 0%, #CC0000 30%, #FFD700 50%, #CC0000 70%, #8B0000 100%);
       box-shadow: 0 3px 20px rgba(0,0,0,0.35);
       padding: 0 20px;
       height: 68px;
@@ -119,13 +119,13 @@
     /* ── HERO ── */
     .hero {
       background: linear-gradient(160deg,
-        #6B0000 0%,
-        #B80000 20%,
-        #B84000 40%,
-        #C8A000 55%,
-        #B84000 70%,
-        #B80000 85%,
-        #6B0000 100%);
+        #8B0000 0%,
+        #CC0000 20%,
+        #E02020 35%,
+        #FFD700 50%,
+        #E02020 65%,
+        #CC0000 80%,
+        #8B0000 100%);
       position: relative; overflow: hidden;
       min-height: 100vh;
       display: flex; align-items: center; justify-content: center;
@@ -135,9 +135,9 @@
       content: '';
       position: absolute; inset: 0;
       background:
-        radial-gradient(ellipse at 50% 40%, rgba(255,255,255,0.18) 0%, transparent 55%),
-        radial-gradient(ellipse at 20% 80%, rgba(204,0,0,0.25) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 20%, rgba(204,0,0,0.25) 0%, transparent 50%);
+        radial-gradient(ellipse at 50% 40%, rgba(255,255,255,0.12) 0%, transparent 55%),
+        radial-gradient(ellipse at 20% 80%, rgba(255,215,0,0.18) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(255,215,0,0.18) 0%, transparent 50%);
       pointer-events: none;
     }
     /* TVK stripe accent top */
@@ -292,13 +292,13 @@
     /* ── CATEGORY SECTION ── */
     .cat-section {
       background: linear-gradient(180deg,
-        #6B0000 0%,
-        #8B0000 18%,
-        #B80000 32%,
-        #C8A000 50%,
-        #B80000 68%,
-        #8B0000 82%,
-        #6B0000 100%);
+        #8B0000 0%,
+        #CC0000 20%,
+        #E02020 35%,
+        #FFD700 50%,
+        #E02020 65%,
+        #CC0000 80%,
+        #8B0000 100%);
       border-top: 3px solid #FFD700;
       border-bottom: 3px solid #FFD700;
     }
@@ -368,7 +368,7 @@
 
     /* ── STATS BANNER ── */
     .stats-banner {
-      background: linear-gradient(135deg, #6B0000 0%, #B80000 35%, #B84000 65%, #C8A000 100%);
+      background: linear-gradient(135deg, #8B0000 0%, #CC0000 35%, #FFD700 65%, #CC0000 85%, #8B0000 100%);
       padding: 50px 20px;
       border-top: 4px solid var(--yellow);
       border-bottom: 4px solid var(--yellow);
@@ -565,7 +565,7 @@
 
     /* ── FOOTER ── */
     footer {
-      background: linear-gradient(180deg, #2A0D00 0%, #6B0000 40%, #B84000 70%, #C8A000 100%);
+      background: linear-gradient(180deg, #2A0D00 0%, #8B0000 35%, #CC0000 60%, #FFD700 100%);
       color: var(--text); padding: 50px 20px 20px;
       border-top: 4px solid var(--yellow);
     }
@@ -602,7 +602,7 @@
 
     /* ── ANNOUNCEMENT BANNER ── */
     .announce {
-      background: linear-gradient(90deg, #6B0000, #B80000, #B84000, #C8A000, #B84000, #B80000, #6B0000);
+      background: linear-gradient(90deg, #8B0000, #CC0000, #FFD700, #CC0000, #8B0000);
       padding: 16px 24px; text-align: center;
       border-bottom: 3px solid var(--yellow);
     }
@@ -665,19 +665,15 @@
     }
     /* Each minister block – dark red top → yellow bottom */
     .minister-block-inner {
-      background: linear-gradient(180deg, #6B0000 0%, #8B0000 40%, #B80000 65%, #FFD700 100%);
-      border-radius: var(--radius);
-      border: 2px solid rgba(255,215,0,0.5);
-      border-top: 4px solid #6B0000;
-      border-bottom: 4px solid #FFD700;
-      padding: 16px 12px 18px;
-      box-shadow: 0 6px 28px rgba(0,0,0,0.55), 0 0 16px rgba(255,215,0,0.18);
+      background: transparent;
+      border-radius: 0;
+      border: none;
+      padding: 0 8px 8px;
+      box-shadow: none;
       transition: var(--transition);
     }
     .minister-block-inner:hover {
       transform: translateY(-6px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.7), 0 0 28px rgba(255,215,0,0.4);
-      border-color: #FFD700;
     }
     /* Vertical divider between two minister cards */
     .minister-col-divider {
@@ -703,8 +699,9 @@
       display: block;
       margin: 0 auto;
       filter:
-        drop-shadow(0 0 32px rgba(255,215,0,0.55))
-        drop-shadow(0 8px 24px rgba(107,0,0,0.65));
+        drop-shadow(0 0 40px rgba(255,215,0,0.7))
+        drop-shadow(0 8px 32px rgba(139,0,0,0.8))
+        drop-shadow(0 0 12px rgba(255,215,0,0.4));
       animation: ministerFadeIn 1s ease 0.3s both;
     }
     @keyframes ministerFadeIn {

@@ -27,7 +27,7 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Poppins', 'Noto Sans Tamil', sans-serif;
-  background: linear-gradient(135deg, #6B0000 0%, #8B0000 25%, #B84000 55%, #C8A000 80%, #FFD700 100%);
+  background: linear-gradient(160deg, #8B0000 0%, #CC0000 18%, #E02020 30%, #FFD700 50%, #E02020 70%, #CC0000 82%, #8B0000 100%);
   background-attachment: fixed;
   color: var(--text);
   line-height: 1.6;
@@ -43,7 +43,7 @@ button { cursor: pointer; font-family: inherit; }
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: linear-gradient(90deg, #6B0000 0%, #B80000 45%, #B84000 75%, #C8A000 100%);
+  background: linear-gradient(90deg, #8B0000 0%, #CC0000 30%, #FFD700 50%, #CC0000 70%, #8B0000 100%);
   box-shadow: 0 3px 24px rgba(0,0,0,0.6);
   padding: 0 20px;
   height: 65px;
