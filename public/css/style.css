@@ -27,7 +27,7 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Poppins', 'Noto Sans Tamil', sans-serif;
-  background: linear-gradient(160deg, #8B0000 0%, #CC0000 18%, #E02020 30%, #FFD700 50%, #E02020 70%, #CC0000 82%, #8B0000 100%);
+  background: linear-gradient(135deg, #E31E24 0%, #FFD700 50%, #E31E24 100%);
   background-attachment: fixed;
   color: var(--text);
   line-height: 1.6;
@@ -152,14 +152,7 @@ button { cursor: pointer; font-family: inherit; }
 
 /* ── HERO ────────────────────────────────────── */
 .hero {
-  background: linear-gradient(160deg,
-    #6B0000 0%,
-    #B80000 20%,
-    #B84000 40%,
-    #C8A000 55%,
-    #B84000 70%,
-    #B80000 85%,
-    #6B0000 100%);
+  background: linear-gradient(135deg, #E31E24 0%, #FFD700 50%, #E31E24 100%);
   position: relative;
   overflow: hidden;
   min-height: 90vh;

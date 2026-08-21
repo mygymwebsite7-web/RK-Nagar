@@ -31,7 +31,7 @@
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Poppins', 'Noto Sans Tamil', sans-serif;
-      background: linear-gradient(160deg, #8B0000 0%, #CC0000 18%, #E02020 30%, #FFD700 50%, #E02020 70%, #CC0000 82%, #8B0000 100%);
+      background: linear-gradient(135deg, #E31E24 0%, #FFD700 50%, #E31E24 100%);
       background-attachment: fixed;
       color: var(--text);
       line-height: 1.6;
@@ -118,14 +118,7 @@
 
     /* ── HERO ── */
     .hero {
-      background: linear-gradient(160deg,
-        #8B0000 0%,
-        #CC0000 20%,
-        #E02020 35%,
-        #FFD700 50%,
-        #E02020 65%,
-        #CC0000 80%,
-        #8B0000 100%);
+      background: linear-gradient(135deg, #E31E24 0%, #FFD700 50%, #E31E24 100%);
       position: relative; overflow: hidden;
       min-height: 100vh;
       display: flex; align-items: center; justify-content: center;
@@ -291,14 +284,7 @@
 
     /* ── CATEGORY SECTION ── */
     .cat-section {
-      background: linear-gradient(180deg,
-        #8B0000 0%,
-        #CC0000 20%,
-        #E02020 35%,
-        #FFD700 50%,
-        #E02020 65%,
-        #CC0000 80%,
-        #8B0000 100%);
+      background: linear-gradient(135deg, #E31E24 0%, #FFD700 50%, #E31E24 100%);
       border-top: 3px solid #FFD700;
       border-bottom: 3px solid #FFD700;
     }
@@ -368,7 +354,7 @@
 
     /* ── STATS BANNER ── */
     .stats-banner {
-      background: linear-gradient(135deg, #8B0000 0%, #CC0000 35%, #FFD700 65%, #CC0000 85%, #8B0000 100%);
+      background: linear-gradient(135deg, #E31E24 0%, #FFD700 50%, #E31E24 100%);
       padding: 50px 20px;
       border-top: 4px solid var(--yellow);
       border-bottom: 4px solid var(--yellow);
@@ -704,12 +690,6 @@
         drop-shadow(0 0 12px rgba(255,215,0,0.4));
       animation: ministerFadeIn 1s ease 0.3s both;
     }
-    /* JPEG with black bg: blend black away into hero */
-    .minister-photo[src$=".jpeg"],
-    .minister-photo[src$=".jpg"] {
-      mix-blend-mode: screen;
-      border-radius: 12px;
-    }
     @keyframes ministerFadeIn {
       from { opacity: 0; transform: translateY(24px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -1034,9 +1014,9 @@
         <!-- New MLA photo -->
         <div class="minister-block">
           <div class="minister-block-inner">
-            <img src="assets/mla3-cutout.jpeg" alt="TVK Leader" class="minister-photo">
-            <div class="minister-name">TVK தலைவர்</div>
-            <div class="minister-desig">ஆர்.கே.நகர் தொகுதி<br>TVK பிரதிநிதி</div>
+            <img src="assets/mla3-cutout.png" alt="சுறா G. வேலு" class="minister-photo mla3-photo">
+            <div class="minister-name" style="font-family:'Noto Sans Tamil','Poppins',sans-serif;">சுறா G. வேலு</div>
+            <div class="minister-desig" style="font-family:'Noto Sans Tamil',sans-serif;">வடசென்னை கிழக்கு மாவட்டச்<br>செயலாளர்</div>
           </div>
         </div>
 
