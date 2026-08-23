@@ -911,7 +911,6 @@
     <li><a href="#home" class="active" onclick="showTab('home')">🏠 Home</a></li>
     <li><a href="#report" onclick="showTab('report')">📢 Report</a></li>
     <li><a href="#track" onclick="showTab('track')">🔍 Track</a></li>
-    <li><a href="#dashboard" onclick="showTab('dashboard')">📊 Dashboard</a></li>
     <li><a href="#admin" onclick="showTab('admin')">🔐 Admin</a></li>
     <li><button class="lang-toggle" id="langToggle" onclick="toggleLang()">தமிழ்</button></li>
   </ul>
@@ -921,7 +920,6 @@
   <a href="#home" onclick="showTab('home');toggleMenu()">🏠 Home / முகப்பு</a>
   <a href="#report" onclick="showTab('report');toggleMenu()">📢 Report / புகார்</a>
   <a href="#track" onclick="showTab('track');toggleMenu()">🔍 Track / கண்காணி</a>
-  <a href="#dashboard" onclick="showTab('dashboard');toggleMenu()">📊 Dashboard</a>
   <a href="#admin" onclick="showTab('admin');toggleMenu()">🔐 Admin</a>
   <button class="lang-toggle" style="margin:10px 0;width:fit-content;" onclick="toggleLang()">தமிழ்</button>
 </div>
@@ -1254,53 +1252,6 @@
 </div><!-- end tab-track -->
 
 
-<!-- ===================== TAB: DASHBOARD ===================== -->
-<div id="tab-dashboard" class="tab-pane">
-  <div class="form-header">
-    <h1>📊 Ward Issues Dashboard</h1>
-    <p>ஆர்.கே. நகர் தொகுதி – புகார் நிலை கண்ணோட்டம்</p>
-  </div>
-  <div class="section" style="background:linear-gradient(135deg,#0D0003,#1F0005);">
-    <div class="container">
-      <div class="admin-stat-grid" id="dashStats"></div>
-      <div class="section-title">
-        <h2>Recent Complaints / சமீபத்திய புகார்கள்</h2>
-      </div>
-      <div class="filter-bar">
-        <select class="filter-select" id="dashFilterStatus" onchange="renderDash()">
-          <option value="">All Status</option>
-          <option>Submitted</option>
-          <option>Under Review</option>
-          <option>In Progress</option>
-          <option>Resolved</option>
-        </select>
-        <select class="filter-select" id="dashFilterCat" onchange="renderDash()">
-          <option value="">All Categories</option>
-          <option>Water Problems</option>
-          <option>Road Problems</option>
-          <option>Street Light Problems</option>
-          <option>Drainage Problems</option>
-          <option>Garbage Problems</option>
-          <option>Electricity Problems</option>
-          <option>Toilet Problems</option>
-          <option>Traffic Problems</option>
-          <option>Other Problems</option>
-        </select>
-      </div>
-      <div class="table-wrap">
-        <table id="dashTable">
-          <thead>
-            <tr>
-              <th>ID</th><th>Name</th><th>Category</th><th>Ward</th><th>Area</th><th>Date</th><th>Status</th>
-            </tr>
-          </thead>
-          <tbody id="dashBody"><tr><td colspan="7" style="text-align:center;padding:30px;color:var(--muted);">No complaints yet. Be the first to report!</td></tr></tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div><!-- end tab-dashboard -->
-
 
 <!-- ===================== TAB: ADMIN ===================== -->
 <div id="tab-admin" class="tab-pane">
@@ -1466,7 +1417,6 @@ function showTab(name) {
   var links = document.querySelectorAll('.nav-links a');
   links.forEach(function(a) { if (a.getAttribute('onclick') && a.getAttribute('onclick').includes("'" + name + "'")) a.classList.add('active'); });
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  if (name === 'dashboard') { renderDash(); renderStats(); }
 }
 
 function toggleMenu() {
