@@ -9,29 +9,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Noto+Sans+Tamil:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --red: #B80000;
-      --red-dark: #6B0000;
-      --red-vivid: #E02020;
-      --yellow: #FFD700;
-      --yellow-dark: #C8A000;
-      --yellow-light: #FFE680;
-      --amber: #B84000;
-      --white: #FFFFFF;
-      --bg: #3A0800;
-      --text: #FFE9B0;
-      --muted: #C8956A;
-      --border: #5A2A00;
-      --radius: 14px;
-      --radius-lg: 22px;
-      --shadow: 0 4px 24px rgba(0,0,0,0.5);
-      --shadow-lg: 0 10px 40px rgba(0,0,0,0.7);
+      --red:        #C0001A;
+      --red-dark:   #7A0010;
+      --red-vivid:  #E8002A;
+      --yellow:     #F5C518;
+      --yellow-dark:#C49A00;
+      --yellow-light:#FADA5E;
+      --amber:      #C25000;
+      --white:      #FFFFFF;
+      --bg:         #1A0005;
+      --text:       #FFF0CC;
+      --muted:      #D4A06A;
+      --border:     #4A1520;
+      --radius:     14px;
+      --radius-lg:  22px;
+      --shadow:     0 4px 24px rgba(0,0,0,0.55);
+      --shadow-lg:  0 10px 40px rgba(0,0,0,0.75);
       --transition: all 0.3s cubic-bezier(.4,0,.2,1);
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Poppins', 'Noto Sans Tamil', sans-serif;
-      background: linear-gradient(135deg, #E31E24 0%, #FFD700 50%, #E31E24 100%);
+      background: linear-gradient(160deg, #1A0005 0%, #3D0010 40%, #1A0005 100%);
       background-attachment: fixed;
       color: var(--text);
       line-height: 1.6;
@@ -64,7 +64,7 @@
     /* ── NAVBAR ── */
     .navbar {
       position: sticky; top: 0; z-index: 1000;
-      background: linear-gradient(90deg, #8B0000 0%, #CC0000 30%, #FFD700 50%, #CC0000 70%, #8B0000 100%);
+      background: linear-gradient(90deg, #120003 0%, #7A0010 30%, #F5C518 50%, #7A0010 70%, #120003 100%);
       box-shadow: 0 3px 20px rgba(0,0,0,0.35);
       padding: 0 20px;
       height: 68px;
@@ -77,7 +77,7 @@
       border-radius: 50%;
       object-fit: cover; object-position: top center;
       border: 3px solid var(--yellow);
-      box-shadow: 0 0 12px rgba(255,215,0,0.5);
+      box-shadow: 0 0 12px rgba(245,197,24,0.5);
     }
     .navbar-title span:first-child {
       display: block; font-size: 15px; font-weight: 800;
@@ -94,7 +94,7 @@
       padding: 7px 13px; border-radius: 8px; transition: var(--transition); white-space: nowrap;
     }
     .nav-links a:hover, .nav-links a.active {
-      background: rgba(255,215,0,0.2); color: var(--yellow);
+      background: rgba(245,197,24,0.18); color: var(--yellow);
     }
     .lang-toggle {
       background: var(--yellow); color: var(--red-dark);
@@ -104,7 +104,7 @@
     }
     .lang-toggle:hover { background: var(--yellow-dark); transform: scale(1.05); }
     .hamburger {
-      display: none; background: none; border: 2px solid rgba(255,215,0,0.5);
+      display: none; background: none; border: 2px solid rgba(245,197,24,0.5);
       color: var(--yellow); font-size: 22px; cursor: pointer;
       width: 40px; height: 40px; border-radius: 8px; align-items: center; justify-content: center;
     }
@@ -118,7 +118,7 @@
 
     /* ── HERO ── */
     .hero {
-      background: linear-gradient(135deg, #E31E24 0%, #FFD700 50%, #E31E24 100%);
+      background: linear-gradient(160deg, #1A0005 0%, #3D0010 45%, #5A0018 60%, #3D0010 80%, #1A0005 100%);
       position: relative; overflow: hidden;
       min-height: 100vh;
       display: flex; align-items: center; justify-content: center;
@@ -128,9 +128,9 @@
       content: '';
       position: absolute; inset: 0;
       background:
-        radial-gradient(ellipse at 50% 40%, rgba(255,255,255,0.12) 0%, transparent 55%),
-        radial-gradient(ellipse at 20% 80%, rgba(255,215,0,0.18) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 20%, rgba(255,215,0,0.18) 0%, transparent 50%);
+        radial-gradient(ellipse at 50% 40%, rgba(245,197,24,0.10) 0%, transparent 55%),
+        radial-gradient(ellipse at 20% 80%, rgba(245,197,24,0.14) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(245,197,24,0.14) 0%, transparent 50%);
       pointer-events: none;
     }
     /* TVK stripe accent top */
@@ -147,7 +147,7 @@
       height: min(480px, 55vw);
       width: auto;
       object-fit: contain; object-position: bottom center;
-      filter: drop-shadow(4px 0 24px rgba(204,0,0,0.5));
+      filter: drop-shadow(4px 0 24px rgba(192,0,26,0.55));
       animation: floatLeft 4s ease-in-out infinite;
       z-index: 2; pointer-events: none;
     }
@@ -156,7 +156,7 @@
       height: min(480px, 55vw);
       width: auto;
       object-fit: contain; object-position: bottom center;
-      filter: drop-shadow(-4px 0 24px rgba(255,215,0,0.4));
+      filter: drop-shadow(-4px 0 24px rgba(245,197,24,0.45));
       animation: floatRight 4.5s ease-in-out infinite;
       z-index: 2; pointer-events: none;
     }
@@ -175,24 +175,24 @@
       height: auto;
       border-radius: 18px;
       border: 3px solid var(--yellow);
-      box-shadow: 0 0 40px rgba(255,215,0,0.5), 0 0 80px rgba(204,0,0,0.4);
+      box-shadow: 0 0 40px rgba(245,197,24,0.5), 0 0 80px rgba(192,0,26,0.4);
       margin: 0 auto 20px;
       display: block;
       animation: logoPulse 3s ease-in-out infinite;
     }
     @keyframes logoPulse {
-      0%,100%{box-shadow:0 0 40px rgba(255,215,0,0.5),0 0 80px rgba(204,0,0,0.4)}
-      50%    {box-shadow:0 0 70px rgba(255,215,0,0.9),0 0 120px rgba(204,0,0,0.7)}
+      0%,100%{box-shadow:0 0 40px rgba(245,197,24,0.5),0 0 80px rgba(192,0,26,0.4)}
+      50%    {box-shadow:0 0 70px rgba(245,197,24,0.9),0 0 120px rgba(192,0,26,0.7)}
     }
 
     .hero-tvk {
       font-size: clamp(64px,14vw,110px); font-weight: 900; line-height: 1;
-      background: linear-gradient(135deg, #FFD700 0%, #FFFFFF 40%, #FFD700 70%, #C8A000 100%);
+      background: linear-gradient(135deg, #F5C518 0%, #FFFFFF 40%, #F5C518 70%, #C49A00 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text; letter-spacing: 8px;
       animation: fadeInDown 0.8s ease;
       text-shadow: none;
-      filter: drop-shadow(0 2px 16px rgba(255,215,0,0.6));
+      filter: drop-shadow(0 2px 16px rgba(245,197,24,0.65));
     }
     .hero-party {
       font-size: clamp(14px,3.5vw,20px); color: var(--yellow); font-weight: 800;
@@ -208,7 +208,7 @@
       font-weight: 700;
     }
     .hero-desc {
-      font-size: 13px; color: rgba(255,215,100,0.80);
+      font-size: 13px; color: rgba(255,220,120,0.85);
       margin: 14px auto 0; line-height: 1.9; max-width: 480px;
       animation: fadeInUp 0.8s ease 0.4s both;
       font-family: 'Noto Sans Tamil', sans-serif;
@@ -221,7 +221,7 @@
       height: auto;
       border-radius: 16px;
       border: 3px solid var(--yellow);
-      box-shadow: 0 0 30px rgba(255,215,0,0.4);
+      box-shadow: 0 0 30px rgba(245,197,24,0.4);
       margin: 20px auto 0;
       display: block;
       animation: fadeInUp 0.8s ease 0.5s both;
@@ -234,28 +234,28 @@
     }
     .btn-primary {
       display: inline-flex; align-items: center; gap: 8px;
-      background: linear-gradient(135deg, #6B0000 0%, #B80000 50%, #B84000 100%);
-      color: #FFD700; border: 2.5px solid var(--yellow);
+      background: linear-gradient(135deg, #7A0010 0%, #C0001A 50%, #C25000 100%);
+      color: #F5C518; border: 2.5px solid var(--yellow);
       padding: 14px 30px; border-radius: 50px;
       font-size: 15px; font-weight: 700;
       transition: var(--transition);
-      box-shadow: 0 6px 24px rgba(107,0,0,0.6), 0 0 14px rgba(255,215,0,0.2);
+      box-shadow: 0 6px 24px rgba(122,0,16,0.65), 0 0 14px rgba(245,197,24,0.2);
     }
     .btn-primary:hover {
-      transform: translateY(-3px); background: linear-gradient(135deg, #B84000, #B80000, #6B0000);
-      box-shadow: 0 10px 32px rgba(107,0,0,0.8), 0 0 24px rgba(255,215,0,0.35);
+      transform: translateY(-3px); background: linear-gradient(135deg, #C25000, #C0001A, #7A0010);
+      box-shadow: 0 10px 32px rgba(122,0,16,0.85), 0 0 24px rgba(245,197,24,0.35);
     }
     .btn-secondary {
       display: inline-flex; align-items: center; gap: 8px;
-      background: linear-gradient(135deg, #FFD700, #C8A000); color: #3A0000;
-      border: 2px solid rgba(107,0,0,0.35); padding: 14px 28px; border-radius: 50px;
+      background: linear-gradient(135deg, #F5C518, #C49A00); color: #2A0005;
+      border: 2px solid rgba(122,0,16,0.35); padding: 14px 28px; border-radius: 50px;
       font-size: 15px; font-weight: 800;
       transition: var(--transition);
-      box-shadow: 0 4px 16px rgba(200,160,0,0.4);
+      box-shadow: 0 4px 16px rgba(196,154,0,0.45);
     }
     .btn-secondary:hover {
-      background: linear-gradient(135deg, #C8A000, #FFD700); transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(200,160,0,0.6);
+      background: linear-gradient(135deg, #C49A00, #F5C518); transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(196,154,0,0.65);
     }
 
     @keyframes fadeInDown { from{opacity:0;transform:translateY(-30px)} to{opacity:1;transform:translateY(0)} }
@@ -267,14 +267,14 @@
     .section-title { text-align: center; margin-bottom: 44px; }
     .section-title h2 {
       font-size: clamp(22px,5vw,32px); font-weight: 800;
-      background: linear-gradient(135deg, #FFD700, #B84000);
+      background: linear-gradient(135deg, #F5C518, #C25000);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
       display: inline-block; position: relative;
     }
     .section-title h2::after {
       content: ''; display: block; width: 70px; height: 4px;
-      background: linear-gradient(90deg, #B80000, #FFD700, #B80000);
+      background: linear-gradient(90deg, #C0001A, #F5C518, #C0001A);
       margin: 10px auto 0; border-radius: 2px;
     }
     .section-title .sub {
@@ -284,18 +284,18 @@
 
     /* ── CATEGORY SECTION ── */
     .cat-section {
-      background: linear-gradient(135deg, #E31E24 0%, #FFD700 50%, #E31E24 100%);
-      border-top: 3px solid #FFD700;
-      border-bottom: 3px solid #FFD700;
+      background: linear-gradient(135deg, #2E0009 0%, #5A0018 50%, #2E0009 100%);
+      border-top: 3px solid #F5C518;
+      border-bottom: 3px solid #F5C518;
     }
     .cat-section .section-title h2 {
-      background: linear-gradient(135deg, #FFD700 0%, #FFFFFF 50%, #FFD700 100%);
+      background: linear-gradient(135deg, #F5C518 0%, #FFFFFF 50%, #F5C518 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
       filter: drop-shadow(0 1px 8px rgba(0,0,0,0.5));
     }
     .cat-section .section-title h2::after {
-      background: linear-gradient(90deg, transparent, #FFD700, transparent);
+      background: linear-gradient(90deg, transparent, #F5C518, transparent);
     }
     .cat-section .section-title .sub { color: rgba(255,230,150,0.85); }
     .category-grid {
@@ -304,7 +304,7 @@
       gap: 18px;
     }
     .category-card {
-      background: linear-gradient(160deg, #6B0000 0%, #B80000 45%, #FFD700 100%);
+      background: linear-gradient(160deg, #7A0010 0%, #C0001A 45%, #F5C518 100%);
       border-radius: var(--radius);
       padding: 26px 14px; text-align: center;
       border: 2px solid rgba(255,215,0,0.35); cursor: pointer;
@@ -314,28 +314,28 @@
     }
     .category-card::before {
       content: ''; position: absolute; inset: 0;
-      background: linear-gradient(160deg, #FFD700 0%, #B84000 50%, #6B0000 100%);
+      background: linear-gradient(160deg, #F5C518 0%, #C25000 50%, #7A0010 100%);
       opacity: 0; transition: var(--transition);
     }
     .category-card:hover {
-      border-color: #FFD700;
+      border-color: #F5C518;
       transform: translateY(-6px);
       box-shadow: 0 10px 32px rgba(0,0,0,0.7), 0 0 24px rgba(255,215,0,0.45);
     }
     .category-card:hover::before { opacity: 1; }
     .cat-emoji { font-size: 36px; margin-bottom: 10px; position: relative; z-index: 1; }
-    .cat-label { font-size: 12px; font-weight: 800; color: #FFD700; font-family: 'Noto Sans Tamil', sans-serif; position: relative; z-index: 1; text-shadow: 0 1px 4px rgba(0,0,0,0.6); }
+    .cat-label { font-size: 12px; font-weight: 800; color: #F5C518; font-family: 'Noto Sans Tamil', sans-serif; position: relative; z-index: 1; text-shadow: 0 1px 4px rgba(0,0,0,0.6); }
     .cat-label-en { font-size: 11px; color: rgba(255,230,150,0.85); margin-top: 3px; position: relative; z-index: 1; font-weight: 600; }
 
     /* ── HOW IT WORKS ── */
-    .how-section { background: linear-gradient(135deg, #1A0A00 0%, #2A0D00 100%); }
+    .how-section { background: linear-gradient(135deg, #0D0003 0%, #1F0005 100%); }
     .steps-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 24px;
     }
     .step-card {
-      background: linear-gradient(135deg, #2A0D00, #3A1500); border-radius: var(--radius);
+      background: linear-gradient(135deg, #1F0005, #320009); border-radius: var(--radius);
       padding: 30px 20px; text-align: center;
       box-shadow: var(--shadow); border-top: 4px solid var(--yellow);
       transition: var(--transition);
@@ -343,8 +343,8 @@
     .step-card:hover { transform: translateY(-5px); box-shadow: 0 10px 36px rgba(107,0,0,0.6); }
     .step-num {
       width: 48px; height: 48px; border-radius: 50%;
-      background: linear-gradient(135deg, #6B0000, #B84000);
-      color: #FFD700; font-size: 20px; font-weight: 800;
+      background: linear-gradient(135deg, #7A0010, #C25000);
+      color: #F5C518; font-size: 20px; font-weight: 800;
       display: flex; align-items: center; justify-content: center;
       margin: 0 auto 14px;
     }
@@ -354,7 +354,7 @@
 
     /* ── STATS BANNER ── */
     .stats-banner {
-      background: linear-gradient(135deg, #E31E24 0%, #FFD700 50%, #E31E24 100%);
+      background: linear-gradient(135deg, #2E0009 0%, #5A0018 50%, #2E0009 100%);
       padding: 50px 20px;
       border-top: 4px solid var(--yellow);
       border-bottom: 4px solid var(--yellow);
@@ -374,23 +374,23 @@
     .stat-label-ta { font-size: 11px; color: rgba(255,255,255,0.65); font-family: 'Noto Sans Tamil', sans-serif; }
 
     /* ── COMPLAINT FORM SECTION ── */
-    .form-section { background: linear-gradient(135deg, #1A0A00, #2A0D00); }
+    .form-section { background: linear-gradient(135deg, #0D0003, #1F0005); }
     .form-header {
-      background: linear-gradient(135deg, #6B0000, #B80000, #B84000);
+      background: linear-gradient(135deg, #7A0010, #C0001A, #C25000);
       padding: 40px 20px; text-align: center;
       border-bottom: 4px solid var(--yellow);
     }
     .form-header h1 { color: white; font-size: clamp(20px,5vw,30px); font-weight: 800; }
     .form-header p  { color: rgba(255,255,255,0.8); margin-top: 6px; font-size: 14px; font-family: 'Noto Sans Tamil', sans-serif; }
     .form-wrap { max-width: 720px; margin: 0 auto; padding: 40px 20px; }
-    .form-card { background: linear-gradient(135deg, #2A0D00, #3A1500); border-radius: var(--radius-lg); padding: 36px; box-shadow: var(--shadow-lg); border: 1px solid rgba(184,64,0,0.35); }
+    .form-card { background: linear-gradient(135deg, #1F0005, #320009); border-radius: var(--radius-lg); padding: 36px; box-shadow: var(--shadow-lg); border: 1px solid rgba(194,0,26,0.35); }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .form-group { margin-bottom: 18px; }
     .form-group label { display: block; font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 6px; font-family: 'Noto Sans Tamil', sans-serif; }
     .form-control {
       width: 100%; padding: 12px 16px; border: 2px solid rgba(184,64,0,0.4);
       border-radius: 10px; font-size: 14px; font-family: inherit;
-      background: #3A1500; transition: var(--transition); outline: none; color: var(--text);
+      background: #200007; transition: var(--transition); outline: none; color: var(--text);
     }
     .form-control:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px rgba(255,215,0,0.15); background: #4A1800; }
     textarea.form-control { resize: vertical; min-height: 110px; }
@@ -398,7 +398,7 @@
       display: flex; align-items: center; gap: 10px;
       border: 2px dashed rgba(184,64,0,0.5); border-radius: 10px; padding: 16px;
       cursor: pointer; transition: var(--transition);
-      background: #3A1500; font-size: 13px; color: var(--muted);
+      background: #200007; font-size: 13px; color: var(--muted);
     }
     .photo-upload-label:hover { border-color: var(--red); color: var(--red); }
     #photoInput { display: none; }
@@ -413,8 +413,8 @@
     .location-btn:hover { border-color: var(--red); color: var(--red); }
     .form-submit-btn {
       width: 100%; padding: 16px;
-      background: linear-gradient(135deg, #6B0000, #B80000, #B84000);
-      color: #FFD700; border: 2.5px solid var(--yellow);
+      background: linear-gradient(135deg, #7A0010, #C0001A, #C25000);
+      color: #F5C518; border: 2.5px solid var(--yellow);
       border-radius: 50px; font-size: 16px; font-weight: 800;
       transition: var(--transition); margin-top: 8px;
       box-shadow: 0 6px 24px rgba(204,0,0,0.4);
@@ -423,13 +423,13 @@
     .form-submit-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(204,0,0,0.6); }
 
     /* ── TRACK SECTION ── */
-    .track-section { background: linear-gradient(135deg, #1A0A00, #2A0D00); }
+    .track-section { background: linear-gradient(135deg, #0D0003, #1F0005); }
     .track-wrap { max-width: 600px; margin: 0 auto; }
     .track-input-wrap { display: flex; gap: 10px; }
     .track-input-wrap input { flex: 1; }
     .track-btn {
-      background: linear-gradient(135deg, #6B0000, #B80000, #B84000);
-      color: #FFD700; border: 2px solid var(--yellow);
+      background: linear-gradient(135deg, #7A0010, #C0001A, #C25000);
+      color: #F5C518; border: 2px solid var(--yellow);
       padding: 12px 24px; border-radius: 10px;
       font-size: 14px; font-weight: 700; white-space: nowrap;
       transition: var(--transition);
@@ -437,7 +437,7 @@
     .track-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(204,0,0,0.4); }
     .track-result { margin-top: 28px; display: none; }
     .track-card {
-      background: linear-gradient(135deg, #2A0D00, #3A1500); border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, #1F0005, #320009); border-radius: var(--radius-lg);
       padding: 28px; box-shadow: var(--shadow-lg);
       border-left: 6px solid var(--yellow);
     }
@@ -462,7 +462,7 @@
     .admin-wrap { max-width: 1100px; margin: 0 auto; }
     .admin-login-card {
       max-width: 420px; margin: 0 auto;
-      background: linear-gradient(135deg, #2A0D00, #3A1500); border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, #1F0005, #320009); border-radius: var(--radius-lg);
       padding: 44px 36px; box-shadow: var(--shadow-lg);
       text-align: center; border-top: 6px solid var(--yellow);
     }
@@ -474,7 +474,7 @@
     }
     #adminPanel { display: none; }
     .admin-header {
-      background: linear-gradient(90deg, #6B0000, #B80000, #B84000);
+      background: linear-gradient(90deg, #7A0010, #C0001A, #C25000);
       padding: 18px 28px; display: flex; align-items: center;
       justify-content: space-between; border-bottom: 3px solid var(--yellow);
     }
@@ -486,15 +486,15 @@
     }
     .filter-select:focus { border-color: var(--red); }
     .table-wrap { overflow-x: auto; border-radius: var(--radius); box-shadow: var(--shadow); }
-    table { width: 100%; border-collapse: collapse; background: #2A0D00; }
-    th { background: linear-gradient(90deg, #6B0000, #B84000); color: #FFD700; padding: 13px 16px; text-align: left; font-size: 12px; font-weight: 700; white-space: nowrap; }
+    table { width: 100%; border-collapse: collapse; background: #1F0005; }
+    th { background: linear-gradient(90deg, #7A0010, #C25000); color: #F5C518; padding: 13px 16px; text-align: left; font-size: 12px; font-weight: 700; white-space: nowrap; }
     td { padding: 12px 16px; border-bottom: 1px solid rgba(184,64,0,0.25); font-size: 12px; color: var(--text); }
     tr:hover td { background: rgba(184,64,0,0.15); }
     .badge { display: inline-block; padding: 4px 11px; border-radius: 20px; font-size: 11px; font-weight: 700; }
-    .badge-submitted { background: rgba(107,0,0,0.4);  color: #FFB0B0; border: 1px solid #B80000; }
-    .badge-review    { background: rgba(184,64,0,0.4); color: #FFD080; border: 1px solid #B84000; }
-    .badge-assigned  { background: rgba(200,160,0,0.3);color: #FFE080; border: 1px solid #C8A000; }
-    .badge-progress  { background: rgba(107,0,0,0.3);  color: #FFD700; border: 1px solid #B80000; }
+    .badge-submitted { background: rgba(122,0,16,0.4);  color: #FFB0B0; border: 1px solid #C0001A; }
+    .badge-review    { background: rgba(194,80,0,0.4);  color: #FFD080; border: 1px solid #C25000; }
+    .badge-assigned  { background: rgba(196,154,0,0.3); color: #FFE080; border: 1px solid #C49A00; }
+    .badge-progress  { background: rgba(122,0,16,0.3);  color: #F5C518; border: 1px solid #C0001A; }
     .badge-resolved  { background: rgba(0,80,0,0.35);  color: #88FF88; border: 1px solid #006600; }
     .status-select {
       padding: 4px 8px; border-radius: 6px; font-size: 11px;
@@ -502,7 +502,7 @@
     }
     .admin-stat-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); gap: 16px; margin-bottom: 24px; }
     .admin-stat {
-      background: linear-gradient(135deg, #2A0D00, #3A1500); border-radius: var(--radius); padding: 20px;
+      background: linear-gradient(135deg, #1F0005, #320009); border-radius: var(--radius); padding: 20px;
       text-align: center; box-shadow: var(--shadow); border-top: 4px solid var(--yellow);
     }
     .admin-stat .num { font-size: 36px; font-weight: 800; color: var(--yellow); }
@@ -516,7 +516,7 @@
     }
     .modal-overlay.open { display: flex; }
     .modal {
-      background: linear-gradient(145deg, #2A0D00, #3A1500); border-radius: var(--radius-lg);
+      background: linear-gradient(145deg, #1F0005, #320009); border-radius: var(--radius-lg);
       padding: 44px 36px; max-width: 500px; width: 100%;
       text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.7);
       border: 2px solid rgba(255,215,0,0.3);
@@ -537,8 +537,8 @@
     /* ── FAB ── */
     .fab {
       display: none; position: fixed; bottom: 24px; right: 20px; z-index: 999;
-      background: linear-gradient(135deg, #6B0000, #B80000, #B84000);
-      color: #FFD700; border: 2.5px solid var(--yellow);
+      background: linear-gradient(135deg, #7A0010, #C0001A, #C25000);
+      color: #F5C518; border: 2.5px solid var(--yellow);
       padding: 15px 22px; border-radius: 50px;
       font-size: 14px; font-weight: 800;
       box-shadow: 0 6px 24px rgba(107,0,0,0.7), 0 0 14px rgba(255,215,0,0.25);
@@ -551,7 +551,7 @@
 
     /* ── FOOTER ── */
     footer {
-      background: linear-gradient(180deg, #2A0D00 0%, #8B0000 35%, #CC0000 60%, #FFD700 100%);
+      background: linear-gradient(180deg, #1A0005 0%, #7A0010 35%, #C0001A 60%, #F5C518 100%);
       color: var(--text); padding: 50px 20px 20px;
       border-top: 4px solid var(--yellow);
     }
@@ -566,7 +566,7 @@
     .footer-brand p  { font-size: 12px; color: rgba(255,230,150,0.75); font-family: 'Noto Sans Tamil', sans-serif; font-weight: 600; }
     .footer-links h4 { color: var(--yellow); font-size: 13px; margin-bottom: 14px; letter-spacing: 0.5px; font-weight: 800; }
     .footer-links a  { display: block; font-size: 12px; color: rgba(255,215,0,0.75); margin-bottom: 7px; transition: var(--transition); font-weight: 600; }
-    .footer-links a:hover { color: #FFD700; padding-left: 4px; }
+    .footer-links a:hover { color: #F5C518; padding-left: 4px; }
     .footer-bottom {
       max-width: 1100px; margin: 20px auto 0;
       text-align: center; font-size: 12px; color: rgba(255,220,130,0.65);
@@ -588,7 +588,7 @@
 
     /* ── ANNOUNCEMENT BANNER ── */
     .announce {
-      background: linear-gradient(90deg, #8B0000, #CC0000, #FFD700, #CC0000, #8B0000);
+      background: linear-gradient(90deg, #120003, #7A0010, #F5C518, #7A0010, #120003);
       padding: 16px 24px; text-align: center;
       border-bottom: 3px solid var(--yellow);
     }
@@ -613,7 +613,7 @@
     /* ── ABOUT CARDS ── */
     .leader-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 24px; }
     .leader-card {
-      background: linear-gradient(135deg, #2A0D00, #3A1500); border-radius: var(--radius);
+      background: linear-gradient(135deg, #1F0005, #320009); border-radius: var(--radius);
       padding: 28px 20px; text-align: center;
       box-shadow: var(--shadow); border-top: 4px solid var(--yellow);
       transition: var(--transition);
@@ -667,9 +667,9 @@
       align-self: stretch;
       background: linear-gradient(to bottom,
         transparent 0%,
-        #FFD700 20%,
-        #B80000 50%,
-        #FFD700 80%,
+        #F5C518 20%,
+        #C0001A 50%,
+        #F5C518 80%,
         transparent 100%);
       border-radius: 2px;
       opacity: 0.85;
@@ -685,9 +685,9 @@
       display: block;
       margin: 0 auto;
       filter:
-        drop-shadow(0 0 40px rgba(255,215,0,0.7))
-        drop-shadow(0 8px 32px rgba(139,0,0,0.8))
-        drop-shadow(0 0 12px rgba(255,215,0,0.4));
+        drop-shadow(0 0 40px rgba(245,197,24,0.7))
+        drop-shadow(0 8px 32px rgba(122,0,16,0.85))
+        drop-shadow(0 0 12px rgba(245,197,24,0.4));
       animation: ministerFadeIn 1s ease 0.3s both;
     }
     @keyframes ministerFadeIn {
@@ -698,7 +698,7 @@
       font-family: 'Noto Sans Tamil', 'Poppins', sans-serif;
       font-size: clamp(13px, 3vw, 17px);
       font-weight: 800;
-      color: #FFD700;
+      color: #F5C518;
       letter-spacing: 0.3px;
       margin-top: 10px;
       line-height: 1.4;
@@ -709,9 +709,9 @@
       font-family: 'Noto Sans Tamil', 'Poppins', sans-serif;
       font-size: clamp(12px, 2.6vw, 15px);
       font-weight: 900;
-      color: #6B0000;
-      background: linear-gradient(90deg, #FFD700, #C8A000);
-      border: 1.5px solid #6B0000;
+      color: #2A0005;
+      background: linear-gradient(90deg, #F5C518, #C49A00);
+      border: 1.5px solid #7A0010;
       border-radius: 20px;
       padding: 4px 14px;
       display: inline-block;
@@ -725,7 +725,7 @@
       font-family: 'Noto Sans Tamil', sans-serif;
       font-size: clamp(11px, 2.2vw, 13px);
       font-weight: 600;
-      color: rgba(255,230,150,0.92);
+      color: rgba(255,235,160,0.95);
       margin-top: 5px;
       line-height: 1.6;
       letter-spacing: 0.2px;
@@ -735,7 +735,7 @@
       font-family: 'Noto Sans Tamil', sans-serif;
       font-size: clamp(10px, 1.9vw, 12px);
       font-weight: 600;
-      color: rgba(255,230,150,0.85);
+      color: rgba(255,235,160,0.88);
       margin-top: 4px;
       line-height: 1.55;
       letter-spacing: 0.1px;
@@ -745,7 +745,7 @@
       font-family: 'Noto Sans Tamil', sans-serif;
       font-size: clamp(10px, 2vw, 12px);
       font-weight: 800;
-      color: #FFD700;
+      color: #F5C518;
       margin-top: 4px;
       letter-spacing: 1px;
       text-transform: uppercase;
@@ -758,7 +758,7 @@
       display: block;
       width: 44px;
       height: 2px;
-      background: linear-gradient(90deg, transparent, #FFD700, #B80000, #FFD700, transparent);
+      background: linear-gradient(90deg, transparent, #F5C518, #C0001A, #F5C518, transparent);
       margin: 8px auto 8px;
       border-radius: 1px;
     }
@@ -767,7 +767,7 @@
       font-family: 'Poppins', sans-serif;
       font-size: clamp(10px, 2vw, 12px);
       font-weight: 700;
-      color: #FFD700;
+      color: #F5C518;
       letter-spacing: 0.5px;
       margin-top: 3px;
       text-shadow: 0 1px 4px rgba(0,0,0,0.5);
@@ -778,11 +778,11 @@
       height: 3px;
       background: linear-gradient(90deg,
         transparent 0%,
-        #6B0000 15%,
-        #B80000 30%,
-        #FFD700 50%,
-        #B80000 70%,
-        #6B0000 85%,
+        #7A0010 15%,
+        #C0001A 30%,
+        #F5C518 50%,
+        #C0001A 70%,
+        #7A0010 85%,
         transparent 100%);
       margin: 28px auto 0;
       border-radius: 2px;
@@ -813,8 +813,8 @@
 
     /* ── SCROLLBAR ── */
     ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #1A0A00; }
-    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #B80000, #B84000); border-radius: 3px; }
+    ::-webkit-scrollbar-track { background: #0D0003; }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #C0001A, #C25000); border-radius: 3px; }
 
     /* ── NAVBAR LOGO WRAP ── */
     .navbar-logo-wrap {
@@ -822,14 +822,14 @@
       border-radius: 50%;
       background: var(--red-dark);
       border: 3px solid var(--yellow);
-      box-shadow: 0 0 14px rgba(255,215,0,0.6), 0 0 28px rgba(204,0,0,0.35);
+      box-shadow: 0 0 14px rgba(245,197,24,0.6), 0 0 28px rgba(192,0,26,0.35);
       overflow: hidden;
       flex-shrink: 0;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .navbar-logo-wrap:hover {
       transform: scale(1.1) rotate(-3deg);
-      box-shadow: 0 0 22px rgba(255,215,0,0.9), 0 0 44px rgba(204,0,0,0.6);
+      box-shadow: 0 0 22px rgba(245,197,24,0.9), 0 0 44px rgba(192,0,26,0.6);
     }
     .navbar-logo-real {
       width: 100%; height: 100%;
@@ -857,23 +857,23 @@
       position: relative;
       z-index: 1;
       filter:
-        drop-shadow(0 0 24px rgba(255,215,0,0.55))
-        drop-shadow(0 0 48px rgba(204,0,0,0.4));
+        drop-shadow(0 0 24px rgba(245,197,24,0.55))
+        drop-shadow(0 0 48px rgba(192,0,26,0.4));
       animation: heroPulseReal 3s ease-in-out infinite;
     }
     @keyframes heroPulseReal {
       0%,100% {
         box-shadow:
-          0 0 0 6px rgba(255,215,0,0.15),
-          0 0 40px rgba(255,215,0,0.55),
-          0 0 80px rgba(204,0,0,0.45),
+          0 0 0 6px rgba(245,197,24,0.15),
+          0 0 40px rgba(245,197,24,0.55),
+          0 0 80px rgba(192,0,26,0.45),
           0 12px 40px rgba(0,0,0,0.6);
       }
       50% {
         box-shadow:
-          0 0 0 10px rgba(255,215,0,0.25),
-          0 0 70px rgba(255,215,0,0.9),
-          0 0 130px rgba(204,0,0,0.7),
+          0 0 0 10px rgba(245,197,24,0.25),
+          0 0 70px rgba(245,197,24,0.9),
+          0 0 130px rgba(192,0,26,0.7),
           0 12px 50px rgba(0,0,0,0.7);
       }
     }
@@ -1154,18 +1154,18 @@
       <div class="leader-grid">
         <div class="leader-card">
           <img id="leader1Img" src="" alt="Leader 1" class="leader-photo" style="display:none;">
-          <div id="leader1Fall" style="width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,#CC0000,#8B0000);border:4px solid var(--red);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:36px;">👤</div>
+          <div id="leader1Fall" style="width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,#C0001A,#7A0010);border:4px solid var(--red);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:36px;">👤</div>
           <div class="leader-name">தலைவர்</div>
           <div class="leader-title">TVK R.K. Nagar Thoguthi</div>
         </div>
         <div class="leader-card">
           <img id="leader2Img" src="" alt="Leader 2" class="leader-photo" style="display:none;">
-          <div id="leader2Fall" style="width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,#FFD700,#E6B800);border:4px solid var(--yellow);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:36px;">👤</div>
+          <div id="leader2Fall" style="width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,#F5C518,#C49A00);border:4px solid var(--yellow);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:36px;">👤</div>
           <div class="leader-name">உள்ளூர் செயலர்</div>
           <div class="leader-title">R.K. Nagar Ward Secretary</div>
         </div>
         <div class="leader-card">
-          <div style="width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,#CC0000,#FFD700);border:4px solid var(--red);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:36px;">🌟</div>
+          <div style="width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,#C0001A,#F5C518);border:4px solid var(--red);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:36px;">🌟</div>
           <div class="leader-name">TVK கழகம்</div>
           <div class="leader-title">Tamilaga Vettri Kazhagam</div>
         </div>
@@ -1311,7 +1311,7 @@
     <h1>📊 Ward Issues Dashboard</h1>
     <p>ஆர்.கே. நகர் தொகுதி – புகார் நிலை கண்ணோட்டம்</p>
   </div>
-  <div class="section" style="background:linear-gradient(135deg,#1A0A00,#2A0D00);">
+  <div class="section" style="background:linear-gradient(135deg,#0D0003,#1F0005);">
     <div class="container">
       <div class="admin-stat-grid" id="dashStats"></div>
       <div class="section-title">
@@ -1357,10 +1357,10 @@
 <div id="tab-admin" class="tab-pane">
 
   <!-- LOGIN -->
-  <div id="loginPanel" style="min-height:80vh;display:flex;align-items:center;justify-content:center;padding:40px 20px;background:linear-gradient(135deg,#1A0A00,#2A0D00,#3A1500);">
+  <div id="loginPanel" style="min-height:80vh;display:flex;align-items:center;justify-content:center;padding:40px 20px;background:linear-gradient(135deg,#0D0003,#1F0005,#320009);">
     <div class="admin-login-card">
       <img id="adminLogoImg" src="" alt="TVK" class="admin-logo" style="display:none;">
-      <div id="adminLogoFall" style="width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,#6B0000,#B84000);border:4px solid var(--yellow);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;color:var(--yellow);margin:0 auto 20px;letter-spacing:2px;">TVK</div>
+      <div id="adminLogoFall" style="width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,#7A0010,#C25000);border:4px solid var(--yellow);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;color:var(--yellow);margin:0 auto 20px;letter-spacing:2px;">TVK</div>
       <h2 style="color:var(--yellow);margin-bottom:6px;font-size:24px;font-weight:800;">Admin Login</h2>
       <p style="font-size:13px;color:var(--muted);margin-bottom:28px;font-family:'Noto Sans Tamil',sans-serif;">TVK Complaint Box – நிர்வாக நுழைவு</p>
       <div class="form-group" style="text-align:left;">
@@ -1453,7 +1453,7 @@
   <div class="footer-inner">
     <div class="footer-brand">
       <img id="footerLogo" src="" alt="TVK" class="footer-logo" style="display:none;">
-      <div id="footerLogoFall" style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#CC0000,#8B0000);border:3px solid var(--yellow);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;color:var(--yellow);margin-bottom:12px;">TVK</div>
+      <div id="footerLogoFall" style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#C0001A,#7A0010);border:3px solid var(--yellow);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;color:var(--yellow);margin-bottom:12px;">TVK</div>
       <h3>TVK Complaint Box</h3>
       <p>தமிழக வெற்றிக் கழகம்</p>
       <p style="margin-top:4px;font-size:11px;color:rgba(255,255,255,0.4);">R.K. Nagar Thoguthi</p>
@@ -1836,7 +1836,7 @@ function renderDash() {
 
   var sg = document.getElementById('dashStats');
   if (sg) sg.innerHTML =
-    statCard('📋', total,    'Total / மொத்தம்', '#CC0000') +
+    statCard('📋', total,    'Total / மொத்தம்', '#C0001A') +
     statCard('⏳', pending,  'Pending / நிலுவை', '#e65100') +
     statCard('🔧', progress, 'In Progress / செயல்', '#1565c0') +
     statCard('✅', resolved, 'Resolved / தீர்வு', '#2e7d32');
@@ -1945,7 +1945,7 @@ function renderAdmin() {
 
   var sg = document.getElementById('adminStats');
   if (sg) sg.innerHTML =
-    statCard('📋', total,    'Total Complaints', '#CC0000') +
+    statCard('📋', total,    'Total Complaints', '#C0001A') +
     statCard('⏳', pending,  'Submitted',         '#e65100') +
     statCard('🔧', progress, 'In Progress',        '#1565c0') +
     statCard('✅', resolved, 'Resolved',            '#2e7d32');
