@@ -1,0 +1,2040 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TVK Complaint Box – R.K. Nagar Thoguthi | தமிழக வெற்றிக் கழகம்</title>
+  <meta name="description" content="TVK R.K. Nagar Thoguthi – People's Grievance Centre. Report local problems easily.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Noto+Sans+Tamil:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #B80000;
+      --red-dark: #6B0000;
+      --red-vivid: #E02020;
+      --yellow: #FFD700;
+      --yellow-dark: #C8A000;
+      --yellow-light: #FFE680;
+      --amber: #B84000;
+      --white: #FFFFFF;
+      --bg: #3A0800;
+      --text: #FFE9B0;
+      --muted: #C8956A;
+      --border: #5A2A00;
+      --radius: 14px;
+      --radius-lg: 22px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.5);
+      --shadow-lg: 0 10px 40px rgba(0,0,0,0.7);
+      --transition: all 0.3s cubic-bezier(.4,0,.2,1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Poppins', 'Noto Sans Tamil', sans-serif;
+      background: linear-gradient(135deg, #E31E24 0%, #FFD700 50%, #E31E24 100%);
+      background-attachment: fixed;
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 15px;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; height: auto; }
+    button { cursor: pointer; font-family: inherit; }
+
+    /* ── TICKER ── */
+    .ticker-wrap {
+      background: var(--yellow);
+      color: var(--red-dark);
+      font-weight: 700;
+      font-size: 13px;
+      padding: 7px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+      z-index: 1001;
+    }
+    .ticker-inner {
+      display: inline-block;
+      animation: ticker 30s linear infinite;
+      padding-left: 100%;
+    }
+    @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-100%)} }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      position: sticky; top: 0; z-index: 1000;
+      background: linear-gradient(90deg, #8B0000 0%, #CC0000 30%, #FFD700 50%, #CC0000 70%, #8B0000 100%);
+      box-shadow: 0 3px 20px rgba(0,0,0,0.35);
+      padding: 0 20px;
+      height: 68px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 3px solid var(--yellow);
+    }
+    .navbar-brand { display: flex; align-items: center; gap: 12px; }
+    .navbar-logo {
+      height: 48px; width: 48px;
+      border-radius: 50%;
+      object-fit: cover; object-position: top center;
+      border: 3px solid var(--yellow);
+      box-shadow: 0 0 12px rgba(255,215,0,0.5);
+    }
+    .navbar-title span:first-child {
+      display: block; font-size: 15px; font-weight: 800;
+      color: var(--yellow); letter-spacing: 2px;
+    }
+    .navbar-title span:last-child {
+      display: block; font-size: 10px;
+      color: rgba(255,255,255,0.85);
+      font-family: 'Noto Sans Tamil', sans-serif;
+    }
+    .nav-links { display: flex; align-items: center; gap: 2px; list-style: none; }
+    .nav-links a {
+      color: var(--white); font-size: 13px; font-weight: 500;
+      padding: 7px 13px; border-radius: 8px; transition: var(--transition); white-space: nowrap;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      background: rgba(255,215,0,0.2); color: var(--yellow);
+    }
+    .lang-toggle {
+      background: var(--yellow); color: var(--red-dark);
+      border: none; padding: 7px 16px; border-radius: 22px;
+      font-size: 12px; font-weight: 800; cursor: pointer;
+      transition: var(--transition); margin-left: 6px; letter-spacing: 0.5px;
+    }
+    .lang-toggle:hover { background: var(--yellow-dark); transform: scale(1.05); }
+    .hamburger {
+      display: none; background: none; border: 2px solid rgba(255,215,0,0.5);
+      color: var(--yellow); font-size: 22px; cursor: pointer;
+      width: 40px; height: 40px; border-radius: 8px; align-items: center; justify-content: center;
+    }
+    .mobile-menu {
+      display: none; flex-direction: column;
+      background: var(--red-dark); padding: 12px 20px; gap: 4px;
+      border-bottom: 3px solid var(--yellow);
+    }
+    .mobile-menu a { color: white; padding: 11px 0; font-size: 14px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .mobile-menu.open { display: flex; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #E31E24 0%, #FFD700 50%, #E31E24 100%);
+      position: relative; overflow: hidden;
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 60px 20px 40px;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 40%, rgba(255,255,255,0.12) 0%, transparent 55%),
+        radial-gradient(ellipse at 20% 80%, rgba(255,215,0,0.18) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(255,215,0,0.18) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    /* TVK stripe accent top */
+    .hero::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 8px;
+      background: repeating-linear-gradient(90deg, var(--red-dark) 0px, var(--red-dark) 33.3%, var(--yellow) 33.3%, var(--yellow) 66.6%, var(--red-dark) 66.6%, var(--red-dark) 100%);
+    }
+
+    /* Side images – PNG cutout style */
+    .hero-side-left {
+      position: absolute; left: 0; bottom: 0;
+      height: min(480px, 55vw);
+      width: auto;
+      object-fit: contain; object-position: bottom center;
+      filter: drop-shadow(4px 0 24px rgba(204,0,0,0.5));
+      animation: floatLeft 4s ease-in-out infinite;
+      z-index: 2; pointer-events: none;
+    }
+    .hero-side-right {
+      position: absolute; right: 0; bottom: 0;
+      height: min(480px, 55vw);
+      width: auto;
+      object-fit: contain; object-position: bottom center;
+      filter: drop-shadow(-4px 0 24px rgba(255,215,0,0.4));
+      animation: floatRight 4.5s ease-in-out infinite;
+      z-index: 2; pointer-events: none;
+    }
+    @keyframes floatLeft  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+    @keyframes floatRight { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+    .hero-inner {
+      position: relative; z-index: 3;
+      max-width: 660px; margin: 0 auto;
+      padding: 0 10px;
+    }
+
+    /* Logo image (image 1) */
+    .hero-logo-img {
+      width: min(260px, 70vw);
+      height: auto;
+      border-radius: 18px;
+      border: 3px solid var(--yellow);
+      box-shadow: 0 0 40px rgba(255,215,0,0.5), 0 0 80px rgba(204,0,0,0.4);
+      margin: 0 auto 20px;
+      display: block;
+      animation: logoPulse 3s ease-in-out infinite;
+    }
+    @keyframes logoPulse {
+      0%,100%{box-shadow:0 0 40px rgba(255,215,0,0.5),0 0 80px rgba(204,0,0,0.4)}
+      50%    {box-shadow:0 0 70px rgba(255,215,0,0.9),0 0 120px rgba(204,0,0,0.7)}
+    }
+
+    .hero-tvk {
+      font-size: clamp(64px,14vw,110px); font-weight: 900; line-height: 1;
+      background: linear-gradient(135deg, #FFD700 0%, #FFFFFF 40%, #FFD700 70%, #C8A000 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; letter-spacing: 8px;
+      animation: fadeInDown 0.8s ease;
+      text-shadow: none;
+      filter: drop-shadow(0 2px 16px rgba(255,215,0,0.6));
+    }
+    .hero-party {
+      font-size: clamp(14px,3.5vw,20px); color: var(--yellow); font-weight: 800;
+      margin-top: 6px; letter-spacing: 2px;
+      animation: fadeInUp 0.8s ease 0.2s both;
+      font-family: 'Noto Sans Tamil', sans-serif;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.6);
+    }
+    .hero-constituency {
+      font-size: clamp(13px,2.5vw,16px); color: rgba(255,230,150,0.92);
+      margin-top: 8px; animation: fadeInUp 0.8s ease 0.3s both;
+      font-family: 'Noto Sans Tamil', sans-serif;
+      font-weight: 700;
+    }
+    .hero-desc {
+      font-size: 13px; color: rgba(255,215,100,0.80);
+      margin: 14px auto 0; line-height: 1.9; max-width: 480px;
+      animation: fadeInUp 0.8s ease 0.4s both;
+      font-family: 'Noto Sans Tamil', sans-serif;
+      font-weight: 600;
+    }
+
+    /* Center 4th image */
+    .hero-center-img {
+      width: min(220px, 60vw);
+      height: auto;
+      border-radius: 16px;
+      border: 3px solid var(--yellow);
+      box-shadow: 0 0 30px rgba(255,215,0,0.4);
+      margin: 20px auto 0;
+      display: block;
+      animation: fadeInUp 0.8s ease 0.5s both;
+    }
+
+    .hero-btns {
+      display: flex; gap: 14px; flex-wrap: wrap;
+      justify-content: center; margin-top: 28px;
+      animation: fadeInUp 0.8s ease 0.6s both;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, #6B0000 0%, #B80000 50%, #B84000 100%);
+      color: #FFD700; border: 2.5px solid var(--yellow);
+      padding: 14px 30px; border-radius: 50px;
+      font-size: 15px; font-weight: 700;
+      transition: var(--transition);
+      box-shadow: 0 6px 24px rgba(107,0,0,0.6), 0 0 14px rgba(255,215,0,0.2);
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px); background: linear-gradient(135deg, #B84000, #B80000, #6B0000);
+      box-shadow: 0 10px 32px rgba(107,0,0,0.8), 0 0 24px rgba(255,215,0,0.35);
+    }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, #FFD700, #C8A000); color: #3A0000;
+      border: 2px solid rgba(107,0,0,0.35); padding: 14px 28px; border-radius: 50px;
+      font-size: 15px; font-weight: 800;
+      transition: var(--transition);
+      box-shadow: 0 4px 16px rgba(200,160,0,0.4);
+    }
+    .btn-secondary:hover {
+      background: linear-gradient(135deg, #C8A000, #FFD700); transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(200,160,0,0.6);
+    }
+
+    @keyframes fadeInDown { from{opacity:0;transform:translateY(-30px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes fadeInUp   { from{opacity:0;transform:translateY(30px)}  to{opacity:1;transform:translateY(0)} }
+
+    /* ── SECTION COMMON ── */
+    .section { padding: 70px 20px; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-title { text-align: center; margin-bottom: 44px; }
+    .section-title h2 {
+      font-size: clamp(22px,5vw,32px); font-weight: 800;
+      background: linear-gradient(135deg, #FFD700, #B84000);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: inline-block; position: relative;
+    }
+    .section-title h2::after {
+      content: ''; display: block; width: 70px; height: 4px;
+      background: linear-gradient(90deg, #B80000, #FFD700, #B80000);
+      margin: 10px auto 0; border-radius: 2px;
+    }
+    .section-title .sub {
+      color: var(--muted); margin-top: 10px; font-size: 14px;
+      font-family: 'Noto Sans Tamil', sans-serif;
+    }
+
+    /* ── CATEGORY SECTION ── */
+    .cat-section {
+      background: linear-gradient(135deg, #E31E24 0%, #FFD700 50%, #E31E24 100%);
+      border-top: 3px solid #FFD700;
+      border-bottom: 3px solid #FFD700;
+    }
+    .cat-section .section-title h2 {
+      background: linear-gradient(135deg, #FFD700 0%, #FFFFFF 50%, #FFD700 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 1px 8px rgba(0,0,0,0.5));
+    }
+    .cat-section .section-title h2::after {
+      background: linear-gradient(90deg, transparent, #FFD700, transparent);
+    }
+    .cat-section .section-title .sub { color: rgba(255,230,150,0.85); }
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 18px;
+    }
+    .category-card {
+      background: linear-gradient(160deg, #6B0000 0%, #B80000 45%, #FFD700 100%);
+      border-radius: var(--radius);
+      padding: 26px 14px; text-align: center;
+      border: 2px solid rgba(255,215,0,0.35); cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.5), 0 0 8px rgba(255,215,0,0.1);
+      position: relative; overflow: hidden;
+    }
+    .category-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(160deg, #FFD700 0%, #B84000 50%, #6B0000 100%);
+      opacity: 0; transition: var(--transition);
+    }
+    .category-card:hover {
+      border-color: #FFD700;
+      transform: translateY(-6px);
+      box-shadow: 0 10px 32px rgba(0,0,0,0.7), 0 0 24px rgba(255,215,0,0.45);
+    }
+    .category-card:hover::before { opacity: 1; }
+    .cat-emoji { font-size: 36px; margin-bottom: 10px; position: relative; z-index: 1; }
+    .cat-label { font-size: 12px; font-weight: 800; color: #FFD700; font-family: 'Noto Sans Tamil', sans-serif; position: relative; z-index: 1; text-shadow: 0 1px 4px rgba(0,0,0,0.6); }
+    .cat-label-en { font-size: 11px; color: rgba(255,230,150,0.85); margin-top: 3px; position: relative; z-index: 1; font-weight: 600; }
+
+    /* ── HOW IT WORKS ── */
+    .how-section { background: linear-gradient(135deg, #1A0A00 0%, #2A0D00 100%); }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+    }
+    .step-card {
+      background: linear-gradient(135deg, #2A0D00, #3A1500); border-radius: var(--radius);
+      padding: 30px 20px; text-align: center;
+      box-shadow: var(--shadow); border-top: 4px solid var(--yellow);
+      transition: var(--transition);
+    }
+    .step-card:hover { transform: translateY(-5px); box-shadow: 0 10px 36px rgba(107,0,0,0.6); }
+    .step-num {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, #6B0000, #B84000);
+      color: #FFD700; font-size: 20px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 14px;
+    }
+    .step-icon { font-size: 38px; margin-bottom: 12px; }
+    .step-card h3 { color: var(--yellow); font-size: 16px; margin-bottom: 8px; }
+    .step-card p { font-size: 12px; color: var(--muted); font-family: 'Noto Sans Tamil', sans-serif; }
+
+    /* ── STATS BANNER ── */
+    .stats-banner {
+      background: linear-gradient(135deg, #E31E24 0%, #FFD700 50%, #E31E24 100%);
+      padding: 50px 20px;
+      border-top: 4px solid var(--yellow);
+      border-bottom: 4px solid var(--yellow);
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px; max-width: 900px; margin: 0 auto;
+    }
+    .stat-item { text-align: center; color: white; }
+    .stat-num {
+      font-size: clamp(42px,8vw,64px); font-weight: 900;
+      color: var(--yellow); line-height: 1;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    .stat-label { font-size: 13px; color: rgba(255,255,255,0.88); margin-top: 6px; font-weight: 600; }
+    .stat-label-ta { font-size: 11px; color: rgba(255,255,255,0.65); font-family: 'Noto Sans Tamil', sans-serif; }
+
+    /* ── COMPLAINT FORM SECTION ── */
+    .form-section { background: linear-gradient(135deg, #1A0A00, #2A0D00); }
+    .form-header {
+      background: linear-gradient(135deg, #6B0000, #B80000, #B84000);
+      padding: 40px 20px; text-align: center;
+      border-bottom: 4px solid var(--yellow);
+    }
+    .form-header h1 { color: white; font-size: clamp(20px,5vw,30px); font-weight: 800; }
+    .form-header p  { color: rgba(255,255,255,0.8); margin-top: 6px; font-size: 14px; font-family: 'Noto Sans Tamil', sans-serif; }
+    .form-wrap { max-width: 720px; margin: 0 auto; padding: 40px 20px; }
+    .form-card { background: linear-gradient(135deg, #2A0D00, #3A1500); border-radius: var(--radius-lg); padding: 36px; box-shadow: var(--shadow-lg); border: 1px solid rgba(184,64,0,0.35); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 6px; font-family: 'Noto Sans Tamil', sans-serif; }
+    .form-control {
+      width: 100%; padding: 12px 16px; border: 2px solid rgba(184,64,0,0.4);
+      border-radius: 10px; font-size: 14px; font-family: inherit;
+      background: #3A1500; transition: var(--transition); outline: none; color: var(--text);
+    }
+    .form-control:focus { border-color: var(--yellow); box-shadow: 0 0 0 3px rgba(255,215,0,0.15); background: #4A1800; }
+    textarea.form-control { resize: vertical; min-height: 110px; }
+    .photo-upload-label {
+      display: flex; align-items: center; gap: 10px;
+      border: 2px dashed rgba(184,64,0,0.5); border-radius: 10px; padding: 16px;
+      cursor: pointer; transition: var(--transition);
+      background: #3A1500; font-size: 13px; color: var(--muted);
+    }
+    .photo-upload-label:hover { border-color: var(--red); color: var(--red); }
+    #photoInput { display: none; }
+    #photoPreview { max-width: 100%; border-radius: 8px; margin-top: 10px; display: none; }
+
+    .location-btn {
+      display: flex; align-items: center; gap: 8px;
+      background: none; border: 2px solid var(--border);
+      padding: 10px 16px; border-radius: 10px; font-size: 13px;
+      color: var(--muted); width: 100%; transition: var(--transition);
+    }
+    .location-btn:hover { border-color: var(--red); color: var(--red); }
+    .form-submit-btn {
+      width: 100%; padding: 16px;
+      background: linear-gradient(135deg, #6B0000, #B80000, #B84000);
+      color: #FFD700; border: 2.5px solid var(--yellow);
+      border-radius: 50px; font-size: 16px; font-weight: 800;
+      transition: var(--transition); margin-top: 8px;
+      box-shadow: 0 6px 24px rgba(204,0,0,0.4);
+      letter-spacing: 0.5px;
+    }
+    .form-submit-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(204,0,0,0.6); }
+
+    /* ── TRACK SECTION ── */
+    .track-section { background: linear-gradient(135deg, #1A0A00, #2A0D00); }
+    .track-wrap { max-width: 600px; margin: 0 auto; }
+    .track-input-wrap { display: flex; gap: 10px; }
+    .track-input-wrap input { flex: 1; }
+    .track-btn {
+      background: linear-gradient(135deg, #6B0000, #B80000, #B84000);
+      color: #FFD700; border: 2px solid var(--yellow);
+      padding: 12px 24px; border-radius: 10px;
+      font-size: 14px; font-weight: 700; white-space: nowrap;
+      transition: var(--transition);
+    }
+    .track-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(204,0,0,0.4); }
+    .track-result { margin-top: 28px; display: none; }
+    .track-card {
+      background: linear-gradient(135deg, #2A0D00, #3A1500); border-radius: var(--radius-lg);
+      padding: 28px; box-shadow: var(--shadow-lg);
+      border-left: 6px solid var(--yellow);
+    }
+    .progress-tracker {
+      display: flex; align-items: center; margin: 24px 0;
+    }
+    .p-step { display: flex; flex-direction: column; align-items: center; flex: 1; }
+    .p-circle {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: #eee; border: 3px solid #ddd;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700; color: #999;
+      transition: var(--transition);
+    }
+    .p-circle.done { background: var(--red); border-color: var(--red); color: white; }
+    .p-circle.current { background: var(--yellow); border-color: var(--yellow-dark); color: var(--red-dark); }
+    .p-label { font-size: 10px; text-align: center; margin-top: 6px; color: var(--muted); font-weight: 500; max-width: 64px; }
+    .p-line { flex: 1; height: 3px; background: #ddd; margin-bottom: 22px; }
+    .p-line.done { background: var(--red); }
+
+    /* ── ADMIN SECTION ── */
+    .admin-wrap { max-width: 1100px; margin: 0 auto; }
+    .admin-login-card {
+      max-width: 420px; margin: 0 auto;
+      background: linear-gradient(135deg, #2A0D00, #3A1500); border-radius: var(--radius-lg);
+      padding: 44px 36px; box-shadow: var(--shadow-lg);
+      text-align: center; border-top: 6px solid var(--yellow);
+    }
+    .admin-logo {
+      width: 88px; height: 88px; border-radius: 50%;
+      object-fit: cover; object-position: top center;
+      border: 4px solid var(--red); margin: 0 auto 20px;
+      box-shadow: 0 0 20px rgba(204,0,0,0.3);
+    }
+    #adminPanel { display: none; }
+    .admin-header {
+      background: linear-gradient(90deg, #6B0000, #B80000, #B84000);
+      padding: 18px 28px; display: flex; align-items: center;
+      justify-content: space-between; border-bottom: 3px solid var(--yellow);
+    }
+    .filter-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+    .filter-select {
+      padding: 9px 14px; border: 2px solid var(--border);
+      border-radius: 8px; font-size: 13px; outline: none;
+      background: white; color: var(--text); transition: var(--transition);
+    }
+    .filter-select:focus { border-color: var(--red); }
+    .table-wrap { overflow-x: auto; border-radius: var(--radius); box-shadow: var(--shadow); }
+    table { width: 100%; border-collapse: collapse; background: #2A0D00; }
+    th { background: linear-gradient(90deg, #6B0000, #B84000); color: #FFD700; padding: 13px 16px; text-align: left; font-size: 12px; font-weight: 700; white-space: nowrap; }
+    td { padding: 12px 16px; border-bottom: 1px solid rgba(184,64,0,0.25); font-size: 12px; color: var(--text); }
+    tr:hover td { background: rgba(184,64,0,0.15); }
+    .badge { display: inline-block; padding: 4px 11px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+    .badge-submitted { background: rgba(107,0,0,0.4);  color: #FFB0B0; border: 1px solid #B80000; }
+    .badge-review    { background: rgba(184,64,0,0.4); color: #FFD080; border: 1px solid #B84000; }
+    .badge-assigned  { background: rgba(200,160,0,0.3);color: #FFE080; border: 1px solid #C8A000; }
+    .badge-progress  { background: rgba(107,0,0,0.3);  color: #FFD700; border: 1px solid #B80000; }
+    .badge-resolved  { background: rgba(0,80,0,0.35);  color: #88FF88; border: 1px solid #006600; }
+    .status-select {
+      padding: 4px 8px; border-radius: 6px; font-size: 11px;
+      border: 1px solid var(--border); cursor: pointer; background: white;
+    }
+    .admin-stat-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(160px,1fr)); gap: 16px; margin-bottom: 24px; }
+    .admin-stat {
+      background: linear-gradient(135deg, #2A0D00, #3A1500); border-radius: var(--radius); padding: 20px;
+      text-align: center; box-shadow: var(--shadow); border-top: 4px solid var(--yellow);
+    }
+    .admin-stat .num { font-size: 36px; font-weight: 800; color: var(--yellow); }
+    .admin-stat .lbl { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.75); z-index: 3000;
+      align-items: center; justify-content: center; padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: linear-gradient(145deg, #2A0D00, #3A1500); border-radius: var(--radius-lg);
+      padding: 44px 36px; max-width: 500px; width: 100%;
+      text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+      border: 2px solid rgba(255,215,0,0.3);
+      border-top: 6px solid var(--yellow);
+      animation: modalIn 0.4s cubic-bezier(.34,1.56,.64,1);
+    }
+    @keyframes modalIn { from{opacity:0;transform:scale(0.8)} to{opacity:1;transform:scale(1)} }
+    .modal-icon { font-size: 56px; margin-bottom: 16px; }
+    .modal h3 { font-size: 22px; font-weight: 800; color: var(--yellow); margin-bottom: 8px; }
+    .complaint-id {
+      background: rgba(107,0,0,0.4);
+      border: 2px dashed var(--yellow); border-radius: 12px;
+      padding: 16px 24px; font-size: 22px; font-weight: 800;
+      color: var(--yellow); letter-spacing: 2px;
+      margin: 18px 0; font-family: monospace;
+    }
+
+    /* ── FAB ── */
+    .fab {
+      display: none; position: fixed; bottom: 24px; right: 20px; z-index: 999;
+      background: linear-gradient(135deg, #6B0000, #B80000, #B84000);
+      color: #FFD700; border: 2.5px solid var(--yellow);
+      padding: 15px 22px; border-radius: 50px;
+      font-size: 14px; font-weight: 800;
+      box-shadow: 0 6px 24px rgba(107,0,0,0.7), 0 0 14px rgba(255,215,0,0.25);
+      animation: fabPulse 2.2s ease-in-out infinite;
+    }
+    @keyframes fabPulse {
+      0%,100%{box-shadow:0 6px 24px rgba(107,0,0,0.7),0 0 14px rgba(255,215,0,0.25)}
+      50%    {box-shadow:0 6px 40px rgba(107,0,0,0.9),0 0 28px rgba(255,215,0,0.5),0 0 0 8px rgba(107,0,0,0.15)}
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: linear-gradient(180deg, #2A0D00 0%, #8B0000 35%, #CC0000 60%, #FFD700 100%);
+      color: var(--text); padding: 50px 20px 20px;
+      border-top: 4px solid var(--yellow);
+    }
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px; padding-bottom: 32px;
+      border-bottom: 1px solid rgba(255,215,0,0.25);
+    }
+    .footer-logo { height: 64px; width: 64px; border-radius: 50%; object-fit: cover; object-position: top center; border: 3px solid var(--yellow); margin-bottom: 12px; }
+    .footer-brand h3 { color: var(--yellow); font-size: 17px; margin-bottom: 5px; }
+    .footer-brand p  { font-size: 12px; color: rgba(255,230,150,0.75); font-family: 'Noto Sans Tamil', sans-serif; font-weight: 600; }
+    .footer-links h4 { color: var(--yellow); font-size: 13px; margin-bottom: 14px; letter-spacing: 0.5px; font-weight: 800; }
+    .footer-links a  { display: block; font-size: 12px; color: rgba(255,215,0,0.75); margin-bottom: 7px; transition: var(--transition); font-weight: 600; }
+    .footer-links a:hover { color: #FFD700; padding-left: 4px; }
+    .footer-bottom {
+      max-width: 1100px; margin: 20px auto 0;
+      text-align: center; font-size: 12px; color: rgba(255,220,130,0.65);
+      font-weight: 600;
+    }
+
+    /* ── TABS ── */
+    .tabs { display: flex; gap: 0; border-bottom: 3px solid var(--red); margin-bottom: 36px; overflow-x: auto; }
+    .tab-btn {
+      padding: 13px 22px; background: none; border: none;
+      font-size: 14px; font-weight: 600; color: var(--muted);
+      border-bottom: 3px solid transparent; margin-bottom: -3px;
+      white-space: nowrap; transition: var(--transition);
+    }
+    .tab-btn.active { color: var(--red); border-bottom-color: var(--red); }
+    .tab-btn:hover  { color: var(--red); }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+
+    /* ── ANNOUNCEMENT BANNER ── */
+    .announce {
+      background: linear-gradient(90deg, #8B0000, #CC0000, #FFD700, #CC0000, #8B0000);
+      padding: 16px 24px; text-align: center;
+      border-bottom: 3px solid var(--yellow);
+    }
+    .announce p { font-size: 14px; font-weight: 700; color: var(--yellow); }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:768px) {
+      .nav-links    { display: none; }
+      .hamburger    { display: flex; }
+      .fab          { display: block; }
+      .hero-side-left, .hero-side-right { height: min(220px, 32vw); }
+      .form-row     { grid-template-columns: 1fr; }
+      .track-input-wrap { flex-direction: column; }
+      .hero-logo-img { width: min(200px, 65vw); }
+      .hero-center-img { width: min(160px, 55vw); }
+      .hero-tvk     { letter-spacing: 4px; }
+    }
+    @media(max-width:480px) {
+      .hero-side-left, .hero-side-right { display: none; }
+    }
+
+    /* ── ABOUT CARDS ── */
+    .leader-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 24px; }
+    .leader-card {
+      background: linear-gradient(135deg, #2A0D00, #3A1500); border-radius: var(--radius);
+      padding: 28px 20px; text-align: center;
+      box-shadow: var(--shadow); border-top: 4px solid var(--yellow);
+      transition: var(--transition);
+    }
+    .leader-card:hover { transform: translateY(-5px); box-shadow: 0 10px 36px rgba(107,0,0,0.6), 0 0 14px rgba(255,215,0,0.2); }
+    .leader-photo {
+      width: 110px; height: 110px; border-radius: 50%;
+      object-fit: cover; object-position: top center;
+      border: 4px solid var(--yellow);
+      box-shadow: 0 4px 16px rgba(107,0,0,0.5);
+      margin: 0 auto 14px;
+    }
+    .leader-name  { font-size: 16px; font-weight: 800; color: var(--yellow); margin-bottom: 4px; }
+    .leader-title { font-size: 12px; color: var(--muted); font-family: 'Noto Sans Tamil', sans-serif; }
+
+    /* ── WAVE DIVIDER ── */
+    .wave-red { background: var(--red); }
+    .wave-svg  { display: block; width: 100%; overflow: hidden; line-height: 0; }
+
+    /* ── MINISTERS ROW (side-by-side) ── */
+    .ministers-row {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 28px;
+      margin: 32px auto 0;
+      width: 100%;
+    }
+    .minister-block {
+      flex: 1;
+      min-width: 0;
+      max-width: 280px;
+      text-align: center;
+    }
+    /* Each minister block – dark red top → yellow bottom */
+    .minister-block-inner {
+      background: transparent;
+      border-radius: 0;
+      border: none;
+      padding: 0 8px 8px;
+      box-shadow: none;
+      transition: var(--transition);
+    }
+    .minister-block-inner:hover {
+      transform: translateY(-6px);
+    }
+    /* Vertical divider between two minister cards */
+    .minister-col-divider {
+      width: 3px;
+      align-self: stretch;
+      background: linear-gradient(to bottom,
+        transparent 0%,
+        #FFD700 20%,
+        #B80000 50%,
+        #FFD700 80%,
+        transparent 100%);
+      border-radius: 2px;
+      opacity: 0.85;
+      flex-shrink: 0;
+    }
+    .minister-photo {
+      width: 100%;
+      max-width: 240px;
+      height: 240px;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 0;
+      display: block;
+      margin: 0 auto;
+      filter:
+        drop-shadow(0 0 40px rgba(255,215,0,0.7))
+        drop-shadow(0 8px 32px rgba(139,0,0,0.8))
+        drop-shadow(0 0 12px rgba(255,215,0,0.4));
+      animation: ministerFadeIn 1s ease 0.3s both;
+    }
+    @keyframes ministerFadeIn {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .minister-name {
+      font-family: 'Noto Sans Tamil', 'Poppins', sans-serif;
+      font-size: clamp(13px, 3vw, 17px);
+      font-weight: 800;
+      color: #FFD700;
+      letter-spacing: 0.3px;
+      margin-top: 10px;
+      line-height: 1.4;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.7);
+      animation: ministerFadeIn 1s ease 0.45s both;
+    }
+    .minister-mla {
+      font-family: 'Noto Sans Tamil', 'Poppins', sans-serif;
+      font-size: clamp(12px, 2.6vw, 15px);
+      font-weight: 900;
+      color: #6B0000;
+      background: linear-gradient(90deg, #FFD700, #C8A000);
+      border: 1.5px solid #6B0000;
+      border-radius: 20px;
+      padding: 4px 14px;
+      display: inline-block;
+      margin-top: 7px;
+      letter-spacing: 0.5px;
+      text-shadow: none;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      animation: ministerFadeIn 1s ease 0.5s both;
+    }
+    .minister-desig {
+      font-family: 'Noto Sans Tamil', sans-serif;
+      font-size: clamp(11px, 2.2vw, 13px);
+      font-weight: 600;
+      color: rgba(255,230,150,0.92);
+      margin-top: 5px;
+      line-height: 1.6;
+      letter-spacing: 0.2px;
+      animation: ministerFadeIn 1s ease 0.55s both;
+    }
+    .minister-desig2 {
+      font-family: 'Noto Sans Tamil', sans-serif;
+      font-size: clamp(10px, 1.9vw, 12px);
+      font-weight: 600;
+      color: rgba(255,230,150,0.85);
+      margin-top: 4px;
+      line-height: 1.55;
+      letter-spacing: 0.1px;
+      animation: ministerFadeIn 1s ease 0.6s both;
+    }
+    .minister-role {
+      font-family: 'Noto Sans Tamil', sans-serif;
+      font-size: clamp(10px, 2vw, 12px);
+      font-weight: 800;
+      color: #FFD700;
+      margin-top: 4px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+      animation: ministerFadeIn 1s ease 0.65s both;
+    }
+    /* Gold line above desig */
+    .minister-desig::before {
+      content: '';
+      display: block;
+      width: 44px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #FFD700, #B80000, #FFD700, transparent);
+      margin: 8px auto 8px;
+      border-radius: 1px;
+    }
+    /* Qualification line */
+    .minister-qual {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(10px, 2vw, 12px);
+      font-weight: 700;
+      color: #FFD700;
+      letter-spacing: 0.5px;
+      margin-top: 3px;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    }
+    /* Horizontal divider between the two rows */
+    .minister-row-divider {
+      width: min(380px, 88vw);
+      height: 3px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        #6B0000 15%,
+        #B80000 30%,
+        #FFD700 50%,
+        #B80000 70%,
+        #6B0000 85%,
+        transparent 100%);
+      margin: 28px auto 0;
+      border-radius: 2px;
+      opacity: 0.9;
+    }
+    /* Single centred card row */
+    .ministers-row-single {
+      justify-content: center;
+      margin-top: 16px;
+    }
+    .ministers-row-single .minister-block {
+      max-width: 240px;
+      flex: none;
+    }
+
+    @media(max-width:600px) {
+      .ministers-row { gap: 14px; }
+      .minister-block { max-width: 160px; }
+      .minister-photo { height: 170px; }
+      .ministers-row-single .minister-block { max-width: 180px; }
+    }
+    @media(max-width:400px) {
+      .ministers-row { gap: 8px; }
+      .minister-block { max-width: 130px; }
+      .minister-photo { height: 140px; }
+      .ministers-row-single .minister-block { max-width: 150px; }
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #1A0A00; }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #B80000, #B84000); border-radius: 3px; }
+
+    /* ── NAVBAR LOGO WRAP ── */
+    .navbar-logo-wrap {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: var(--red-dark);
+      border: 3px solid var(--yellow);
+      box-shadow: 0 0 14px rgba(255,215,0,0.6), 0 0 28px rgba(204,0,0,0.35);
+      overflow: hidden;
+      flex-shrink: 0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .navbar-logo-wrap:hover {
+      transform: scale(1.1) rotate(-3deg);
+      box-shadow: 0 0 22px rgba(255,215,0,0.9), 0 0 44px rgba(204,0,0,0.6);
+    }
+    .navbar-logo-real {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      mix-blend-mode: screen;
+      filter: brightness(1.1) saturate(1.2);
+    }
+
+    /* ── HERO LOGO WRAP ── */
+    .hero-logo-wrap {
+      position: relative;
+      width: min(150px, 40vw);
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-logo-img-real {
+      width: 100%;
+      height: auto;
+      border-radius: 0;
+      display: block;
+      position: relative;
+      z-index: 1;
+      filter:
+        drop-shadow(0 0 24px rgba(255,215,0,0.55))
+        drop-shadow(0 0 48px rgba(204,0,0,0.4));
+      animation: heroPulseReal 3s ease-in-out infinite;
+    }
+    @keyframes heroPulseReal {
+      0%,100% {
+        box-shadow:
+          0 0 0 6px rgba(255,215,0,0.15),
+          0 0 40px rgba(255,215,0,0.55),
+          0 0 80px rgba(204,0,0,0.45),
+          0 12px 40px rgba(0,0,0,0.6);
+      }
+      50% {
+        box-shadow:
+          0 0 0 10px rgba(255,215,0,0.25),
+          0 0 70px rgba(255,215,0,0.9),
+          0 0 130px rgba(204,0,0,0.7),
+          0 12px 50px rgba(0,0,0,0.7);
+      }
+    }
+    /* Spinning glow ring */
+    .hero-logo-glow-ring {
+      position: absolute;
+      inset: -14px;
+      border-radius: 28px;
+      border: 3px solid transparent;
+      background: linear-gradient(135deg, var(--yellow), var(--red), var(--yellow)) border-box;
+      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: destination-out;
+      mask-composite: exclude;
+      animation: spinRing 4s linear infinite;
+      opacity: 0.7;
+      z-index: 0;
+    }
+    @keyframes spinRing {
+      0%   { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @media(max-width:768px) {
+      .hero-logo-wrap { width: min(240px, 80vw); }
+      .navbar-logo-wrap { width: 44px; height: 44px; }
+    }
+    @media(max-width:480px) {
+      .hero-logo-wrap { width: min(200px, 88vw); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    &nbsp;&nbsp;&nbsp;🔴 TVK Complaint Box – R.K. Nagar Thoguthi &nbsp;|&nbsp; உங்கள் குரல் கேட்கப்படும் &nbsp;|&nbsp; 🟡 புகார் பதிவு செய்ய கீழே உள்ள படிவத்தை பயன்படுத்தவும் &nbsp;|&nbsp; 🔴 Your Voice, Our Action &nbsp;|&nbsp; ஆர்.கே. நகர் தொகுதி – மக்கள் குறை தீர்வு மையம் &nbsp;|&nbsp; 🟡 Admin Login: TVK / TVK123 &nbsp;|&nbsp; Report. Track. Resolve. &nbsp;&nbsp;&nbsp;
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="mainNav">
+  <div class="navbar-brand">
+    <div class="navbar-logo-wrap">
+      <img src="assets/tvk-logo.jpg" alt="TVK Logo" class="navbar-logo-real" id="navLogoImg">
+    </div>
+    <div class="navbar-title">
+      <span>TVK</span>
+      <span>தமிழக வெற்றிக் கழகம்</span>
+    </div>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home" class="active" onclick="showTab('home')">🏠 Home</a></li>
+    <li><a href="#report" onclick="showTab('report')">📢 Report</a></li>
+    <li><a href="#track" onclick="showTab('track')">🔍 Track</a></li>
+    <li><a href="#dashboard" onclick="showTab('dashboard')">📊 Dashboard</a></li>
+    <li><a href="#admin" onclick="showTab('admin')">🔐 Admin</a></li>
+    <li><button class="lang-toggle" id="langToggle" onclick="toggleLang()">தமிழ்</button></li>
+  </ul>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()">☰</button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home" onclick="showTab('home');toggleMenu()">🏠 Home / முகப்பு</a>
+  <a href="#report" onclick="showTab('report');toggleMenu()">📢 Report / புகார்</a>
+  <a href="#track" onclick="showTab('track');toggleMenu()">🔍 Track / கண்காணி</a>
+  <a href="#dashboard" onclick="showTab('dashboard');toggleMenu()">📊 Dashboard</a>
+  <a href="#admin" onclick="showTab('admin');toggleMenu()">🔐 Admin</a>
+  <button class="lang-toggle" style="margin:10px 0;width:fit-content;" onclick="toggleLang()">தமிழ்</button>
+</div>
+
+<!-- ===================== TAB: HOME ===================== -->
+<div id="tab-home" class="tab-pane active">
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <!-- Left side person (image 2) -->
+    <img id="heroLeft" src="" alt="TVK Leader" class="hero-side-left" style="display:none;">
+    <!-- Right side person (image 3) -->
+    <img id="heroRight" src="" alt="TVK Worker" class="hero-side-right" style="display:none;">
+
+    <div class="hero-inner">
+
+      <!-- TVK Party Logo -->
+      <div class="hero-logo-wrap">
+        <img src="assets/tvk-logo-cutout.png" alt="தமிழக வெற்றிக் கழகம்" class="hero-logo-img-real" id="heroLogo">
+        <div class="hero-logo-glow-ring"></div>
+      </div>
+
+      <div class="hero-tvk">TVK</div>
+      <div class="hero-constituency" id="txt-hero-const">ஆர்.கே. நகர் தொகுதி – மக்கள் குறை தீர்வு மையம்</div>
+
+      <!-- Ministers side-by-side row -->
+      <div class="ministers-row">
+
+        <!-- Minister 1 -->
+        <div class="minister-block">
+          <div class="minister-block-inner">
+            <img src="assets/minister-cutout.png" alt="மாண்புமிகு N. N. ஆனந்த்" class="minister-photo">
+            <div class="minister-name">மாண்புமிகு<br>N. N. ஆனந்த்</div>
+            <div class="minister-mla">தி.நகர் சட்டமன்ற உறுப்பினர்</div>
+            <div class="minister-desig">ஊரக வளர்ச்சி மற்றும்<br>நீர் வளத்துறை அமைச்சர்</div>
+            <div class="minister-role">கழக பொதுச்செயலாளர்</div>
+          </div>
+        </div>
+
+        <!-- Vertical divider -->
+        <div class="minister-col-divider"></div>
+
+        <!-- Minister 2 -->
+        <div class="minister-block">
+          <div class="minister-block-inner">
+            <img src="assets/minister2-cutout.png" alt="மாண்புமிகு Dr.N.மரியவில்சன்" class="minister-photo">
+            <div class="minister-name">மாண்புமிகு<br>Dr.N.மரியவில்சன்</div>
+            <div class="minister-desig">ஆர்.கே.நகர் தொகுதி<br>சட்டமன்ற உறுப்பினர்</div>
+            <div class="minister-desig2">த.ந.அ. நிதிதிட்டமிடல் மற்றும்<br>மேம்பாட்டு அமைச்சர்</div>
+            <div class="minister-qual">B.Tech, MBA, MLA</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Horizontal divider -->
+      <div class="minister-row-divider"></div>
+
+      <!-- Leader row (single card) -->
+      <div class="ministers-row ministers-row-single">
+
+        <div class="minister-block">
+          <div class="minister-block-inner">
+            <img src="assets/leader-cutout.png" alt="தளபதி T.ராஜேஷ்" class="minister-photo">
+            <div class="minister-name">தளபதி T.ராஜேஷ்</div>
+            <div class="minister-desig">சென்னை வடக்கு மாவட்ட<br>இணை செயலாளர்</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="hero-desc" id="txt-hero-desc">உங்கள் பகுதியில் உள்ள பிரச்சனைகளை பதிவு செய்யுங்கள். உங்கள் குரல், உங்கள் பகுதி வளர்ச்சிக்கு முக்கியம்.</div>
+
+      <div class="hero-btns">
+        <a href="#report" class="btn-primary" onclick="showTab('report')" id="txt-hero-cta">📢 புகார் பதிவு செய்</a>
+        <a href="#track"  class="btn-secondary" onclick="showTab('track')">🔍 புகாரை கண்காணி</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ANNOUNCE -->
+  <div class="announce">
+    <p>🔴 TVK R.K. Nagar Thoguthi – Complaint Box &nbsp;|&nbsp; ஆர்.கே. நகர் தொகுதி புகார் பெட்டி &nbsp;|&nbsp; Admin: TVK / TVK123 🟡</p>
+  </div>
+
+  <!-- STATS BANNER -->
+  <div class="stats-banner">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-num" id="statTotal">0</div>
+        <div class="stat-label">Total Complaints</div>
+        <div class="stat-label-ta">மொத்த புகார்கள்</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="statPending">0</div>
+        <div class="stat-label">Pending</div>
+        <div class="stat-label-ta">நிலுவையில்</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="statProgress">0</div>
+        <div class="stat-label">In Progress</div>
+        <div class="stat-label-ta">செயல்பாட்டில்</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num" id="statResolved">0</div>
+        <div class="stat-label">Resolved</div>
+        <div class="stat-label-ta">தீர்க்கப்பட்டது</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <div class="section cat-section">
+    <div class="container">
+      <div class="section-title">
+        <h2 id="txt-cat-title">புகார் வகைகள்</h2>
+        <p class="sub" id="txt-cat-sub">உங்கள் பிரச்சனை வகையை தேர்ந்தெடுங்கள்</p>
+      </div>
+      <div class="category-grid">
+        <div class="category-card" onclick="goReport('Water Problems')">
+          <div class="cat-emoji">💧</div>
+          <div class="cat-label">தண்ணீர்</div>
+          <div class="cat-label-en">Water</div>
+        </div>
+        <div class="category-card" onclick="goReport('Road Problems')">
+          <div class="cat-emoji">🛣️</div>
+          <div class="cat-label">சாலை</div>
+          <div class="cat-label-en">Roads</div>
+        </div>
+        <div class="category-card" onclick="goReport('Street Light Problems')">
+          <div class="cat-emoji">💡</div>
+          <div class="cat-label">தெருவிளக்கு</div>
+          <div class="cat-label-en">Street Lights</div>
+        </div>
+        <div class="category-card" onclick="goReport('Drainage Problems')">
+          <div class="cat-emoji">🚰</div>
+          <div class="cat-label">கழிவுநீர்</div>
+          <div class="cat-label-en">Drainage</div>
+        </div>
+        <div class="category-card" onclick="goReport('Garbage Problems')">
+          <div class="cat-emoji">🗑️</div>
+          <div class="cat-label">குப்பை</div>
+          <div class="cat-label-en">Garbage</div>
+        </div>
+        <div class="category-card" onclick="goReport('Electricity Problems')">
+          <div class="cat-emoji">⚡</div>
+          <div class="cat-label">மின்சாரம்</div>
+          <div class="cat-label-en">Electricity</div>
+        </div>
+        <div class="category-card" onclick="goReport('Toilet Problems')">
+          <div class="cat-emoji">🚻</div>
+          <div class="cat-label">கழிப்பிடம்</div>
+          <div class="cat-label-en">Toilets</div>
+        </div>
+        <div class="category-card" onclick="goReport('Traffic Problems')">
+          <div class="cat-emoji">🚦</div>
+          <div class="cat-label">போக்குவரத்து</div>
+          <div class="cat-label-en">Traffic</div>
+        </div>
+        <div class="category-card" onclick="goReport('Other Problems')">
+          <div class="cat-emoji">📍</div>
+          <div class="cat-label">மற்றவை</div>
+          <div class="cat-label-en">Other</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="section how-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>How It Works / எப்படி பயன்படுத்துவது</h2>
+        <p class="sub">எளிதான 4 படிகளில் புகார் பதிவு செய்யுங்கள்</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-icon">📝</div>
+          <div class="step-num">1</div>
+          <h3>Report</h3>
+          <p>உங்கள் பிரச்சனையை படிவத்தில் பதிவு செய்யுங்கள்</p>
+        </div>
+        <div class="step-card">
+          <div class="step-icon">🎫</div>
+          <div class="step-num">2</div>
+          <h3>Get ID</h3>
+          <p>TVK-XXXXXX என்ற புகார் ஐடி பெறுங்கள்</p>
+        </div>
+        <div class="step-card">
+          <div class="step-icon">🔍</div>
+          <div class="step-num">3</div>
+          <h3>Track</h3>
+          <p>உங்கள் புகாரின் நிலையை கண்காணியுங்கள்</p>
+        </div>
+        <div class="step-card">
+          <div class="step-icon">✅</div>
+          <div class="step-num">4</div>
+          <h3>Resolved</h3>
+          <p>பிரச்சனை தீர்வு பெறுங்கள், மகிழ்ச்சியாக வாழுங்கள்</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEADERS (About) -->
+  <div class="section" style="background:white;">
+    <div class="container">
+      <div class="section-title">
+        <h2>Our Leaders / நமது தலைவர்கள்</h2>
+        <p class="sub">ஆர்.கே. நகர் தொகுதி – TVK குழு</p>
+      </div>
+      <div class="leader-grid">
+        <div class="leader-card">
+          <img id="leader1Img" src="" alt="Leader 1" class="leader-photo" style="display:none;">
+          <div id="leader1Fall" style="width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,#CC0000,#8B0000);border:4px solid var(--red);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:36px;">👤</div>
+          <div class="leader-name">தலைவர்</div>
+          <div class="leader-title">TVK R.K. Nagar Thoguthi</div>
+        </div>
+        <div class="leader-card">
+          <img id="leader2Img" src="" alt="Leader 2" class="leader-photo" style="display:none;">
+          <div id="leader2Fall" style="width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,#FFD700,#E6B800);border:4px solid var(--yellow);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:36px;">👤</div>
+          <div class="leader-name">உள்ளூர் செயலர்</div>
+          <div class="leader-title">R.K. Nagar Ward Secretary</div>
+        </div>
+        <div class="leader-card">
+          <div style="width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,#CC0000,#FFD700);border:4px solid var(--red);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:36px;">🌟</div>
+          <div class="leader-name">TVK கழகம்</div>
+          <div class="leader-title">Tamilaga Vettri Kazhagam</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end tab-home -->
+
+
+<!-- ===================== TAB: REPORT ===================== -->
+<div id="tab-report" class="tab-pane">
+  <div class="form-header">
+    <h1>📢 <span id="txt-form-title">புகார் பதிவு செய்யுங்கள்</span></h1>
+    <p id="txt-form-sub">உங்கள் பிரச்சனையை இங்கே பதிவு செய்யுங்கள் – நாங்கள் தீர்வு காண்போம்</p>
+  </div>
+  <div class="form-wrap">
+    <div class="form-card">
+      <form id="complaintForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label id="lbl-name">குடியிருப்பாளர் பெயர் *</label>
+            <input class="form-control" id="fName" name="name" placeholder="உங்கள் பெயர் / Your name" required>
+          </div>
+          <div class="form-group">
+            <label id="lbl-mobile">கைபேசி எண் *</label>
+            <input class="form-control" id="fMobile" name="mobile" placeholder="10-digit mobile" maxlength="10" pattern="[0-9]{10}" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label id="lbl-ward">வார்டு எண் *</label>
+            <input class="form-control" id="fWard" name="wardNumber" placeholder="e.g. 12" required>
+          </div>
+          <div class="form-group">
+            <label id="lbl-area">பகுதி / தெரு *</label>
+            <input class="form-control" id="fArea" name="area" placeholder="Street / Area name" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label id="lbl-cat">புகார் வகை *</label>
+          <select class="form-control" id="fCategory" name="category" required>
+            <option value="">-- வகை தேர்ந்தெடு / Select Category --</option>
+            <option value="Water Problems">💧 தண்ணீர் / Water Problems</option>
+            <option value="Road Problems">🛣️ சாலை / Road Problems</option>
+            <option value="Street Light Problems">💡 தெருவிளக்கு / Street Lights</option>
+            <option value="Drainage Problems">🚰 கழிவுநீர் / Drainage</option>
+            <option value="Garbage Problems">🗑️ குப்பை / Garbage</option>
+            <option value="Electricity Problems">⚡ மின்சாரம் / Electricity</option>
+            <option value="Toilet Problems">🚻 கழிப்பிடம் / Toilets</option>
+            <option value="Traffic Problems">🚦 போக்குவரத்து / Traffic</option>
+            <option value="Other Problems">📍 மற்றவை / Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label id="lbl-desc">பிரச்சனை விவரம் *</label>
+          <textarea class="form-control" id="fDesc" name="description" placeholder="பிரச்சனையை விரிவாக விவரிக்கவும் / Describe the problem in detail..." required></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label id="lbl-photo">புகைப்படம் (விருப்பமானது)</label>
+            <label class="photo-upload-label" for="photoInput">
+              📷 &nbsp; <span id="photoLabel">Click to upload photo / புகைப்படம் பதிவேற்று</span>
+            </label>
+            <input type="file" id="photoInput" name="photo" accept="image/*" onchange="previewPhoto(this)">
+            <img id="photoPreview" alt="Preview">
+          </div>
+          <div class="form-group">
+            <label id="lbl-landmark">இடம் / அடையாளம்</label>
+            <input class="form-control" id="fLandmark" name="landmark" placeholder="Near bus stop, temple...">
+            <button type="button" class="location-btn" style="margin-top:8px;" onclick="getLocation()">
+              📍 <span id="txt-get-loc">Get My Location</span>
+            </button>
+            <div id="locationStatus" style="font-size:11px;color:var(--muted);margin-top:4px;"></div>
+          </div>
+        </div>
+        <div id="formError" style="color:var(--red);font-size:13px;margin-bottom:12px;display:none;padding:10px;background:#fff5f5;border-radius:8px;border-left:4px solid var(--red);"></div>
+        <button type="submit" class="form-submit-btn" id="submitBtn">
+          ✅ <span id="txt-submit">புகாரை சமர்பிக்கவும் / Submit Complaint</span>
+        </button>
+      </form>
+    </div>
+  </div>
+</div><!-- end tab-report -->
+
+
+<!-- ===================== TAB: TRACK ===================== -->
+<div id="tab-track" class="tab-pane">
+  <div class="form-header">
+    <h1>🔍 <span id="txt-track-title">புகாரை கண்காணிக்கவும்</span></h1>
+    <p>உங்கள் புகார் ID மூலம் நிலையை அறியுங்கள்</p>
+  </div>
+  <div class="section track-section">
+    <div class="container">
+      <div class="track-wrap">
+        <div class="form-card" style="margin-bottom:28px;">
+          <div class="form-group">
+            <label style="font-size:14px;font-weight:700;color:var(--red);">புகார் ID உள்ளிடவும் / Enter Complaint ID</label>
+            <div class="track-input-wrap">
+              <input class="form-control" id="trackInput" placeholder="TVK-XXXXXX">
+              <button class="track-btn" onclick="trackComplaint()">🔍 Track</button>
+            </div>
+          </div>
+          <p style="font-size:12px;color:var(--muted);margin-top:8px;">Example: TVK-240101-1234 &nbsp;|&nbsp; உதாரணம்: TVK-240101-1234</p>
+        </div>
+
+        <div class="track-result" id="trackResult">
+          <div class="track-card">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;">
+              <div>
+                <div style="font-size:12px;color:var(--muted);">Complaint ID / புகார் ஐடி</div>
+                <div style="font-size:20px;font-weight:800;color:var(--red);font-family:monospace;" id="trackId">–</div>
+              </div>
+              <span id="trackBadge" class="badge badge-submitted">Submitted</span>
+            </div>
+            <div style="margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13px;">
+              <div><b>Name:</b> <span id="trackName">–</span></div>
+              <div><b>Mobile:</b> <span id="trackMobile">–</span></div>
+              <div><b>Category:</b> <span id="trackCat">–</span></div>
+              <div><b>Ward:</b> <span id="trackWard">–</span></div>
+              <div><b>Area:</b> <span id="trackArea">–</span></div>
+              <div><b>Date:</b> <span id="trackDate">–</span></div>
+            </div>
+            <div style="margin-top:14px;font-size:13px;"><b>Description:</b><br><span id="trackDesc" style="color:var(--muted);"></span></div>
+            <div class="progress-tracker" id="progressTracker"></div>
+          </div>
+        </div>
+
+        <div id="trackNotFound" style="display:none;text-align:center;padding:40px 20px;">
+          <div style="font-size:48px;margin-bottom:12px;">❌</div>
+          <h3 style="color:var(--red);margin-bottom:8px;">Complaint Not Found</h3>
+          <p style="color:var(--muted);font-size:13px;font-family:'Noto Sans Tamil',sans-serif;">இந்த ID உடன் எந்த புகாரும் கண்டுபிடிக்கப்படவில்லை</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- end tab-track -->
+
+
+<!-- ===================== TAB: DASHBOARD ===================== -->
+<div id="tab-dashboard" class="tab-pane">
+  <div class="form-header">
+    <h1>📊 Ward Issues Dashboard</h1>
+    <p>ஆர்.கே. நகர் தொகுதி – புகார் நிலை கண்ணோட்டம்</p>
+  </div>
+  <div class="section" style="background:linear-gradient(135deg,#1A0A00,#2A0D00);">
+    <div class="container">
+      <div class="admin-stat-grid" id="dashStats"></div>
+      <div class="section-title">
+        <h2>Recent Complaints / சமீபத்திய புகார்கள்</h2>
+      </div>
+      <div class="filter-bar">
+        <select class="filter-select" id="dashFilterStatus" onchange="renderDash()">
+          <option value="">All Status</option>
+          <option>Submitted</option>
+          <option>Under Review</option>
+          <option>In Progress</option>
+          <option>Resolved</option>
+        </select>
+        <select class="filter-select" id="dashFilterCat" onchange="renderDash()">
+          <option value="">All Categories</option>
+          <option>Water Problems</option>
+          <option>Road Problems</option>
+          <option>Street Light Problems</option>
+          <option>Drainage Problems</option>
+          <option>Garbage Problems</option>
+          <option>Electricity Problems</option>
+          <option>Toilet Problems</option>
+          <option>Traffic Problems</option>
+          <option>Other Problems</option>
+        </select>
+      </div>
+      <div class="table-wrap">
+        <table id="dashTable">
+          <thead>
+            <tr>
+              <th>ID</th><th>Name</th><th>Category</th><th>Ward</th><th>Area</th><th>Date</th><th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="dashBody"><tr><td colspan="7" style="text-align:center;padding:30px;color:var(--muted);">No complaints yet. Be the first to report!</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div><!-- end tab-dashboard -->
+
+
+<!-- ===================== TAB: ADMIN ===================== -->
+<div id="tab-admin" class="tab-pane">
+
+  <!-- LOGIN -->
+  <div id="loginPanel" style="min-height:80vh;display:flex;align-items:center;justify-content:center;padding:40px 20px;background:linear-gradient(135deg,#1A0A00,#2A0D00,#3A1500);">
+    <div class="admin-login-card">
+      <img id="adminLogoImg" src="" alt="TVK" class="admin-logo" style="display:none;">
+      <div id="adminLogoFall" style="width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,#6B0000,#B84000);border:4px solid var(--yellow);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900;color:var(--yellow);margin:0 auto 20px;letter-spacing:2px;">TVK</div>
+      <h2 style="color:var(--yellow);margin-bottom:6px;font-size:24px;font-weight:800;">Admin Login</h2>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:28px;font-family:'Noto Sans Tamil',sans-serif;">TVK Complaint Box – நிர்வாக நுழைவு</p>
+      <div class="form-group" style="text-align:left;">
+        <label>Username / பயனர் பெயர்</label>
+        <input class="form-control" id="adminUser" placeholder="Enter username">
+      </div>
+      <div class="form-group" style="text-align:left;">
+        <label>Password / கடவுச்சொல்</label>
+        <input class="form-control" type="password" id="adminPass" placeholder="Enter password" onkeydown="if(event.key==='Enter')doLogin()">
+      </div>
+      <div id="loginError" style="color:var(--red);font-size:13px;margin-bottom:12px;display:none;padding:8px;background:#fff5f5;border-radius:6px;"></div>
+      <button class="form-submit-btn" onclick="doLogin()">🔐 Login</button>
+      <p style="font-size:11px;color:var(--muted);margin-top:14px;">Hint: TVK / TVK123</p>
+    </div>
+  </div>
+
+  <!-- ADMIN PANEL -->
+  <div id="adminPanel">
+    <div class="admin-header">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="width:40px;height:40px;border-radius:50%;background:var(--yellow);display:flex;align-items:center;justify-content:center;font-weight:900;color:var(--red-dark);font-size:12px;">TVK</div>
+        <span style="color:white;font-weight:800;font-size:16px;">TVK Admin Dashboard</span>
+        <span style="color:rgba(255,255,255,0.7);font-size:12px;">R.K. Nagar Thoguthi</span>
+      </div>
+      <button onclick="doLogout()" style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,215,0,0.5);color:var(--yellow);padding:8px 20px;border-radius:20px;font-size:13px;cursor:pointer;font-weight:700;">Logout</button>
+    </div>
+    <div style="padding:28px 20px;max-width:1100px;margin:0 auto;">
+      <div class="admin-stat-grid" id="adminStats"></div>
+      <div class="filter-bar">
+        <select class="filter-select" id="filterStatus" onchange="renderAdmin()">
+          <option value="">All Status</option>
+          <option>Submitted</option>
+          <option>Under Review</option>
+          <option>Assigned</option>
+          <option>In Progress</option>
+          <option>Resolved</option>
+        </select>
+        <select class="filter-select" id="filterCategory" onchange="renderAdmin()">
+          <option value="">All Categories</option>
+          <option>Water Problems</option>
+          <option>Road Problems</option>
+          <option>Street Light Problems</option>
+          <option>Drainage Problems</option>
+          <option>Garbage Problems</option>
+          <option>Electricity Problems</option>
+          <option>Toilet Problems</option>
+          <option>Traffic Problems</option>
+          <option>Other Problems</option>
+        </select>
+        <input class="filter-select" id="filterWard" placeholder="Filter by Ward" oninput="renderAdmin()" style="width:140px;">
+        <button onclick="renderAdmin()" style="background:var(--red);color:white;border:none;padding:9px 18px;border-radius:8px;font-size:13px;cursor:pointer;font-weight:700;">🔄 Refresh</button>
+        <button onclick="exportCSV()" style="background:var(--yellow);color:var(--red-dark);border:none;padding:9px 18px;border-radius:8px;font-size:13px;cursor:pointer;font-weight:700;">📥 Export CSV</button>
+      </div>
+      <div class="table-wrap">
+        <table id="adminTable">
+          <thead>
+            <tr>
+              <th>Complaint ID</th><th>Name</th><th>Mobile</th><th>Ward</th>
+              <th>Category</th><th>Area</th><th>Date</th><th>Status</th><th>Photo</th>
+            </tr>
+          </thead>
+          <tbody id="adminBody"><tr><td colspan="9" style="text-align:center;padding:30px;color:var(--muted);">Loading...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div><!-- end tab-admin -->
+
+
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay" id="successModal">
+  <div class="modal">
+    <div class="modal-icon">🎉</div>
+    <h3>Complaint Registered!</h3>
+    <p style="color:var(--muted);font-size:13px;font-family:'Noto Sans Tamil',sans-serif;">உங்கள் புகார் வெற்றிகரமாக பதிவு செய்யப்பட்டது</p>
+    <div class="complaint-id" id="generatedId">TVK-...</div>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:20px;">📋 Save this ID to track your complaint status<br><span style="font-family:'Noto Sans Tamil',sans-serif;">இந்த ஐடியை சேமிக்கவும்</span></p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <button class="btn-secondary" onclick="openTrackTab()">🔍 Track Complaint</button>
+      <button onclick="closeModal()" style="background:none;border:2px solid var(--border);padding:12px 22px;border-radius:50px;font-size:14px;cursor:pointer;font-weight:600;">Report Another</button>
+    </div>
+  </div>
+</div>
+
+<!-- FAB -->
+<a href="#report" class="fab" onclick="showTab('report')">📢 புகார்</a>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img id="footerLogo" src="" alt="TVK" class="footer-logo" style="display:none;">
+      <div id="footerLogoFall" style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#CC0000,#8B0000);border:3px solid var(--yellow);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;color:var(--yellow);margin-bottom:12px;">TVK</div>
+      <h3>TVK Complaint Box</h3>
+      <p>தமிழக வெற்றிக் கழகம்</p>
+      <p style="margin-top:4px;font-size:11px;color:rgba(255,255,255,0.4);">R.K. Nagar Thoguthi</p>
+    </div>
+    <div class="footer-links">
+      <h4>Quick Links</h4>
+      <a href="#" onclick="showTab('home')">🏠 Home / முகப்பு</a>
+      <a href="#" onclick="showTab('report')">📢 Report / புகார்</a>
+      <a href="#" onclick="showTab('track')">🔍 Track / கண்காணி</a>
+      <a href="#" onclick="showTab('dashboard')">📊 Dashboard</a>
+      <a href="#" onclick="showTab('admin')">🔐 Admin</a>
+    </div>
+    <div class="footer-links">
+      <h4>Complaint Categories</h4>
+      <a href="#" onclick="goReport('Water Problems')">💧 Water / தண்ணீர்</a>
+      <a href="#" onclick="goReport('Road Problems')">🛣️ Roads / சாலை</a>
+      <a href="#" onclick="goReport('Electricity Problems')">⚡ Electricity / மின்சாரம்</a>
+      <a href="#" onclick="goReport('Garbage Problems')">🗑️ Garbage / குப்பை</a>
+    </div>
+    <div class="footer-links">
+      <h4>Contact</h4>
+      <a href="#">📞 TVK Helpline</a>
+      <a href="#">📍 R.K. Nagar, Chennai</a>
+      <a href="#">✉️ tvk.rknagar@gmail.com</a>
+      <a href="#">🌐 tamilagavettrikazhagam.in</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2024 TVK Complaint Box – R.K. Nagar Thoguthi. Tamilaga Vettri Kazhagam. &nbsp;|&nbsp; பிறப்பொக்கும் எல்லா உயிர்க்கும்!
+  </div>
+</footer>
+
+
+<script>
+/* ═══════════════════════════════════════════════
+   IMAGE LOADER – uses the 4 uploaded images
+   The user must place images in assets/images/:
+     img1.png – TVK Logo/Flag (image 1)
+     img2.jpg – Leader left  (image 2)
+     img3.jpg – Worker right (image 3)
+     img4.png – Center visual (image 4)
+═══════════════════════════════════════════════ */
+function tryLoadImage(imgEl, fallEl, src) {
+  var img = new Image();
+  img.onload = function() {
+    imgEl.src = src;
+    imgEl.style.display = '';
+    if (fallEl) fallEl.style.display = 'none';
+  };
+  img.onerror = function() {
+    // fallback stays visible
+  };
+  img.src = src;
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+  // Image 1 → Logo (navbar, hero logo, footer, admin)
+  var img1 = 'assets/images/img1.png';
+  tryLoadImage(document.getElementById('navLogoImg'),    document.getElementById('navLogoFallback'), img1);
+  tryLoadImage(document.getElementById('heroLogo'),      document.getElementById('heroLogoFallback'), img1);
+  tryLoadImage(document.getElementById('footerLogo'),    document.getElementById('footerLogoFall'), img1);
+  tryLoadImage(document.getElementById('adminLogoImg'),  document.getElementById('adminLogoFall'), img1);
+
+  // Image 2 → Left corner hero (leader)
+  tryLoadImage(document.getElementById('heroLeft'),      null, 'assets/images/img2.jpg');
+  tryLoadImage(document.getElementById('leader1Img'),    document.getElementById('leader1Fall'), 'assets/images/img2.jpg');
+
+  // Image 3 → Right corner hero (worker)
+  tryLoadImage(document.getElementById('heroRight'),     null, 'assets/images/img3.jpg');
+  tryLoadImage(document.getElementById('leader2Img'),    document.getElementById('leader2Fall'), 'assets/images/img3.jpg');
+
+  // Image 4 → Center aligned in hero
+  tryLoadImage(document.getElementById('heroCenterImg'), null, 'assets/images/img4.png');
+});
+
+/* ═══════════════════════════════════════════════
+   TAB NAVIGATION
+═══════════════════════════════════════════════ */
+function showTab(name) {
+  document.querySelectorAll('.tab-pane').forEach(function(el) { el.classList.remove('active'); });
+  var pane = document.getElementById('tab-' + name);
+  if (pane) pane.classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(function(a) { a.classList.remove('active'); });
+  var links = document.querySelectorAll('.nav-links a');
+  links.forEach(function(a) { if (a.getAttribute('onclick') && a.getAttribute('onclick').includes("'" + name + "'")) a.classList.add('active'); });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (name === 'dashboard') { renderDash(); renderStats(); }
+}
+
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+/* ═══════════════════════════════════════════════
+   LANGUAGE
+═══════════════════════════════════════════════ */
+var lang = 'ta';
+var TR = {
+  ta: {
+    'txt-hero-party':   'தமிழக வெற்றிக் கழகம்',
+    'txt-hero-const':   'ஆர்.கே. நகர் தொகுதி – மக்கள் குறை தீர்வு மையம்',
+    'txt-hero-desc':    'உங்கள் பகுதியில் உள்ள பிரச்சனைகளை பதிவு செய்யுங்கள். உங்கள் குரல், உங்கள் பகுதி வளர்ச்சிக்கு முக்கியம்.',
+    'txt-hero-cta':     '📢 புகார் பதிவு செய்',
+    'txt-cat-title':    'புகார் வகைகள்',
+    'txt-cat-sub':      'உங்கள் பிரச்சனை வகையை தேர்ந்தெடுங்கள்',
+    'txt-form-title':   'புகார் பதிவு செய்யுங்கள்',
+    'txt-form-sub':     'உங்கள் பிரச்சனையை இங்கே பதிவு செய்யுங்கள் – நாங்கள் தீர்வு காண்போம்',
+    'txt-track-title':  'புகாரை கண்காணிக்கவும்',
+    'txt-submit':       'புகாரை சமர்பிக்கவும்',
+    'txt-get-loc':      'என் இடத்தை பெறு',
+    'lbl-name':         'குடியிருப்பாளர் பெயர் *',
+    'lbl-mobile':       'கைபேசி எண் *',
+    'lbl-ward':         'வார்டு எண் *',
+    'lbl-area':         'பகுதி / தெரு *',
+    'lbl-cat':          'புகார் வகை *',
+    'lbl-desc':         'பிரச்சனை விவரம் *',
+    'lbl-photo':        'புகைப்படம் (விருப்பமானது)',
+    'lbl-landmark':     'இடம் / அடையாளம்',
+  },
+  en: {
+    'txt-hero-party':   'Tamilaga Vettri Kazhagam',
+    'txt-hero-const':   'R.K. Nagar Thoguthi – People\'s Grievance Centre',
+    'txt-hero-desc':    'Register problems in your area. Your voice is important for your area\'s development.',
+    'txt-hero-cta':     '📢 Report a Complaint',
+    'txt-cat-title':    'Complaint Categories',
+    'txt-cat-sub':      'Select your problem type / உங்கள் பிரச்சனை வகையை தேர்ந்தெடுங்கள்',
+    'txt-form-title':   'Report a Complaint',
+    'txt-form-sub':     'Submit your complaint – We will take action',
+    'txt-track-title':  'Track Your Complaint',
+    'txt-submit':       'Submit Complaint',
+    'txt-get-loc':      'Get My Location',
+    'lbl-name':         'Resident Name *',
+    'lbl-mobile':       'Mobile Number *',
+    'lbl-ward':         'Ward Number *',
+    'lbl-area':         'Area / Street Name *',
+    'lbl-cat':          'Complaint Category *',
+    'lbl-desc':         'Problem Description *',
+    'lbl-photo':        'Upload Photo (optional)',
+    'lbl-landmark':     'Location / Landmark',
+  }
+};
+
+function applyLang() {
+  var t = TR[lang];
+  Object.keys(t).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = t[id];
+  });
+  var btn = document.getElementById('langToggle');
+  if (btn) btn.textContent = lang === 'en' ? 'தமிழ்' : 'English';
+}
+function toggleLang() {
+  lang = lang === 'en' ? 'ta' : 'en';
+  applyLang();
+}
+document.addEventListener('DOMContentLoaded', applyLang);
+
+/* ═══════════════════════════════════════════════
+   DATA STORE
+═══════════════════════════════════════════════ */
+function getComplaints() {
+  try { return JSON.parse(localStorage.getItem('tvk-complaints') || '[]'); } catch(e) { return []; }
+}
+function saveComplaints(arr) {
+  localStorage.setItem('tvk-complaints', JSON.stringify(arr));
+}
+function genId() {
+  var now = new Date();
+  var d = now.getFullYear().toString().slice(2) +
+    String(now.getMonth()+1).padStart(2,'0') +
+    String(now.getDate()).padStart(2,'0');
+  var r = Math.floor(1000 + Math.random() * 9000);
+  return 'TVK-' + d + '-' + r;
+}
+
+/* ═══════════════════════════════════════════════
+   COMPLAINT FORM
+═══════════════════════════════════════════════ */
+var photoDataUrl = null;
+var locationData = null;
+
+function previewPhoto(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      photoDataUrl = e.target.result;
+      var prev = document.getElementById('photoPreview');
+      prev.src = photoDataUrl;
+      prev.style.display = 'block';
+      document.getElementById('photoLabel').textContent = '✅ ' + input.files[0].name;
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+function getLocation() {
+  var status = document.getElementById('locationStatus');
+  var btn = document.querySelector('.location-btn');
+  if (!navigator.geolocation) { status.textContent = 'Geolocation not supported'; return; }
+  status.textContent = '⏳ Getting location...';
+  navigator.geolocation.getCurrentPosition(
+    function(pos) {
+      locationData = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+      status.textContent = '✅ ' + locationData.lat.toFixed(5) + ', ' + locationData.lng.toFixed(5);
+      document.getElementById('fLandmark').placeholder = locationData.lat.toFixed(4) + ', ' + locationData.lng.toFixed(4);
+    },
+    function() { status.textContent = '❌ Location access denied'; }
+  );
+}
+
+function goReport(cat) {
+  showTab('report');
+  var sel = document.getElementById('fCategory');
+  if (sel) {
+    for (var i = 0; i < sel.options.length; i++) {
+      if (sel.options[i].value === cat) { sel.selectedIndex = i; break; }
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  var form = document.getElementById('complaintForm');
+  if (!form) return;
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    var name    = document.getElementById('fName').value.trim();
+    var mobile  = document.getElementById('fMobile').value.trim();
+    var ward    = document.getElementById('fWard').value.trim();
+    var area    = document.getElementById('fArea').value.trim();
+    var cat     = document.getElementById('fCategory').value;
+    var desc    = document.getElementById('fDesc').value.trim();
+    var lm      = document.getElementById('fLandmark').value.trim();
+    var errEl   = document.getElementById('formError');
+
+    if (!name || !mobile || !ward || !area || !cat || !desc) {
+      errEl.textContent = '⚠️ Please fill all required fields. / அனைத்து கட்டாய புலங்களையும் நிரப்பவும்.';
+      errEl.style.display = 'block'; return;
+    }
+    if (!/^[0-9]{10}$/.test(mobile)) {
+      errEl.textContent = '⚠️ Enter a valid 10-digit mobile number.';
+      errEl.style.display = 'block'; return;
+    }
+    errEl.style.display = 'none';
+
+    var submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span>Submitting... / சமர்பிக்கிறது...</span>';
+
+    try {
+      // Use FormData from the form directly — captures photo file automatically
+      var formData = new FormData(document.getElementById('complaintForm'));
+
+      var res = await fetch('/api/complaints', { method: 'POST', body: formData });
+      var data = await res.json();
+
+      if (!res.ok) throw new Error(data.error || 'Submission failed');
+
+      document.getElementById('generatedId').textContent = data.complaintId;
+      document.getElementById('successModal').classList.add('open');
+      form.reset();
+      photoDataUrl = null;
+      locationData = null;
+      document.getElementById('photoPreview').style.display = 'none';
+      document.getElementById('photoLabel').textContent = 'Click to upload photo / புகைப்படம் பதிவேற்று';
+      document.getElementById('locationStatus').textContent = '';
+      renderStats();
+    } catch(err) {
+      errEl.textContent = '❌ ' + (err.message || 'Something went wrong. Try again.');
+      errEl.style.display = 'block';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '✅ <span id="txt-submit">புகாரை சமர்பிக்கவும் / Submit Complaint</span>';
+    }
+  });
+});
+
+function closeModal() {
+  document.getElementById('successModal').classList.remove('open');
+}
+function openTrackTab() {
+  closeModal();
+  var id = document.getElementById('generatedId').textContent;
+  showTab('track');
+  document.getElementById('trackInput').value = id;
+  trackComplaint();
+}
+
+/* ═══════════════════════════════════════════════
+   TRACK
+═══════════════════════════════════════════════ */
+var STATUSES = ['Submitted', 'Under Review', 'Assigned', 'In Progress', 'Resolved'];
+
+function trackComplaint() {
+  var id = document.getElementById('trackInput').value.trim().toUpperCase();
+  var res = document.getElementById('trackResult');
+  var nf  = document.getElementById('trackNotFound');
+  res.style.display = 'none';
+  nf.style.display  = 'none';
+
+  var complaints = getComplaints();
+  var c = complaints.find(function(x) { return x.id.toUpperCase() === id; });
+  if (!c) { nf.style.display = 'block'; return; }
+
+  document.getElementById('trackId').textContent = c.id;
+  document.getElementById('trackName').textContent = c.name;
+  document.getElementById('trackMobile').textContent = c.mobile.replace(/(.{6})/, '******');
+  document.getElementById('trackCat').textContent = c.category;
+  document.getElementById('trackWard').textContent = c.ward;
+  document.getElementById('trackArea').textContent = c.area;
+  document.getElementById('trackDate').textContent = c.date;
+  document.getElementById('trackDesc').textContent = c.description;
+
+  var badge = document.getElementById('trackBadge');
+  badge.textContent = c.status;
+  badge.className = 'badge ' + getBadgeClass(c.status);
+
+  var tracker = document.getElementById('progressTracker');
+  var sIdx = STATUSES.indexOf(c.status);
+  var html = '';
+  STATUSES.forEach(function(s, i) {
+    var cls = i < sIdx ? 'done' : (i === sIdx ? 'current' : '');
+    html += '<div class="p-step">';
+    html += '<div class="p-circle ' + cls + '">' + (i < sIdx ? '✓' : (i + 1)) + '</div>';
+    html += '<div class="p-label">' + s + '</div>';
+    html += '</div>';
+    if (i < STATUSES.length - 1) html += '<div class="p-line ' + (i < sIdx ? 'done' : '') + '"></div>';
+  });
+  tracker.innerHTML = html;
+  res.style.display = 'block';
+}
+
+/* ═══════════════════════════════════════════════
+   STATS
+═══════════════════════════════════════════════ */
+function renderStats() {
+  var complaints = getComplaints();
+  var total    = complaints.length;
+  var pending  = complaints.filter(function(c) { return c.status === 'Submitted' || c.status === 'Under Review'; }).length;
+  var progress = complaints.filter(function(c) { return c.status === 'Assigned' || c.status === 'In Progress'; }).length;
+  var resolved = complaints.filter(function(c) { return c.status === 'Resolved'; }).length;
+
+  animateCount('statTotal',    total);
+  animateCount('statPending',  pending);
+  animateCount('statProgress', progress);
+  animateCount('statResolved', resolved);
+}
+
+function animateCount(id, target) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var start = 0; var dur = 800;
+  var startTime = performance.now();
+  function update(now) {
+    var elapsed = now - startTime;
+    var progress = Math.min(elapsed / dur, 1);
+    var val = Math.round(progress * target);
+    el.textContent = val;
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+document.addEventListener('DOMContentLoaded', renderStats);
+
+/* ═══════════════════════════════════════════════
+   DASHBOARD
+═══════════════════════════════════════════════ */
+function renderDash() {
+  var complaints = getComplaints();
+  var fs = document.getElementById('dashFilterStatus').value;
+  var fc = document.getElementById('dashFilterCat').value;
+  var filtered = complaints.filter(function(c) {
+    return (!fs || c.status === fs) && (!fc || c.category === fc);
+  });
+
+  var total    = complaints.length;
+  var pending  = complaints.filter(function(c) { return c.status === 'Submitted' || c.status === 'Under Review'; }).length;
+  var progress = complaints.filter(function(c) { return c.status === 'In Progress'; }).length;
+  var resolved = complaints.filter(function(c) { return c.status === 'Resolved'; }).length;
+
+  var sg = document.getElementById('dashStats');
+  if (sg) sg.innerHTML =
+    statCard('📋', total,    'Total / மொத்தம்', '#CC0000') +
+    statCard('⏳', pending,  'Pending / நிலுவை', '#e65100') +
+    statCard('🔧', progress, 'In Progress / செயல்', '#1565c0') +
+    statCard('✅', resolved, 'Resolved / தீர்வு', '#2e7d32');
+
+  var body = document.getElementById('dashBody');
+  if (!body) return;
+  if (!filtered.length) {
+    body.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:30px;color:var(--muted);">No complaints found.</td></tr>';
+    return;
+  }
+  body.innerHTML = filtered.slice().reverse().map(function(c) {
+    return '<tr>' +
+      '<td style="font-weight:700;color:var(--red);font-family:monospace;font-size:11px;">' + c.id + '</td>' +
+      '<td>' + c.name + '</td>' +
+      '<td>' + c.category + '</td>' +
+      '<td>' + c.ward + '</td>' +
+      '<td>' + c.area + '</td>' +
+      '<td>' + c.date + '</td>' +
+      '<td><span class="badge ' + getBadgeClass(c.status) + '">' + c.status + '</span></td>' +
+      '</tr>';
+  }).join('');
+}
+
+function statCard(icon, num, label, color) {
+  return '<div class="admin-stat"><div style="font-size:28px;margin-bottom:4px;">' + icon + '</div>' +
+    '<div class="num" style="color:' + color + '">' + num + '</div>' +
+    '<div class="lbl">' + label + '</div></div>';
+}
+
+/* ═══════════════════════════════════════════════
+   ADMIN
+═══════════════════════════════════════════════ */
+var allAdminComplaints = [];
+
+async function doLogin() {
+  var u   = document.getElementById('adminUser').value.trim();
+  var p   = document.getElementById('adminPass').value;
+  var err = document.getElementById('loginError');
+  var btn = document.querySelector('#loginPanel .form-submit-btn');
+  err.style.display = 'none';
+  if (btn) { btn.disabled = true; btn.textContent = 'Logging in...'; }
+
+  try {
+    var res  = await fetch('/api/admin/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: u, password: p })
+    });
+    var data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Login failed');
+    localStorage.setItem('tvk-admin-token', data.token);
+    document.getElementById('loginPanel').style.display = 'none';
+    document.getElementById('adminPanel').style.display = 'block';
+    loadAdminComplaints();
+  } catch(e) {
+    err.textContent = '❌ ' + e.message;
+    err.style.display = 'block';
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = '🔐 Login'; }
+  }
+}
+
+function doLogout() {
+  localStorage.removeItem('tvk-admin-token');
+  document.getElementById('loginPanel').style.display = 'flex';
+  document.getElementById('adminPanel').style.display = 'none';
+  document.getElementById('adminUser').value = '';
+  document.getElementById('adminPass').value = '';
+  document.getElementById('loginError').style.display = 'none';
+  allAdminComplaints = [];
+}
+
+async function loadAdminComplaints() {
+  var token = localStorage.getItem('tvk-admin-token');
+  if (!token) { doLogout(); return; }
+  var body = document.getElementById('adminBody');
+  if (body) body.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:20px;color:var(--muted);">Loading...</td></tr>';
+  try {
+    var res = await fetch('/api/admin/complaints', {
+      headers: { 'Authorization': 'Bearer ' + token }, cache: 'no-store'
+    });
+    if (res.status === 401) { doLogout(); return; }
+    var data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Failed to load');
+    allAdminComplaints = Array.isArray(data) ? data : [];
+    renderAdmin();
+  } catch(e) {
+    if (body) body.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:20px;color:#c0392b;">❌ ' + e.message + '</td></tr>';
+  }
+}
+
+function renderAdmin() {
+  var fs = document.getElementById('filterStatus').value;
+  var fc = document.getElementById('filterCategory').value;
+  var fw = document.getElementById('filterWard').value.trim().toLowerCase();
+  var filtered = allAdminComplaints.filter(function(c) {
+    return (!fs || c.status === fs) &&
+           (!fc || c.category === fc) &&
+           (!fw || (c.ward_number||'').toLowerCase().includes(fw));
+  });
+
+  var total    = allAdminComplaints.length;
+  var pending  = allAdminComplaints.filter(function(c) { return c.status === 'Submitted'; }).length;
+  var progress = allAdminComplaints.filter(function(c) { return c.status === 'In Progress'; }).length;
+  var resolved = allAdminComplaints.filter(function(c) { return c.status === 'Resolved'; }).length;
+
+  var sg = document.getElementById('adminStats');
+  if (sg) sg.innerHTML =
+    statCard('📋', total,    'Total Complaints', '#CC0000') +
+    statCard('⏳', pending,  'Submitted',         '#e65100') +
+    statCard('🔧', progress, 'In Progress',        '#1565c0') +
+    statCard('✅', resolved, 'Resolved',            '#2e7d32');
+
+  var body = document.getElementById('adminBody');
+  if (!filtered.length) {
+    body.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:30px;color:var(--muted);">No complaints found.</td></tr>';
+    return;
+  }
+  body.innerHTML = filtered.map(function(c) {
+    var date = c.created_at ? new Date(c.created_at).toLocaleDateString('en-IN') : '';
+    return '<tr>' +
+      '<td style="font-weight:700;color:var(--red);font-family:monospace;font-size:11px;">' + (c.complaint_id||'') + '</td>' +
+      '<td>' + c.name + '</td>' +
+      '<td>' + c.mobile + '</td>' +
+      '<td>' + (c.ward_number||'') + '</td>' +
+      '<td>' + c.category + '</td>' +
+      '<td>' + c.area + '</td>' +
+      '<td>' + date + '</td>' +
+      '<td>' +
+        '<select class="status-select" onchange="updateStatus(' + c.id + ',this.value)">' +
+          STATUSES.map(function(s) { return '<option' + (s===c.status?' selected':'') + '>' + s + '</option>'; }).join('') +
+        '</select>' +
+      '</td>' +
+      '<td>' + (c.photo ? '<a href="' + c.photo + '" target="_blank" style="color:var(--red);font-size:12px;font-weight:700;">📷 View</a>' : '—') + '</td>' +
+      '</tr>';
+  }).join('');
+}
+
+async function updateStatus(id, newStatus) {
+  var token = localStorage.getItem('tvk-admin-token');
+  try {
+    var res = await fetch('/api/admin/' + id, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+      body: JSON.stringify({ status: newStatus })
+    });
+    if (!res.ok) { alert('Failed to update status'); return; }
+    var c = allAdminComplaints.find(function(x) { return x.id === id; });
+    if (c) { c.status = newStatus; renderAdmin(); }
+  } catch(e) { alert('Network error: ' + e.message); }
+}
+
+function getBadgeClass(status) {
+  var map = {
+    'Submitted':    'badge-submitted',
+    'Under Review': 'badge-review',
+    'Assigned':     'badge-assigned',
+    'In Progress':  'badge-progress',
+    'Resolved':     'badge-resolved'
+  };
+  return map[status] || 'badge-submitted';
+}
+
+/* ═══════════════════════════════════════════════
+   EXPORT CSV
+═══════════════════════════════════════════════ */
+function exportCSV() {
+  var complaints = getComplaints();
+  if (!complaints.length) { alert('No complaints to export.'); return; }
+  var rows = [['ID','Name','Mobile','Ward','Area','Category','Description','Status','Date']];
+  complaints.forEach(function(c) {
+    rows.push([c.id, c.name, c.mobile, c.ward, c.area, c.category, c.description, c.status, c.date]);
+  });
+  var csv = rows.map(function(r) { return r.map(function(v) { return '"' + String(v||'').replace(/"/g,'""') + '"'; }).join(','); }).join('\n');
+  var blob = new Blob([csv], { type: 'text/csv' });
+  var url  = URL.createObjectURL(blob);
+  var a    = document.createElement('a');
+  a.href = url; a.download = 'tvk-complaints.csv'; a.click();
+  URL.revokeObjectURL(url);
+}
+
+/* ═══════════════════════════════════════════════
+   SEED DEMO DATA (if empty)
+═══════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', function() {
+  var c = getComplaints();
+  if (c.length === 0) {
+    var demo = [
+      { id:'TVK-240601-1001', name:'முருகன்',      mobile:'9876543210', ward:'5',  area:'அண்ணா நகர்',   category:'Water Problems',        description:'குழாய் தண்ணீர் 3 நாட்களாக வரவில்லை.',         status:'Resolved',     date:'01 Jun 2024', createdAt: Date.now()-5e6 },
+      { id:'TVK-240602-1002', name:'கவிதா',        mobile:'9123456789', ward:'7',  area:'கணேஷ் நகர்',    category:'Road Problems',          description:'சாலையில் பெரிய குழி உள்ளது, விபத்து நடக்கலாம்.',status:'In Progress',   date:'02 Jun 2024', createdAt: Date.now()-4e6 },
+      { id:'TVK-240603-1003', name:'வேலுச்சாமி',   mobile:'9988776655', ward:'12', area:'வெட்டுவாணி தெரு',category:'Street Light Problems',   description:'தெரு விளக்கு 1 மாதமாக எரியவில்லை.',           status:'Under Review', date:'03 Jun 2024', createdAt: Date.now()-3e6 },
+      { id:'TVK-240604-1004', name:'லலிதா',        mobile:'9876512345', ward:'3',  area:'பூவரசு தெரு',   category:'Garbage Problems',        description:'குப்பை 5 நாட்களாக அகற்றப்படவில்லை.',          status:'Submitted',    date:'04 Jun 2024', createdAt: Date.now()-2e6 },
+      { id:'TVK-240605-1005', name:'சுரேஷ்',       mobile:'9765432100', ward:'9',  area:'காந்தி சாலை',   category:'Electricity Problems',    description:'மின் தடை அடிக்கடி வருகிறது.',                   status:'Assigned',     date:'05 Jun 2024', createdAt: Date.now()-1e6 },
+    ];
+    saveComplaints(demo);
+  }
+  renderStats();
+});
+</script>
+</body>
+</html>

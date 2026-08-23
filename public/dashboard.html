@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ward Dashboard – TVK Complaint Box</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="navbar-placeholder"></div>
+
+<div style="background:linear-gradient(135deg,#6B0000,#B80000,#B84000,#C8A000);padding:40px 20px;text-align:center;border-bottom:3px solid #FFD700;">
+  <h1 style="color:#FFD700;font-size:clamp(22px,5vw,34px);font-weight:800" data-i18n="dash_title">Ward Issues Dashboard</h1>
+  <p style="color:rgba(255,230,150,0.85);margin-top:8px;font-size:14px" class="tamil">வார்டு வாரியான புகார்கள் நிலை</p>
+</div>
+
+<div class="container" style="padding:40px 20px;">
+
+  <!-- STAT CARDS -->
+  <div class="stats-grid" id="statsGrid">
+    <div class="stat-card">
+      <div class="stat-num" id="statTotal">–</div>
+      <div class="stat-label" data-i18n="dash_total">Total Complaints</div>
+    </div>
+    <div class="stat-card" style="border-top-color:#B84000;">
+      <div class="stat-num" style="color:#C8A000" id="statPending">–</div>
+      <div class="stat-label" data-i18n="dash_pending">Pending</div>
+    </div>
+    <div class="stat-card" style="border-top-color:#C8A000;">
+      <div class="stat-num" style="color:#FFD700" id="statProgress">–</div>
+      <div class="stat-label" data-i18n="dash_progress">In Progress</div>
+    </div>
+    <div class="stat-card" style="border-top-color:#2e7d32;">
+      <div class="stat-num" style="color:#88FF88" id="statResolved">–</div>
+      <div class="stat-label" data-i18n="dash_resolved">Resolved</div>
+    </div>
+  </div>
+
+  <!-- WARD MAP -->
+  <div class="card" style="padding:28px;">
+    <h3 style="color:var(--yellow);margin-bottom:6px;">Ward Map</h3>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:20px" class="tamil">🔴 அதிகம் &nbsp;🟡 நடுத்தரம் &nbsp;🟢 குறைவு</p>
+    <div class="ward-grid" id="wardGrid">
+      <div style="color:var(--muted);font-size:13px">Loading ward data...</div>
+    </div>
+  </div>
+
+  <p style="text-align:right;font-size:12px;color:var(--muted);margin-top:12px" id="lastUpdated"></p>
+</div>
+
+<a href="report.html" class="fab" data-i18n="fab_label">📢 Report</a>
+<div id="footer-placeholder"></div>
+
+<script src="js/translations.js"></script>
+<script src="js/main.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>
