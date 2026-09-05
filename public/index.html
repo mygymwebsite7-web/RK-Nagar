@@ -643,6 +643,9 @@
       margin: 32px auto 0;
       width: 100%;
     }
+    .ministers-row.row-even {
+      align-items: center;
+    }
     .minister-block {
       flex: 1;
       min-width: 0;
@@ -692,11 +695,15 @@
     }
     .mla3-photo {
       max-width: 220px;
-      height: 220px;
+      height: 260px;
+      object-fit: contain;
+      object-position: top center;
     }
     .mla4-photo {
       max-width: 220px;
-      height: 220px;
+      height: 260px;
+      object-fit: contain;
+      object-position: top center;
     }
     @keyframes ministerFadeIn {
       from { opacity: 0; transform: translateY(24px); }
@@ -987,7 +994,7 @@
       <div class="minister-row-divider"></div>
 
       <!-- Leader row (two cards) -->
-      <div class="ministers-row">
+      <div class="ministers-row row-even">
 
         <!-- 4th MLA (now in 3rd position) -->
         <div class="minister-block">
