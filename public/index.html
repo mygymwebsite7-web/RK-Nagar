@@ -1764,7 +1764,7 @@ async function doLogin() {
     document.getElementById('adminPanel').style.display = 'block';
     loadAdminComplaints();
   } catch(e) {
-    err.textContent = '❌ ' + e.message;
+    err.textContent = '❌ ' + (e.message || 'Network error – check your connection');
     err.style.display = 'block';
   } finally {
     if (btn) { btn.disabled = false; btn.textContent = '🔐 Login'; }

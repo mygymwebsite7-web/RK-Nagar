@@ -13,6 +13,8 @@ export default async function handler(req, res) {
   const user = verifyToken(req);
   if (!user) return res.status(401).json({ error: 'Unauthorized' });
 
+  if (!supabase) return res.status(503).json({ error: 'Database not configured. Please set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in Vercel Environment Variables.' });
+
   const { id } = req.query;
 
   // Vercel may pass body as string; parse it if needed

@@ -10,6 +10,11 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
+  // Guard: env vars not configured
+  if (!process.env.ADMIN_USERNAME || !process.env.ADMIN_PASSWORD_HASH || !process.env.JWT_SECRET) {
+    return res.status(503).json({ error: 'Admin not configured. Please set ADMIN_USERNAME, ADMIN_PASSWORD_HASH and JWT_SECRET in Vercel Environment Variables.' });
+  }
+
   // Vercel may pass body as string; parse it if needed
   let body = req.body || {};
   if (typeof body === 'string') {
