@@ -1,6 +1,12 @@
-import 'dotenv/config';
-import { supabase } from '../../lib/supabase.js';
+import { createClient } from '@supabase/supabase-js';
 import { verifyToken } from '../../lib/auth.js';
+
+function getSupabase() {
+  const url = process.env.SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) return null;
+  return createClient(url, key);
+}
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -13,7 +19,8 @@ export default async function handler(req, res) {
   const user = verifyToken(req);
   if (!user) return res.status(401).json({ error: 'Unauthorized' });
 
-  if (!supabase) return res.status(503).json({ error: 'Database not configured. Please set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in Vercel Environment Variables.' });
+  const supabase = getSupabase();
+  if (!supabase) return res.status(503).json({ error: 'Database not configured. Add SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in Vercel Environment Variables.' });
 
   try {
     const { data: complaints, error } = await supabase
@@ -22,7 +29,7 @@ export default async function handler(req, res) {
       .order('created_at', { ascending: false });
 
     if (error) throw error;
-    
+
     return res.status(200).json(complaints);
   } catch (err) {
     return res.status(500).json({ error: 'Server error: ' + err.message });
