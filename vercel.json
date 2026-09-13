@@ -2,6 +2,7 @@
   "version": 2,
   "outputDirectory": "public",
   "routes": [
+    { "src": "/api/health",               "dest": "/api/health.js" },
     { "src": "/api/debug",                "dest": "/api/debug.js" },
     { "src": "/api/complaints/dashboard", "dest": "/api/complaints/dashboard.js" },
     { "src": "/api/complaints/([^/]+)",   "dest": "/api/complaints/[complaintId].js?complaintId=$1" },
