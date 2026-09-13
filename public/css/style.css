@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Noto+Sans+Tamil:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Noto+Sans+Tamil:wght@400;600;700&display=swap');
 
 :root {
   --red:        #C0001A;
@@ -18,7 +18,7 @@
   --shadow-lg:  0 8px 40px rgba(0,0,0,0.7);
   --radius:     12px;
   --radius-lg:  20px;
-  --transition: all 0.3s ease;
+  --transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,8 +27,7 @@ html { scroll-behavior: smooth; }
 
 body {
   font-family: 'Poppins', 'Noto Sans Tamil', sans-serif;
-  background: linear-gradient(160deg, #1A0005 0%, #3D0010 40%, #1A0005 100%);
-  background-attachment: fixed;
+  background: #2A0008;
   color: var(--text);
   line-height: 1.6;
   font-size: 15px;
