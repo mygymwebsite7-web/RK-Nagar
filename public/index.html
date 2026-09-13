@@ -6,10 +6,7 @@
   <title>TVK Complaint Box – R.K. Nagar Thoguthi | தமிழக வெற்றிக் கழகம்</title>
   <meta name="description" content="TVK R.K. Nagar Thoguthi – People's Grievance Centre. Report local problems easily.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Noto+Sans+Tamil:wght@400;600;700;800&display=swap">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Noto+Sans+Tamil:wght@400;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Noto+Sans+Tamil:wght@400;600;700;800&display=swap" rel="stylesheet"></noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Noto+Sans+Tamil:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --red:        #C0001A;
@@ -34,7 +31,8 @@
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Poppins', 'Noto Sans Tamil', sans-serif;
-      background: #2A0008;
+      background: linear-gradient(160deg, #1A0005 0%, #3D0010 40%, #1A0005 100%);
+      background-attachment: fixed;
       color: var(--text);
       line-height: 1.6;
       font-size: 15px;
@@ -58,9 +56,8 @@
     }
     .ticker-inner {
       display: inline-block;
-      animation: ticker 45s linear infinite;
+      animation: ticker 30s linear infinite;
       padding-left: 100%;
-      will-change: transform;
     }
     @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-100%)} }
 
@@ -126,7 +123,6 @@
       min-height: 100vh;
       display: flex; align-items: center; justify-content: center;
       text-align: center; padding: 60px 20px 40px;
-      will-change: auto;
     }
     .hero::before {
       content: '';
@@ -151,7 +147,8 @@
       height: min(480px, 55vw);
       width: auto;
       object-fit: contain; object-position: bottom center;
-      filter: drop-shadow(4px 0 16px rgba(192,0,26,0.45));
+      filter: drop-shadow(4px 0 24px rgba(192,0,26,0.55));
+      animation: floatLeft 4s ease-in-out infinite;
       z-index: 2; pointer-events: none;
     }
     .hero-side-right {
@@ -159,9 +156,12 @@
       height: min(480px, 55vw);
       width: auto;
       object-fit: contain; object-position: bottom center;
-      filter: drop-shadow(-4px 0 16px rgba(245,197,24,0.35));
+      filter: drop-shadow(-4px 0 24px rgba(245,197,24,0.45));
+      animation: floatRight 4.5s ease-in-out infinite;
       z-index: 2; pointer-events: none;
     }
+    @keyframes floatLeft  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+    @keyframes floatRight { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
 
     .hero-inner {
       position: relative; z-index: 3;
@@ -175,9 +175,14 @@
       height: auto;
       border-radius: 18px;
       border: 3px solid var(--yellow);
-      box-shadow: 0 0 32px rgba(245,197,24,0.45), 0 0 60px rgba(192,0,26,0.35);
+      box-shadow: 0 0 40px rgba(245,197,24,0.5), 0 0 80px rgba(192,0,26,0.4);
       margin: 0 auto 20px;
       display: block;
+      animation: logoPulse 3s ease-in-out infinite;
+    }
+    @keyframes logoPulse {
+      0%,100%{box-shadow:0 0 40px rgba(245,197,24,0.5),0 0 80px rgba(192,0,26,0.4)}
+      50%    {box-shadow:0 0 70px rgba(245,197,24,0.9),0 0 120px rgba(192,0,26,0.7)}
     }
 
     .hero-tvk {
@@ -537,6 +542,11 @@
       padding: 15px 22px; border-radius: 50px;
       font-size: 14px; font-weight: 800;
       box-shadow: 0 6px 24px rgba(107,0,0,0.7), 0 0 14px rgba(255,215,0,0.25);
+      animation: fabPulse 2.2s ease-in-out infinite;
+    }
+    @keyframes fabPulse {
+      0%,100%{box-shadow:0 6px 24px rgba(107,0,0,0.7),0 0 14px rgba(255,215,0,0.25)}
+      50%    {box-shadow:0 6px 40px rgba(107,0,0,0.9),0 0 28px rgba(255,215,0,0.5),0 0 0 8px rgba(107,0,0,0.15)}
     }
 
     /* ── FOOTER ── */
@@ -677,7 +687,11 @@
       border-radius: 0;
       display: block;
       margin: 0 auto;
-      filter: drop-shadow(0 6px 18px rgba(122,0,16,0.7));
+      filter:
+        drop-shadow(0 0 40px rgba(245,197,24,0.7))
+        drop-shadow(0 8px 32px rgba(122,0,16,0.85))
+        drop-shadow(0 0 12px rgba(245,197,24,0.4));
+      animation: ministerFadeIn 1s ease 0.3s both;
     }
     .mla3-photo,
     .mla4-photo {
@@ -685,6 +699,10 @@
       height: 280px;
       object-fit: contain;
       object-position: top center;
+    }
+    @keyframes ministerFadeIn {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
     .minister-name {
       font-family: 'Noto Sans Tamil', 'Poppins', sans-serif;
@@ -695,6 +713,7 @@
       margin-top: 10px;
       line-height: 1.4;
       text-shadow: 0 1px 8px rgba(0,0,0,0.7);
+      animation: ministerFadeIn 1s ease 0.45s both;
     }
     .minister-mla {
       font-family: 'Noto Sans Tamil', 'Poppins', sans-serif;
@@ -710,6 +729,7 @@
       letter-spacing: 0.5px;
       text-shadow: none;
       box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      animation: ministerFadeIn 1s ease 0.5s both;
     }
     .minister-desig {
       font-family: 'Noto Sans Tamil', sans-serif;
@@ -719,6 +739,7 @@
       margin-top: 5px;
       line-height: 1.6;
       letter-spacing: 0.2px;
+      animation: ministerFadeIn 1s ease 0.55s both;
     }
     .minister-desig2 {
       font-family: 'Noto Sans Tamil', sans-serif;
@@ -728,6 +749,7 @@
       margin-top: 4px;
       line-height: 1.55;
       letter-spacing: 0.1px;
+      animation: ministerFadeIn 1s ease 0.6s both;
     }
     .minister-role {
       font-family: 'Noto Sans Tamil', sans-serif;
@@ -738,6 +760,7 @@
       letter-spacing: 1px;
       text-transform: uppercase;
       text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+      animation: ministerFadeIn 1s ease 0.65s both;
     }
     /* Gold line above desig */
     .minister-desig::before {
@@ -843,7 +866,26 @@
       display: block;
       position: relative;
       z-index: 1;
-      filter: drop-shadow(0 0 18px rgba(245,197,24,0.5));
+      filter:
+        drop-shadow(0 0 24px rgba(245,197,24,0.55))
+        drop-shadow(0 0 48px rgba(192,0,26,0.4));
+      animation: heroPulseReal 3s ease-in-out infinite;
+    }
+    @keyframes heroPulseReal {
+      0%,100% {
+        box-shadow:
+          0 0 0 6px rgba(245,197,24,0.15),
+          0 0 40px rgba(245,197,24,0.55),
+          0 0 80px rgba(192,0,26,0.45),
+          0 12px 40px rgba(0,0,0,0.6);
+      }
+      50% {
+        box-shadow:
+          0 0 0 10px rgba(245,197,24,0.25),
+          0 0 70px rgba(245,197,24,0.9),
+          0 0 130px rgba(192,0,26,0.7),
+          0 12px 50px rgba(0,0,0,0.7);
+      }
     }
     .hero-logo-glow-ring { display: none; }
     @media(max-width:768px) {
@@ -898,9 +940,9 @@
   <!-- HERO -->
   <section class="hero" id="home">
     <!-- Left side person (image 2) -->
-    <img id="heroLeft" src="" alt="TVK Leader" class="hero-side-left" style="display:none;" loading="lazy">
+    <img id="heroLeft" src="" alt="TVK Leader" class="hero-side-left" style="display:none;">
     <!-- Right side person (image 3) -->
-    <img id="heroRight" src="" alt="TVK Worker" class="hero-side-right" style="display:none;" loading="lazy">
+    <img id="heroRight" src="" alt="TVK Worker" class="hero-side-right" style="display:none;">
 
     <div class="hero-inner">
 
@@ -919,7 +961,7 @@
         <!-- Minister 1 -->
         <div class="minister-block">
           <div class="minister-block-inner">
-            <img src="assets/minister-cutout.png" alt="மாண்புமிகு N. ஆனந்த்" class="minister-photo" loading="lazy">
+            <img src="assets/minister-cutout.png" alt="மாண்புமிகு N. ஆனந்த்" class="minister-photo">
             <div class="minister-name" style="font-size:clamp(15px,3.5vw,20px);">மாண்புமிகு<br>N. ஆனந்த்</div>
             <div class="minister-mla">தி.நகர் சட்டமன்ற உறுப்பினர்</div>
             <div class="minister-desig">ஊரக வளர்ச்சி மற்றும்<br>நீர் வளத்துறை அமைச்சர்</div>
@@ -933,7 +975,7 @@
         <!-- Minister 2 -->
         <div class="minister-block">
           <div class="minister-block-inner">
-            <img src="assets/minister2-cutout.png" alt="மாண்புமிகு Dr.N.மரியவில்சன்" class="minister-photo" loading="lazy">
+            <img src="assets/minister2-cutout.png" alt="மாண்புமிகு Dr.N.மரியவில்சன்" class="minister-photo">
             <div class="minister-name">மாண்புமிகு<br>Dr.N.மரியவில்சன்</div>
             <div class="minister-desig">ஆர்.கே.நகர் தொகுதி<br>சட்டமன்ற உறுப்பினர்</div>
             <div class="minister-desig2">த.ந.அ. நிதிதிட்டமிடல் மற்றும்<br>மேம்பாட்டு அமைச்சர்</div>
@@ -952,7 +994,7 @@
         <!-- 4th MLA (now in 3rd position) -->
         <div class="minister-block">
           <div class="minister-block-inner">
-            <img src="assets/mla4-cutout.png" alt="சுறா G. வேலு" class="minister-photo mla4-photo" loading="lazy">
+            <img src="assets/mla4-cutout.png" alt="சுறா G. வேலு" class="minister-photo mla4-photo">
             <div class="minister-name" style="font-family:'Noto Sans Tamil','Poppins',sans-serif;">சுறா G. வேலு</div>
             <div class="minister-desig" style="font-family:'Noto Sans Tamil',sans-serif;">வடசென்னை கிழக்கு மாவட்டச்<br>செயலாளர்</div>
           </div>
@@ -964,7 +1006,7 @@
         <!-- Leader (now in 4th position) -->
         <div class="minister-block">
           <div class="minister-block-inner">
-            <img src="assets/leader-cutout.png" alt="T. ராஜேஷ்" class="minister-photo mla3-photo" loading="lazy">
+            <img src="assets/leader-cutout.png" alt="T. ராஜேஷ்" class="minister-photo mla3-photo">
             <div class="minister-name">T. ராஜேஷ்</div>
             <div class="minister-desig">வடசென்னை கிழக்கு மாவட்ட<br>பொறுப்பாளர்</div>
           </div>
