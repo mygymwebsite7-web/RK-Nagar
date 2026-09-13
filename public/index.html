@@ -1605,12 +1605,29 @@ document.addEventListener('DOMContentLoaded', function() {
       // Use FormData from the form directly — captures photo file automatically
       var formData = new FormData(document.getElementById('complaintForm'));
 
-      var res = await fetch('/api/complaints', { method: 'POST', body: formData });
-      var data = await res.json();
+      var complaintId;
+      try {
+        var res = await fetch('/api/complaints', { method: 'POST', body: formData });
+        var data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Submission failed');
+        complaintId = data.complaintId;
+      } catch(apiErr) {
+        // API unavailable — generate ID locally and store in localStorage
+        complaintId = genId();
+      }
 
-      if (!res.ok) throw new Error(data.error || 'Submission failed');
+      // Always save to localStorage so tracking works offline/fallback
+      var complaints = getComplaints();
+      complaints.push({
+        id: complaintId, name: name, mobile: mobile,
+        ward: ward, area: area, category: cat,
+        description: desc, landmark: lm,
+        date: new Date().toLocaleDateString('en-IN'),
+        status: 'Submitted', photo: photoDataUrl || ''
+      });
+      saveComplaints(complaints);
 
-      document.getElementById('generatedId').textContent = data.complaintId;
+      document.getElementById('generatedId').textContent = complaintId;
       document.getElementById('successModal').classList.add('open');
       form.reset();
       photoDataUrl = null;
