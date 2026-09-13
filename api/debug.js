@@ -1,6 +1,6 @@
-import 'dotenv/config';
+const { createClient } = require('@supabase/supabase-js');
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   if (req.method === 'OPTIONS') return res.status(200).end();
 
@@ -14,28 +14,24 @@ export default async function handler(req, res) {
   if (missing.length) {
     return res.status(200).json({
       ok: false,
-      problem: 'Missing environment variables — add in Vercel → Settings → Environment Variables',
+      problem: 'Missing env vars — add in Vercel → Settings → Environment Variables, then redeploy',
       missing,
     });
   }
 
-  const { createClient } = await import('@supabase/supabase-js');
   const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_ROLE_KEY);
 
   const { data: sample, error: readErr } = await supabase
     .from('complaints').select('*').limit(1);
 
   if (readErr) {
-    return res.status(200).json({
-      ok: false, problem: 'DB read failed', error: readErr.message, code: readErr.code,
-    });
+    return res.status(200).json({ ok: false, problem: 'DB read failed', error: readErr.message, code: readErr.code });
   }
 
   const testId = 'DEBUG-' + Date.now();
   const { error: insertErr } = await supabase.from('complaints').insert([{
-    complaint_id: testId,
-    name: 'Debug', mobile: '0000000000', ward_number: '0',
-    area: 'Debug', category: 'Other Local Problems',
+    complaint_id: testId, name: 'Debug', mobile: '0000000000',
+    ward_number: '0', area: 'Debug', category: 'Other Problems',
     description: 'debug', landmark: '', photo: '',
   }]);
   if (!insertErr) {
@@ -47,6 +43,6 @@ export default async function handler(req, res) {
     db_columns: sample && sample[0] ? Object.keys(sample[0]) : '(empty table — columns ok)',
     insert_test: insertErr
       ? { ok: false, error: insertErr.message }
-      : { ok: true, message: 'All systems working' },
+      : { ok: true, message: 'All systems working ✅' },
   });
-}
+};

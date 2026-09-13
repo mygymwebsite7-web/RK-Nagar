@@ -1,6 +1,6 @@
-import { createClient } from '@supabase/supabase-js';
+const { createClient } = require('@supabase/supabase-js');
 
-export const config = { api: { bodyParser: false } };
+module.exports.config = { api: { bodyParser: false } };
 
 function getSupabase() {
   const url = process.env.SUPABASE_URL;
@@ -14,41 +14,56 @@ function parseForm(req) {
     const chunks = [];
     req.on('data', chunk => chunks.push(chunk));
     req.on('end', () => {
-      const body = Buffer.concat(chunks);
-      const contentType = req.headers['content-type'] || '';
-      const boundary = contentType.split('boundary=')[1];
-      if (!boundary) return reject(new Error('No boundary in multipart'));
+      try {
+        const body = Buffer.concat(chunks);
+        const contentType = req.headers['content-type'] || '';
+        const boundaryMatch = contentType.match(/boundary=([^\s;]+)/);
+        if (!boundaryMatch) return reject(new Error('No boundary in multipart'));
+        const boundary = boundaryMatch[1].trim();
 
-      const fields = {};
-      const files  = {};
-      const parts  = body.toString('binary').split('--' + boundary);
+        const fields = {};
+        const files  = {};
+        const delimBuf = Buffer.from('\r\n--' + boundary);
+        const bodyWithPreamble = Buffer.concat([Buffer.from('\r\n'), body]);
 
-      for (const part of parts) {
-        if (!part.includes('Content-Disposition')) continue;
-        const [headerSection, ...bodyParts] = part.split('\r\n\r\n');
-        const bodyContent = bodyParts.join('\r\n\r\n').replace(/\r\n$/, '');
-        const nameMatch  = headerSection.match(/name="([^"]+)"/);
-        const fileMatch  = headerSection.match(/filename="([^"]+)"/);
-        if (!nameMatch) continue;
-        const fieldName = nameMatch[1];
-        if (fileMatch) {
-          const ctMatch = headerSection.match(/Content-Type:\s*([^\r\n]+)/i);
-          files[fieldName] = {
-            originalFilename: fileMatch[1],
-            contentType: ctMatch ? ctMatch[1].trim() : 'application/octet-stream',
-            buffer: Buffer.from(bodyContent, 'binary'),
-          };
-        } else {
-          fields[fieldName] = bodyContent;
+        let start = bodyWithPreamble.indexOf('\r\n--' + boundary);
+        while (start !== -1) {
+          const headerStart = start + delimBuf.length + 2; // skip \r\n after boundary
+          const headerEnd   = bodyWithPreamble.indexOf('\r\n\r\n', headerStart);
+          if (headerEnd === -1) break;
+          const headers = bodyWithPreamble.slice(headerStart, headerEnd).toString();
+          const next    = bodyWithPreamble.indexOf('\r\n--' + boundary, headerEnd + 4);
+          const partBody = next === -1
+            ? bodyWithPreamble.slice(headerEnd + 4)
+            : bodyWithPreamble.slice(headerEnd + 4, next);
+
+          const nameMatch = headers.match(/name="([^"]+)"/i);
+          const fileMatch = headers.match(/filename="([^"]*)"/i);
+          if (!nameMatch) { start = next; continue; }
+          const fieldName = nameMatch[1];
+
+          if (fileMatch) {
+            const ctMatch = headers.match(/Content-Type:\s*([^\r\n]+)/i);
+            files[fieldName] = {
+              originalFilename: fileMatch[1],
+              contentType: ctMatch ? ctMatch[1].trim() : 'application/octet-stream',
+              buffer: partBody,
+            };
+          } else {
+            fields[fieldName] = partBody.toString();
+          }
+          start = next;
         }
+        resolve({ fields, files });
+      } catch (e) {
+        reject(e);
       }
-      resolve({ fields, files });
     });
     req.on('error', reject);
   });
 }
 
-export default async function handler(req, res) {
+module.exports.default = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
@@ -58,12 +73,14 @@ export default async function handler(req, res) {
 
   const supabase = getSupabase();
   if (!supabase) {
-    return res.status(503).json({ error: 'Database not configured. Add SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in Vercel Environment Variables.' });
+    return res.status(503).json({
+      error: 'Database not configured. Add SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in Vercel → Settings → Environment Variables, then redeploy.'
+    });
   }
 
   try {
     const { fields, files } = await parseForm(req);
-    const get = f => fields[f] || '';
+    const get = f => (fields[f] || '').trim();
 
     const name        = get('name');
     const mobile      = get('mobile');
@@ -82,8 +99,8 @@ export default async function handler(req, res) {
     const photoFile = files.photo;
     if (photoFile && photoFile.buffer && photoFile.buffer.length > 0) {
       try {
-        const ext      = (photoFile.originalFilename || '').split('.').pop().toLowerCase() || 'jpg';
-        const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+        const ext      = (photoFile.originalFilename || 'jpg').split('.').pop().toLowerCase() || 'jpg';
+        const fileName = Date.now() + '-' + Math.random().toString(36).slice(2) + '.' + ext;
         const { error: uploadError } = await supabase.storage
           .from('complaint-photos')
           .upload(fileName, photoFile.buffer, {
@@ -97,23 +114,23 @@ export default async function handler(req, res) {
       } catch (_) { /* continue without photo */ }
     }
 
-    const date = new Date();
-    const ymd  = `${date.getFullYear()}${String(date.getMonth()+1).padStart(2,'0')}${String(date.getDate()).padStart(2,'0')}`;
+    const now  = new Date();
+    const ymd  = now.getFullYear() + String(now.getMonth()+1).padStart(2,'0') + String(now.getDate()).padStart(2,'0');
     const rand = String(Math.floor(1000 + Math.random() * 9000));
-    const complaintId = `TVK-${ymd}-${rand}`;
+    const complaintId = 'TVK-' + ymd + '-' + rand;
 
-    const { error } = await supabase.from('complaints').insert([{
+    const { error: dbErr } = await supabase.from('complaints').insert([{
       complaint_id: complaintId,
       name, mobile, ward_number, area, category, description, landmark,
       photo: photoUrl,
     }]);
 
-    if (error) {
-      return res.status(500).json({ error: 'DB insert failed: ' + error.message, code: error.code });
+    if (dbErr) {
+      return res.status(500).json({ error: 'DB insert failed: ' + dbErr.message, code: dbErr.code });
     }
 
     return res.status(201).json({ complaintId, message: 'Complaint registered successfully' });
   } catch (err) {
     return res.status(500).json({ error: 'Server error: ' + err.message });
   }
-}
+};

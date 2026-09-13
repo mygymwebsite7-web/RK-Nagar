@@ -1,14 +1,7 @@
-import { createClient } from '@supabase/supabase-js';
-import { verifyToken } from '../../lib/auth.js';
+const { createClient } = require('@supabase/supabase-js');
+const { verifyToken }  = require('../../lib/auth');
 
-function getSupabase() {
-  const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !key) return null;
-  return createClient(url, key);
-}
-
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'PATCH, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
@@ -19,14 +12,18 @@ export default async function handler(req, res) {
   const user = verifyToken(req);
   if (!user) return res.status(401).json({ error: 'Unauthorized' });
 
-  const supabase = getSupabase();
-  if (!supabase) return res.status(503).json({ error: 'Database not configured. Add SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in Vercel Environment Variables.' });
+  const url = process.env.SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) {
+    return res.status(503).json({ error: 'Database not configured. Add SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in Vercel → Settings → Environment Variables, then redeploy.' });
+  }
 
+  const supabase = createClient(url, key);
   const { id } = req.query;
 
   let body = req.body || {};
   if (typeof body === 'string') {
-    try { body = JSON.parse(body); } catch { body = {}; }
+    try { body = JSON.parse(body); } catch (_) { body = {}; }
   }
   const { status } = body;
 
@@ -49,4 +46,4 @@ export default async function handler(req, res) {
   } catch (err) {
     return res.status(500).json({ error: 'Server error: ' + err.message });
   }
-}
+};

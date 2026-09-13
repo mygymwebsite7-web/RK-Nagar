@@ -1,7 +1,7 @@
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
+const bcrypt = require('bcryptjs');
+const jwt    = require('jsonwebtoken');
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
@@ -10,12 +10,12 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   if (!process.env.ADMIN_USERNAME || !process.env.ADMIN_PASSWORD_HASH || !process.env.JWT_SECRET) {
-    return res.status(503).json({ error: 'Admin not configured. Set ADMIN_USERNAME, ADMIN_PASSWORD_HASH and JWT_SECRET in Vercel Environment Variables.' });
+    return res.status(503).json({ error: 'Admin not configured. Add ADMIN_USERNAME, ADMIN_PASSWORD_HASH and JWT_SECRET in Vercel → Settings → Environment Variables, then redeploy.' });
   }
 
   let body = req.body || {};
   if (typeof body === 'string') {
-    try { body = JSON.parse(body); } catch { body = {}; }
+    try { body = JSON.parse(body); } catch (_) { body = {}; }
   }
   const { username, password } = body;
 
@@ -30,4 +30,4 @@ export default async function handler(req, res) {
 
   const token = jwt.sign({ role: 'admin' }, process.env.JWT_SECRET, { expiresIn: '8h' });
   return res.status(200).json({ token });
-}
+};
